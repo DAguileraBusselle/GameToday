@@ -11,20 +11,21 @@
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@id/tvRegistro"
-        android:layout_height="match_parent"/>
+        android:src="@drawable/mandologo"/>
 
     <TextView
         android:id="@+id/tvRegistro"
-        android:textStyle="bold"
-        android:textColor="@color/morao_chilling"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/llEtRegistar"
+        android:fontFamily="@font/conthrax_sb"
         android:text="@string/tv_registro"
-        android:fontFamily="@font/kitchen_police"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/morao_chilling"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 
     <LinearLayout
@@ -37,7 +38,7 @@
         <EditText
             android:id="@+id/etUsuarioRegistar"
             android:layout_width="match_parent"
-            android:fontFamily="@font/kitchen_police"
+            android:fontFamily="@font/conthrax_sb"
             android:textColorHint="@color/morao_trans_menos"
             android:backgroundTint="@color/morao_chilling"
             android:layout_height="wrap_content"
@@ -47,7 +48,7 @@
             android:id="@+id/etCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kitchen_police"
+            android:fontFamily="@font/conthrax_sb"
             android:textColorHint="@color/morao_trans_menos"
             android:backgroundTint="@color/morao_chilling"
             android:hint="@string/introducir_correo" />
@@ -61,7 +62,7 @@
                 android:id="@+id/etContraseniaRegistrar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/kitchen_police"
+                android:fontFamily="@font/conthrax_sb"
                 android:textColorHint="@color/morao_trans_menos"
                 android:backgroundTint="@color/morao_chilling"
                 android:hint="@string/introducir_contrasenia"
@@ -87,7 +88,7 @@
                 android:id="@+id/etContraseniaCheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/kitchen_police"
+                android:fontFamily="@font/conthrax_sb"
                 android:textColorHint="@color/morao_trans_menos"
                 android:backgroundTint="@color/morao_chilling"
                 android:hint="@string/introducir_contrasenia_check"
@@ -115,7 +116,7 @@
 
         <Button
             android:id="@+id/btnCancelarRegistar"
-            android:fontFamily="@font/kitchen_police"
+            android:fontFamily="@font/conthrax_sb"
             android:background="@drawable/outline_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,7 +128,7 @@
 
         <Button
             android:id="@+id/btnRegistrarRegistrar"
-            android:fontFamily="@font/kitchen_police"
+            android:fontFamily="@font/conthrax_sb"
             android:background="@drawable/outline_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
