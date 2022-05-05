@@ -6,7 +6,23 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="introducir_correo">Introduce el correo</string>
+    <string name="introducir_contrasenia">Introduce la contraseña</string>
+    <string name="introducir_usuario">Introduce el usuario o correo</string>
+    <string name="btn_cancelar">CANCELAR</string>
+    <string name="introducir_contrasenia_check">confirma la contraseña</string>
+    <string name="toast_vacio">Debe rellenar todos los campos</string>
+    <string name="toast_contra_check_fail">Las contraseñas no coinciden</string>
+    <string name="toast_nombre_existe">El nombre de usuario ya existe</string>
+    <string name="toast_correo_existe">El correo ya existe</string>
+    <string name="user_registrado">Usuario registrado exitosamente</string>
+    <string name="introducir_usuario_reg">Introduce el nombre de usuario</string>
+    <string name="toast_no_existe">El usuario introducido no existe</string>
+    <string name="toast_correo_invalido">Introduce un correo valido</string>
+    <string name="nombre_no_correo">El nombre de usuario no puede ser un correo</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="btn_iniciar">INICIAR SESIÓN</string>
+    <string name="btn_registar">REGISTRAR</string>
+    <string name="tv_registro">REGISTRO DE USUARIO</string>
 </resources>

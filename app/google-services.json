@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "520036214684",
+    "project_id": "gametoday-b83d0",
+    "storage_bucket": "gametoday-b83d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520036214684:android:504a0c21019e52c7c88a59",
+        "android_client_info": {
+          "package_name": "com.dam.gametoday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520036214684-lviugbtgqkqv8371a2cu13q8t63snacg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD20G9CKU3BaeqSXWEr-gZonVTm5KIcIJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520036214684-lviugbtgqkqv8371a2cu13q8t63snacg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

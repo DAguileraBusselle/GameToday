@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondohex"
+    android:padding="@dimen/padding"
+    tools:context=".RegistrarActivity">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="match_parent"
+        android:layout_above="@id/tvRegistro"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/tvRegistro"
+        android:textStyle="bold"
+        android:textColor="@color/morao_chilling"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/llEtRegistar"
+        android:text="@string/tv_registro"
+        android:fontFamily="@font/kitchen_police"
+        android:textAlignment="center" />
+
+
+    <LinearLayout
+        android:id="@+id/llEtRegistar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layoutBotonesRegistar"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etUsuarioRegistar"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/kitchen_police"
+            android:textColorHint="@color/morao_trans_menos"
+            android:backgroundTint="@color/morao_chilling"
+            android:layout_height="wrap_content"
+            android:hint="@string/introducir_usuario_reg" />
+
+        <EditText
+            android:id="@+id/etCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kitchen_police"
+            android:textColorHint="@color/morao_trans_menos"
+            android:backgroundTint="@color/morao_chilling"
+            android:hint="@string/introducir_correo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etContraseniaRegistrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kitchen_police"
+                android:textColorHint="@color/morao_trans_menos"
+                android:backgroundTint="@color/morao_chilling"
+                android:hint="@string/introducir_contrasenia"
+                android:inputType="textPassword"
+                android:layout_weight="0.25"/>
+
+            <ImageView
+                android:id="@+id/btnVerContra"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ojoabiertomorado"
+                android:layout_weight="1.9"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etContraseniaCheck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kitchen_police"
+                android:textColorHint="@color/morao_trans_menos"
+                android:backgroundTint="@color/morao_chilling"
+                android:hint="@string/introducir_contrasenia_check"
+                android:inputType="textPassword"
+                android:layout_weight="0.25"/>
+
+            <ImageView
+                android:id="@+id/btnVerContraCheck"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ojoabiertomorado"
+                android:layout_weight="1.9"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutBotonesRegistar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/padding">
+
+        <Button
+            android:id="@+id/btnCancelarRegistar"
+            android:fontFamily="@font/kitchen_police"
+            android:background="@drawable/outline_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_cancelar" />
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/btnRegistrarRegistrar"
+            android:fontFamily="@font/kitchen_police"
+            android:background="@drawable/outline_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_registar" />
+    </LinearLayout>
+
+</RelativeLayout>
