@@ -64,7 +64,7 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
         llm = new LinearLayoutManager(getContext());
         rvFeed.setLayoutManager(llm);
 
-        adapter = new FeedAdapter(listaPublicaciones);
+        adapter = new FeedAdapter(listaPublicaciones, getResources().getIdentifier("@drawable/default_pic", null, getContext().getPackageName()));
         rvFeed.setAdapter(adapter);
 
         actualizarFeed();
