@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class IniciarSesionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +37,7 @@ public class IniciarSesionActivity extends AppCompatActivity implements View.OnC
     ImageView btnVerContra;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference bdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class IniciarSesionActivity extends AppCompatActivity implements View.OnC
         btnCancelar.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+        bdd = FirebaseDatabase.getInstance().getReference();
 
         btnVerContra.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +84,7 @@ public class IniciarSesionActivity extends AppCompatActivity implements View.OnC
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
+        if (currentUser != null && bdd.child("Users").child(currentUser.getUid()).getKey() != null) {
             Intent i = new Intent(IniciarSesionActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

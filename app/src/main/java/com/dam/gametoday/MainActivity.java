@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Intent i;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference bdd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +39,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRegistrar.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+        bdd = FirebaseDatabase.getInstance().getReference();
 
+        //Ejecutar al menos una vez el sign out para crear un usuario nuevo
+        //mAuth.signOut();
 
-        if (mAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser() != null && bdd.child("Users").child(mAuth.getCurrentUser().getUid()) != null) {
             Intent i = new Intent(MainActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

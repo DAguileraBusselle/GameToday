@@ -44,4 +44,6 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="btn_cerrar_sesion">CERRAR SESIÓN</string>
     <string name="aceptar">ACEPTAR</string>
+    <string name="btn_cambiar_foto">CAMBIAR FOTO</string>
+    <string name="toast_foto_subida">Foto subida con éxito</string>
 </resources>

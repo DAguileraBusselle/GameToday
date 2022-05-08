@@ -1,8 +1,10 @@
 package com.dam.gametoday.rvUtils;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dam.gametoday.R;
 import com.dam.gametoday.model.Publicacion;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,11 +48,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
 
     public class FeedVH extends RecyclerView.ViewHolder {
-        TextView tvUser, tvTexto, tvHora;
+        StorageReference mStorRef;
 
+        TextView tvUser, tvTexto, tvHora;
+        ImageView ivFoto;
 
         public FeedVH(@NonNull View itemView) {
             super(itemView);
+
+            ivFoto = itemView.findViewById(R.id.ivProfilePic);
 
             tvTexto = itemView.findViewById(R.id.tvTextoPubli);
             tvUser = itemView.findViewById(R.id.tvNombreUserPubli);
@@ -61,6 +71,20 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             Date resultDate = new Date(publi.getFechaPubli());
 
             tvHora.setText(sdf.format(resultDate));
+
+            mStorRef = FirebaseStorage.getInstance().getReference();
+            System.out.println("##################################################");
+            System.out.println(publi.getUser());
+
+            System.out.println(publi.getUserId());
+            System.out.println("##################################################");
+
+            mStorRef.child(publi.getUserId() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Picasso.get().load(uri).into(ivFoto);
+                }
+            });
         }
     }
 }

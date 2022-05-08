@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,11 +13,15 @@ import android.widget.ImageView;
 import com.dam.gametoday.dialog.OnAceptarPubliListener;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +36,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
+    StorageReference mStorRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         FeedFragment feed = new FeedFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
+
+        mStorRef = FirebaseStorage.getInstance().getReference();
+
+        mStorRef.child(mAuth.getCurrentUser().getUid() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(btnPerfil);
+            }
+        });
 
     }
 
@@ -91,4 +106,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
 }

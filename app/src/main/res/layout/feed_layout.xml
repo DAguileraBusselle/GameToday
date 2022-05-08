@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         android:orientation="horizontal">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfilePic"
             android:src="@drawable/default_pic"
             android:layout_width="match_parent"
