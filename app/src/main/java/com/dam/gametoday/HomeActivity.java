@@ -43,6 +43,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
 
+    private ArrayList<Publicacion> listaPublicaciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
 
-        ArrayList<Publicacion> listaPublicaciones = new ArrayList<Publicacion>();
+        listaPublicaciones = new ArrayList<Publicacion>();
 
-        Query mQuery = bdd.child("Publicaciones");
+        llm = new LinearLayoutManager(getApplicationContext());
+        rvFeed.setLayoutManager(llm);
+
+        adapter = new FeedAdapter(listaPublicaciones);
+        rvFeed.setAdapter(adapter);
+
+        actualizarFeed();
+
+
+
+        /*Query mQuery = bdd.child("Publicaciones");
 
         ValueEventListener feedListener = new ValueEventListener() {
             @Override
@@ -88,7 +99,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-        mQuery.addListenerForSingleValueEvent(feedListener);
+        mQuery.addListenerForSingleValueEvent(feedListener);*/
 
         /*
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("displayName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -141,6 +152,28 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mQuery.addListenerForSingleValueEvent(mQueryValueListener);
 
         */
+
+    }
+
+    private void actualizarFeed() {
+
+        FirebaseDatabase.getInstance().getReference().child("Publicaciones").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaPublicaciones.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Publicacion publicacion = snapshot.getValue(Publicacion.class);
+                    listaPublicaciones.add(publicacion);
+
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 

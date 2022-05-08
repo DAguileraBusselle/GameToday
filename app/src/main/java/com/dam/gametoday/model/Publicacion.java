@@ -24,6 +24,9 @@ public class Publicacion {
         return texto;
     }
 
+    public Publicacion() {
+    }
+
     public void setTexto(String texto) {
         this.texto = texto;
     }

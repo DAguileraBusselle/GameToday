@@ -87,9 +87,6 @@ public class IniciarSesionActivity extends AppCompatActivity implements View.OnC
             finish();
         }
 
-
-        //TODO: actualizar ui para el usuario
-
     }
 
     @Override
