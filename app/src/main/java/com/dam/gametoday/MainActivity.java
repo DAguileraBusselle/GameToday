@@ -54,7 +54,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             i = new Intent(this, IniciarSesionActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         }
         startActivity(i);
-        finish();
+
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

@@ -51,7 +51,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
         }
 
         public void bindFeed(Publicacion publi) {
-            tvUser.setText(publi.getNombreUser());
+            tvUser.setText(publi.getUser());
             tvTexto.setText(publi.getTexto());
         }
     }

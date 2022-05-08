@@ -2,30 +2,77 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gris_guay"
-    tools:context=".HomeActivity">
+    android:padding="@dimen/padding"
+    >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFeed"
+
+    <ImageView
+        android:id="@+id/btnPersonalProfile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/default_pic" />
+
+    <ImageView
+        android:id="@+id/icono"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_sin_borde" />
+
+    <View
+        android:layout_below="@id/btnPersonalProfile"
+        android:id="@+id/margenTop"
+        android:layout_marginTop="@dimen/padding"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="1dp"
+        android:background="@color/gris_chilling"/>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnPublicar"
-        android:pointerIcon="crosshair"
-        android:src="@drawable/plus"
+    <FrameLayout
+        android:id="@+id/flHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/margenBottom"
+        android:layout_below="@+id/margenTop"
+        android:layout_marginTop="-3dp"
+        android:layout_marginBottom="3dp" />
+
+    <View
+        android:layout_above="@id/llNavegacion"
+        android:id="@+id/margenBottom"
         android:layout_marginBottom="@dimen/padding"
-        android:layout_marginRight="@dimen/padding"
-        android:backgroundTint="@color/morao_chilling"
-        app:borderWidth="2dp"
-        app:rippleColor="@color/morao_chilling"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gris_chilling"/>
+
+    <LinearLayout
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        />
+        android:id="@+id/llNavegacion"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btnHome"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/home"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/search"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

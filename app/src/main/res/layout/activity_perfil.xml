@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gris_guay"
+    tools:context=".PerfilActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/headerhex"
+        android:id="@+id/llPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/nav_header_desc"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/default_pic" />
+
+    <TextView
+        android:id="@+id/tvNombreUserPerfil"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:textColor="@color/morao_chilling"
+        android:fontFamily="@font/conthrax_sb"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:text="@string/nav_header_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/tvCorreoUserPerfil"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/conthrax_sb"
+        android:textColor="@color/morao_trans_menos"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="@string/nav_header_subtitle"
+        android:layout_marginBottom="@dimen/padding"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llEscribirResenia"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding">
+
+        <TextView
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_cerrar_sesion"
+            android:textColor="@color/red"
+            android:fontFamily="@font/conthrax_sb"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/red"/>
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/llPerfil"
+        android:id="@+id/margenBottom"
+        android:layout_marginBottom="@dimen/padding"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gris_chilling"/>
+
+
+
+
+</RelativeLayout>

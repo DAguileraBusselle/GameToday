@@ -5,14 +5,22 @@
       <map>
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/drawable-v24/_presiodo.xml" value="0.3338541666666667" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/drawable-v24/outline_button.xml" value="0.3828125" />
-        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_home.xml" value="0.33" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/drawable-v24/side_nav_bar.xml" value="0.196875" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_iniciar_sesion.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_perfil.xml" value="0.33" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_registrar.xml" value="0.33" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/app_bar_main.xml" value="0.22" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/content_home.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/content_main.xml" value="0.22" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/dialog_publicar.xml" value="0.2635416666666667" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/feed_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/fragment_feed.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/fragment_publicar_dialog.xml" value="0.2635416666666667" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/layout/nav_header_main.xml" value="0.33" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/menu/menu_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/GameToday/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.196875" />
       </map>
     </option>
   </component>

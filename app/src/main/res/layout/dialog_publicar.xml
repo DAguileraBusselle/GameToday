@@ -12,7 +12,7 @@
         android:id="@+id/btnCancelarPubli"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/x"
+        android:src="@drawable/cross"
         />
 
 
@@ -23,7 +23,8 @@
         android:id="@+id/etTextoPubli"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/morao_trans_menos"
+        android:textColor="@color/morao_chilling"
+        android:backgroundTint="@color/morao_chilling"
         android:fontFamily="@font/conthrax_sb"
         />
 

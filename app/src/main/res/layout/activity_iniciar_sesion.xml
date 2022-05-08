@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="@dimen/padding"
+        android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true">
 
         <Button
@@ -89,8 +89,7 @@
             android:fontFamily="@font/conthrax_sb"
             android:background="@drawable/outline_button"
             android:layout_weight="1"
-            android:textSize="13sp"
-            android:text="@string/btn_iniciar" />
+            android:text="@string/aceptar" />
     </LinearLayout>
 
 </RelativeLayout>

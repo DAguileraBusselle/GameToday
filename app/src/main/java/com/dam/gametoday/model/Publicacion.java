@@ -12,11 +12,11 @@ public class Publicacion {
         this.texto = texto;
     }
 
-    public String getNombreUser() {
+    public String getUser() {
         return nombreUser;
     }
 
-    public void setNombreUser(String nombreUser) {
+    public void setUser(String nombreUser) {
         this.nombreUser = nombreUser;
     }
 
@@ -24,10 +24,12 @@ public class Publicacion {
         return texto;
     }
 
-    public Publicacion() {
-    }
+
 
     public void setTexto(String texto) {
         this.texto = texto;
+    }
+
+    public Publicacion() {
     }
 }
