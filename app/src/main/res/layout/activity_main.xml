@@ -20,11 +20,11 @@
         android:id="@+id/btnIniciarSesion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:fontFamily="@font/conthrax_sb"
         android:layout_above="@+id/btnRegistrar"
         android:background="@drawable/outline_button"
+        android:fontFamily="@font/conthrax_sb"
         android:text="@string/btn_iniciar"
+        android:textSize="18sp"
 
         />
 

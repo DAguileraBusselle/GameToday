@@ -68,9 +68,22 @@
             android:fontFamily="@font/conthrax_sb"
             />
 
+        <TextView
+            android:padding="10dp"
+            android:id="@+id/tvFechaHoraPubli"
+            app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="01/23/2009 - 14:08"
+            android:textAlignment="textEnd"
+            android:textSize="8sp"
+            android:textColor="@color/morao_trans_menos"
+            android:fontFamily="@font/conthrax_sb"
+            />
+
 
         <View
-            app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
+            app:layout_constraintTop_toBottomOf="@id/tvFechaHoraPubli"
             android:layout_marginTop="@dimen/padding"
             android:layout_width="match_parent"
             android:layout_height="1dp"

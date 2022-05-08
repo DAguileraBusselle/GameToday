@@ -18,6 +18,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarPubliListener {
@@ -83,6 +85,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     map.put("user", task.getResult().getValue());
                     map.put("texto", texto);
                     map.put("userId", mAuth.getCurrentUser().getUid());
+                    map.put("fechaPubliMilis", System.currentTimeMillis() + 7200000);
                     ref.child(idPubli).setValue(map);
                 }
             }

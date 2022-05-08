@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dam.gametoday.R;
 import com.dam.gametoday.model.Publicacion;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
@@ -40,7 +42,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
 
     public class FeedVH extends RecyclerView.ViewHolder {
-        TextView tvUser, tvTexto;
+        TextView tvUser, tvTexto, tvHora;
 
 
         public FeedVH(@NonNull View itemView) {
@@ -48,11 +50,17 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
             tvTexto = itemView.findViewById(R.id.tvTextoPubli);
             tvUser = itemView.findViewById(R.id.tvNombreUserPubli);
+            tvHora = itemView.findViewById(R.id.tvFechaHoraPubli);
         }
 
         public void bindFeed(Publicacion publi) {
             tvUser.setText(publi.getUser());
             tvTexto.setText(publi.getTexto());
+
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
+            Date resultDate = new Date(publi.getFechaPubli());
+
+            tvHora.setText(sdf.format(resultDate));
         }
     }
 }

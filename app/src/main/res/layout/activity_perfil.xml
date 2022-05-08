@@ -61,7 +61,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_cerrar_sesion"
-            android:textColor="@color/red"
+            android:textSize="23sp"
+            android:textColor="@color/morrao"
             android:fontFamily="@font/conthrax_sb"
             android:layout_alignParentBottom="true"
             android:textAlignment="center"/>
@@ -69,7 +70,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/red"/>
+            android:background="@color/morrao"/>
     </LinearLayout>
 
     <View
