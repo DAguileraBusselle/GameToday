@@ -8,7 +8,7 @@
     <string name="previous">Previous</string>
     <string name="introducir_correo">Introduce el correo</string>
     <string name="introducir_contrasenia">Introduce la contraseña</string>
-    <string name="introducir_usuario">Introduce el usuario o correo</string>
+    <string name="introducir_usuario">Introduce el correo</string>
     <string name="btn_cancelar">CANCELAR</string>
     <string name="introducir_contrasenia_check">confirma la contraseña</string>
     <string name="toast_vacio">Debe rellenar todos los campos</string>
@@ -25,4 +25,15 @@
     <string name="btn_iniciar">INICIAR SESIÓN</string>
     <string name="btn_registar">REGISTRAR</string>
     <string name="tv_registro">REGISTRO DE USUARIO</string>
+    <string name="toast_contra_corta">La contraseña debe tener al menos 6 carácteres</string>
+    <string name="toast_usuario_creado">Usuario creado correctamente</string>
+    <string name="toast_usuario_no_creado">El usuario no se pudo crear</string>
+    <string name="toast_intro_correo">No ha introducido el correo</string>
+    <string name="toast_intro_contra">No ha introducido la contraseña</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fd_btn_cancelar">cancelar</string>
+    <string name="toast_publicacion_subida">Publicacion subida</string>
+    <string name="toast_prueba_exitosa">AAAAAAAAAAAAAAAAAAAAAAAAAA</string>
+    <string name="toast_debe_escribir">Debe escribir una publicacion</string>
 </resources>

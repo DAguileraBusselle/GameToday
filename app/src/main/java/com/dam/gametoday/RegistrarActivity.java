@@ -1,5 +1,6 @@
 package com.dam.gametoday;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 
@@ -19,6 +20,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
 public class RegistrarActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText etNombre;
@@ -36,6 +48,9 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
     Boolean viendoContra2 = false;
 
     Intent i;
+
+    private FirebaseAuth auth;
+    private DatabaseReference rootRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +72,8 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
         btnVerContra = findViewById(R.id.btnVerContra);
         btnVerContraCheck = findViewById(R.id.btnVerContraCheck);
 
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        auth = FirebaseAuth.getInstance();
 
         btnRegistrar.setEnabled(false);
 
@@ -68,10 +85,10 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
 
                 viendoContra1 = !viendoContra1;
                 if (viendoContra1) {
-                    btnVerContra.setImageResource(getResources().getIdentifier("@drawable/ojolineamorado", null, getPackageName()));
+                    btnVerContra.setImageResource(getResources().getIdentifier("@drawable/ojoabiertomorado", null, getPackageName()));
                     etContra.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
-                    btnVerContra.setImageResource(getResources().getIdentifier("@drawable/ojoabiertomorado", null, getPackageName()));
+                    btnVerContra.setImageResource(getResources().getIdentifier("@drawable/ojolineamorado", null, getPackageName()));
                     etContra.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
 
@@ -88,10 +105,10 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
 
                 viendoContra2 = !viendoContra2;
                 if (viendoContra2) {
-                    btnVerContraCheck.setImageResource(getResources().getIdentifier("@drawable/ojolineamorado", null, getPackageName()));
+                    btnVerContraCheck.setImageResource(getResources().getIdentifier("@drawable/ojoabiertomorado", null, getPackageName()));
                     etContraCheck.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
-                    btnVerContraCheck.setImageResource(getResources().getIdentifier("@drawable/ojoabiertomorado", null, getPackageName()));
+                    btnVerContraCheck.setImageResource(getResources().getIdentifier("@drawable/ojolineamorado", null, getPackageName()));
                     etContraCheck.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
 
@@ -155,8 +172,10 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         if (view.equals(btnCancelar)) {
-            i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(RegistrarActivity.this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
+            finish();
         } else {
             String nombre = etNombre.getText().toString().trim();
             String correo = etCorreo.getText().toString().trim();
@@ -172,10 +191,47 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
                     Toast.makeText(this, R.string.toast_contra_check_fail, Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(this, "HASTA AQUI BIEN", Toast.LENGTH_SHORT).show();
-                    //TODO: registro en base de datos
+                    if (contraCheck.length() < 6) {
+                        Toast.makeText(this, R.string.toast_contra_corta, Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        registrarUsuario(nombre, correo, contra);
+                    }
+
                 }
             }
         }
+    }
+
+    private void registrarUsuario(String displayName, String correo, String contra) {
+
+        auth.createUserWithEmailAndPassword(correo, contra).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("displayName", displayName);
+                map.put("correo", correo);
+                map.put("id", auth.getCurrentUser().getUid());
+
+                rootRef.child("Users").child(auth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), R.string.toast_usuario_creado, Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent (RegistrarActivity.this, MainActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                            finish();
+                        }
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), R.string.toast_usuario_no_creado + ": " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

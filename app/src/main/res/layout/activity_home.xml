@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gris_guay"
+    tools:context=".HomeActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnPublicar"
+        android:pointerIcon="crosshair"
+        android:src="@drawable/plus"
+        android:layout_marginBottom="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:backgroundTint="@color/morao_chilling"
+        app:borderWidth="2dp"
+        app:rippleColor="@color/morao_chilling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>

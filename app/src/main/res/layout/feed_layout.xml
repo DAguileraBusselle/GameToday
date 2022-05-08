@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gris_guay"
+    >
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/padding"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/llUserFeed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivProfilePic"
+            android:src="@drawable/default_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            />
+
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:id="@+id/tvNombreUserPubli"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="powdavyd"
+                android:layout_weight="0.1"
+                android:textColor="@color/morao_chilling"
+                android:fontFamily="@font/conthrax_sb"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/tvCorreoUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="powdavyd@gmail.com"
+                android:layout_weight="2"
+                android:textColor="@color/morao_trans_menos"
+                android:fontFamily="@font/conthrax_sb"
+                android:textSize="10sp"
+                />
+        </LinearLayout>
+
+
+        </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/tvTextoPubli"
+        app:layout_constraintTop_toBottomOf="@id/llUserFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bua tio me he despertao con unas ganas de chupar polla que te cagas"
+        android:textColor="@color/morao_chilling"
+        android:fontFamily="@font/conthrax_sb"
+        />
+
+
+    <View
+        app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gris_chilling"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondohex"
+    android:padding="@dimen/padding"
+    tools:context=".IniciarSesionActivity">
+
+    <ImageView
+        android:id="@+id/ivLogoInciar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/etUsuario"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/g2dlogo" />
+
+    <EditText
+        android:id="@+id/etUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llContra"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/morao_chilling"
+        android:fontFamily="@font/conthrax_sb"
+        android:hint="@string/introducir_usuario"
+        android:nextFocusDown="@id/etContrasenia"
+        android:textColor="@color/morao_chilling"
+        android:textColorHint="@color/morao_trans_menos" />
+
+    <LinearLayout
+        android:layout_above="@id/layoutBotones"
+        android:id="@+id/llContra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <EditText
+            android:id="@+id/etContrasenia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/morao_chilling"
+            android:textColorHint="@color/morao_trans_menos"
+            android:fontFamily="@font/conthrax_sb"
+            android:backgroundTint="@color/morao_chilling"
+            android:layout_weight="0.25"
+            android:hint="@string/introducir_contrasenia"
+            android:inputType="textPassword" />
+
+        <ImageView
+            android:id="@+id/btnVerContraInic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ojolineamorado"
+            android:layout_weight="1.9"/>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/layoutBotones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/padding"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/conthrax_sb"
+            android:background="@drawable/outline_button"
+            android:layout_weight="1"
+            android:text="@string/btn_cancelar" />
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/btnAceptar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/conthrax_sb"
+            android:background="@drawable/outline_button"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:text="@string/btn_iniciar" />
+    </LinearLayout>
+
+</RelativeLayout>

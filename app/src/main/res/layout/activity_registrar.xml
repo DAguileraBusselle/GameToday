@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/tvRegistro"
-        android:src="@drawable/mandologo"/>
+        android:src="@drawable/g2dlogo"/>
 
     <TextView
         android:id="@+id/tvRegistro"
@@ -38,6 +38,7 @@
         <EditText
             android:id="@+id/etUsuarioRegistar"
             android:layout_width="match_parent"
+            android:textColor="@color/morao_chilling"
             android:fontFamily="@font/conthrax_sb"
             android:textColorHint="@color/morao_trans_menos"
             android:backgroundTint="@color/morao_chilling"
@@ -47,6 +48,7 @@
         <EditText
             android:id="@+id/etCorreo"
             android:layout_width="match_parent"
+            android:textColor="@color/morao_chilling"
             android:layout_height="wrap_content"
             android:fontFamily="@font/conthrax_sb"
             android:textColorHint="@color/morao_trans_menos"
@@ -62,6 +64,7 @@
                 android:id="@+id/etContraseniaRegistrar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/morao_chilling"
                 android:fontFamily="@font/conthrax_sb"
                 android:textColorHint="@color/morao_trans_menos"
                 android:backgroundTint="@color/morao_chilling"
@@ -73,7 +76,7 @@
                 android:id="@+id/btnVerContra"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ojoabiertomorado"
+                android:src="@drawable/ojolineamorado"
                 android:layout_weight="1.9"/>
 
         </LinearLayout>
@@ -89,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/conthrax_sb"
+                android:textColor="@color/morao_chilling"
                 android:textColorHint="@color/morao_trans_menos"
                 android:backgroundTint="@color/morao_chilling"
                 android:hint="@string/introducir_contrasenia_check"
@@ -99,7 +103,7 @@
                 android:id="@+id/btnVerContraCheck"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ojoabiertomorado"
+                android:src="@drawable/ojolineamorado"
                 android:layout_weight="1.9"/>
 
         </LinearLayout>
