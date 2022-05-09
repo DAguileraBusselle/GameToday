@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.SearchFragment"
-    android:background="@color/gris_guay">
+    android:background="@drawable/fondohex">
 
     <LinearLayout
         android:layout_marginTop="@dimen/padding"
@@ -23,6 +23,8 @@
             android:layout_weight="1"
             android:fontFamily="@font/conthrax_sb"
             android:id="@+id/etSearchUsuario"
+            android:textSize="24sp"
+            android:textColor="@color/morao_trans_menos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -35,9 +37,23 @@
             android:src="@drawable/cross"/>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvAviso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llSearchUsuario"
+        android:layout_centerVertical="true"
+        android:textAlignment="center"
+        android:fontFamily="@font/conthrax_sb"
+        android:padding="@dimen/padding"
+        android:textColor="@color/morrao_chilling"
+        android:textSize="20sp"
+        android:visibility="gone"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="8dp"
-        android:layout_below="@id/llSearchUsuario"
+        android:layout_below="@id/tvAviso"
         android:id="@+id/rvSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

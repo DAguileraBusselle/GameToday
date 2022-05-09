@@ -47,4 +47,6 @@
     <string name="btn_cambiar_foto">CAMBIAR FOTO</string>
     <string name="toast_foto_subida">Foto subida con éxito</string>
     <string name="btn_seguir">SEGUIR</string>
+    <string name="introduce_search">Introduce un nombre de usuario para buscarlo</string>
+    <string name="no_result_search">No encontramos lo que buscas :(</string>
 </resources>

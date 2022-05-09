@@ -38,7 +38,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
     @Override
     public SearchAdapter.SearchVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.feed_layout, parent, false);
+                .inflate(R.layout.search_layout, parent, false);
         SearchAdapter.SearchVH vh = new SearchAdapter.SearchVH(v);
         return vh;
     }
@@ -66,7 +66,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
             super(itemView);
             tvNombreUser = itemView.findViewById(R.id.tvNombreUserSearch);
             ivFotoUser = itemView.findViewById(R.id.ivFotoPerfilSearch);
-
         }
 
         public void bindSearch(Usuario user) {

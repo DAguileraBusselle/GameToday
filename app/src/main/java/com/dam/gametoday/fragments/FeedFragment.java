@@ -90,6 +90,7 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
 
                 sortListReverse(listaPublicaciones);
 
+
                 adapter.notifyDataSetChanged();
             }
 

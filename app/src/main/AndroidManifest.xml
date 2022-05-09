@@ -14,7 +14,8 @@
             android:exported="true" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".IniciarSesionActivity"
             android:exported="true" />

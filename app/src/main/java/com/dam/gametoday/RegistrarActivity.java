@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 public class RegistrarActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -177,7 +178,7 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
             startActivity(i);
             finish();
         } else {
-            String nombre = etNombre.getText().toString().trim();
+            String nombre = etNombre.getText().toString().trim().toLowerCase();
             String correo = etCorreo.getText().toString().trim();
             String contra = etContra.getText().toString().trim();
             String contraCheck = etContraCheck.getText().toString().trim();

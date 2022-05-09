@@ -36,4 +36,7 @@ public class Usuario {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public Usuario() {
+    }
 }

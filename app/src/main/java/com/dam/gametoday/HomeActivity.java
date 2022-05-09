@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.dam.gametoday.dialog.OnAceptarPubliListener;
 import com.dam.gametoday.fragments.FeedFragment;
+import com.dam.gametoday.fragments.SearchFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -52,6 +53,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         bdd = FirebaseDatabase.getInstance().getReference();
 
         btnHome.setOnClickListener(this);
+        btnSearch.setOnClickListener(this);
         btnPerfil.setOnClickListener(this);
 
         FeedFragment feed = new FeedFragment();
@@ -74,6 +76,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (v.equals(btnHome)) {
 
             FeedFragment feed = new FeedFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
+
+        } if (v.equals(btnSearch)) {
+
+            SearchFragment feed = new SearchFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
 
         } else if (v.equals(btnPerfil)) {
@@ -101,7 +108,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     map.put("texto", texto);
                     map.put("userId", mAuth.getCurrentUser().getUid());
                     map.put("fechaPubliMilis", System.currentTimeMillis());
-                    //map.put("publiId", idPubli);
                     ref.child(idPubli).setValue(map);
                 }
             }
