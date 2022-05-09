@@ -46,4 +46,5 @@
     <string name="aceptar">ACEPTAR</string>
     <string name="btn_cambiar_foto">CAMBIAR FOTO</string>
     <string name="toast_foto_subida">Foto subida con éxito</string>
+    <string name="btn_seguir">SEGUIR</string>
 </resources>

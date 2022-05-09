@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.SearchFragment"
+    android:background="@color/gris_guay">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/padding"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:id="@+id/llSearchUsuario"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/outline_button">
+
+        <EditText
+            android:layout_marginLeft="15dp"
+            android:backgroundTint="@color/trans"
+            android:layout_weight="1"
+            android:fontFamily="@font/conthrax_sb"
+            android:id="@+id/etSearchUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+        <ImageView
+            android:id="@+id/btnBorrarSearch"
+            android:layout_width="50dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/cross"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/llSearchUsuario"
+        android:id="@+id/rvSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+</RelativeLayout>
