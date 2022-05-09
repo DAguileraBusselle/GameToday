@@ -80,7 +80,7 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaPublicaciones.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Publicacion publicacion = new Publicacion(snapshot.child("user").getValue().toString(), snapshot.child("texto").getValue().toString(), (long) snapshot.child("fechaPubliMilis").getValue(), snapshot.child("userId").getValue().toString());
+                    Publicacion publicacion = new Publicacion(snapshot.getKey(), snapshot.child("user").getValue().toString(), snapshot.child("texto").getValue().toString(), (long) snapshot.child("fechaPubliMilis").getValue(), snapshot.child("userId").getValue().toString());
                     System.out.println(snapshot.child("fechaPubliMilis").getValue().toString());
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
                     Date resultDate = new Date(publicacion.getFechaPubli());

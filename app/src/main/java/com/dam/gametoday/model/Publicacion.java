@@ -4,17 +4,23 @@ import java.util.Date;
 
 public class Publicacion {
 
+    private String publiId;
     private String nombreUser;
     private String texto;
     private long fechaPubliMilis;
     private String userId;
 
-    public Publicacion(String nombreUser, String texto, long fechaPubliMilis, String userId) {
+    public Publicacion(String publiId, String nombreUser, String texto, long fechaPubliMilis, String userId) {
+        this.publiId = publiId;
         this.nombreUser = nombreUser;
         this.texto = texto;
         this.fechaPubliMilis = fechaPubliMilis;
         this.userId = userId;
     }
+
+    public String getPubliId() { return publiId; }
+
+    public void setPubliId(String publiId) { this.publiId = publiId; }
 
     public String getUser() { return nombreUser; }
 

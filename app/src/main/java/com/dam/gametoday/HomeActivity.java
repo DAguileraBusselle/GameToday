@@ -101,6 +101,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     map.put("texto", texto);
                     map.put("userId", mAuth.getCurrentUser().getUid());
                     map.put("fechaPubliMilis", System.currentTimeMillis());
+                    //map.put("publiId", idPubli);
                     ref.child(idPubli).setValue(map);
                 }
             }

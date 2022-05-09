@@ -68,22 +68,37 @@
             android:fontFamily="@font/conthrax_sb"
             />
 
-        <TextView
-            android:padding="10dp"
-            android:id="@+id/tvFechaHoraPubli"
+        <LinearLayout
+            android:id="@+id/llBorrarFecha"
             app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="01/23/2009 - 14:08"
-            android:textAlignment="textEnd"
-            android:textSize="8sp"
-            android:textColor="@color/morao_trans_menos"
-            android:fontFamily="@font/conthrax_sb"
-            />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/btnBorrarPubli"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/papelera"/>
+
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/tvFechaHoraPubli"
+                app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="01/23/2009 - 14:08"
+                android:textAlignment="textEnd"
+                android:textSize="8sp"
+                android:textColor="@color/morao_trans_menos"
+                android:fontFamily="@font/conthrax_sb"
+                />
+        </LinearLayout>
 
 
         <View
-            app:layout_constraintTop_toBottomOf="@id/tvFechaHoraPubli"
+            app:layout_constraintTop_toBottomOf="@id/llBorrarFecha"
             android:layout_marginTop="@dimen/padding"
             android:layout_width="match_parent"
             android:layout_height="1dp"

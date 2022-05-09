@@ -15,6 +15,10 @@ import com.dam.gametoday.R;
 import com.dam.gametoday.model.Publicacion;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -53,8 +57,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
     public class FeedVH extends RecyclerView.ViewHolder {
         StorageReference mStorRef;
 
+        private FirebaseAuth mAuth;
+        private DatabaseReference bdd;
+
         TextView tvUser, tvTexto, tvHora;
-        ImageView ivFoto;
+        ImageView ivFoto, btnBorrar;
 
         public FeedVH(@NonNull View itemView) {
             super(itemView);
@@ -64,6 +71,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             tvTexto = itemView.findViewById(R.id.tvTextoPubli);
             tvUser = itemView.findViewById(R.id.tvNombreUserPubli);
             tvHora = itemView.findViewById(R.id.tvFechaHoraPubli);
+
+            btnBorrar = itemView.findViewById(R.id.btnBorrarPubli);
         }
 
         public void bindFeed(Publicacion publi) {
@@ -76,6 +85,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             tvHora.setText(sdf.format(resultDate));
 
             mStorRef = FirebaseStorage.getInstance().getReference();
+            mAuth = FirebaseAuth.getInstance();
+            bdd = FirebaseDatabase.getInstance().getReference();
+
             System.out.println("##################################################");
             System.out.println(publi.getUser());
 
@@ -93,6 +105,23 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                     ivFoto.setImageResource(defaulPic);
                 }
             });
+
+            if (publi.getUserId().equals(mAuth.getCurrentUser().getUid())) {
+                btnBorrar.setVisibility(View.VISIBLE);
+                btnBorrar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+
+                        bdd.child("Publicaciones").child(publi.getPubliId()).removeValue();
+                    }
+                });
+
+            } else {
+                btnBorrar.setVisibility(View.INVISIBLE);
+            }
+
         }
     }
 }
