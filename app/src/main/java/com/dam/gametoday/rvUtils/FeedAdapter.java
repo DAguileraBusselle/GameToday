@@ -133,6 +133,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 btnBorrar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        mStorRef.child(publi.getImagenPubli()).delete();
                         bdd.child("Publicaciones").child(publi.getPubliId()).removeValue();
                     }
                 });
