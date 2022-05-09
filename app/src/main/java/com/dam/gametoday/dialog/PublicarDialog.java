@@ -1,9 +1,15 @@
 package com.dam.gametoday.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,10 +28,16 @@ import com.dam.gametoday.R;
 
 public class PublicarDialog extends DialogFragment {
 
+    public static final int CLAVE_ELEGIR_FOTO = 2;
+
     OnAceptarPubliListener listener;
     EditText etTexto;
     ImageView btnCancel;
     ImageView btnAceptar;
+    ImageView btnGaleria;
+    ImageView ivFotoPreview;
+
+    Uri imagenUri;
 
     @NonNull
     @Override
@@ -37,6 +49,8 @@ public class PublicarDialog extends DialogFragment {
         etTexto = v.findViewById(R.id.etTextoPubli);
         btnCancel = v.findViewById(R.id.btnCancelarPubli);
         btnAceptar = v.findViewById(R.id.btnAceptarPubli);
+        btnGaleria = v.findViewById(R.id.btnSubirImagenPubli);
+        ivFotoPreview = v.findViewById(R.id.ivPreviewImagenPubli);
 
         builder.setView(v);
 
@@ -47,6 +61,7 @@ public class PublicarDialog extends DialogFragment {
             @Override
             public void onShow(DialogInterface dialog) {
 
+                btnAceptar.setEnabled(false);
                 btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -54,6 +69,38 @@ public class PublicarDialog extends DialogFragment {
                     }
                 });
 
+                etTexto.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (etTexto.getText().toString().isEmpty()) {
+                            btnAceptar.setEnabled(false);
+                            btnAceptar.setBackground(getResources().getDrawable(R.drawable.tick_trans));
+                        } else {
+                            btnAceptar.setEnabled(true);
+                            btnAceptar.setBackground(getResources().getDrawable(R.drawable.tick));
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+
+
+                btnGaleria.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        i.setType("image/*");
+                        startActivityForResult(i, CLAVE_ELEGIR_FOTO);
+                    }
+                });
 
                 btnAceptar.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -61,16 +108,8 @@ public class PublicarDialog extends DialogFragment {
 
                         String texto = etTexto.getText().toString().trim();
 
-                        if (texto.isEmpty()) {
-
-                            //TODO: disable button hasta que haya escrito algo
-                            Toast.makeText(getActivity().getApplicationContext(), R.string.toast_debe_escribir, Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            listener.enviarPubli(texto);
-                            dialog.dismiss();
-                        }
-
+                        listener.enviarPubli(texto, imagenUri);
+                        dialog.dismiss();
 
 
                     }
@@ -92,6 +131,20 @@ public class PublicarDialog extends DialogFragment {
         }
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CLAVE_ELEGIR_FOTO) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data.getData() != null) {
+                    imagenUri = data.getData();
+                    ivFotoPreview.setImageURI(imagenUri);
+                }
+            }
+        }
+    }
+
 
     @Override
     public void onDetach() {

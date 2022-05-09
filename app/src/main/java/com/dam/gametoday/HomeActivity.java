@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.dam.gametoday.dialog.OnAceptarPubliListener;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.fragments.SearchFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -92,7 +95,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void enviarPubli(String texto) {
+    public void enviarPubli(String texto, Uri imagen) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Publicaciones");
         String idPubli = ref.push().getKey();
 
@@ -103,12 +106,39 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     System.out.println(Log.e("firebase", "Error getting data", task.getException()));
                 }
                 else {
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("user", task.getResult().getValue());
-                    map.put("texto", texto);
-                    map.put("userId", mAuth.getCurrentUser().getUid());
-                    map.put("fechaPubliMilis", System.currentTimeMillis());
-                    ref.child(idPubli).setValue(map);
+                    if(imagen == null) {
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("user", task.getResult().getValue());
+                        map.put("texto", texto);
+                        map.put("userId", mAuth.getCurrentUser().getUid());
+                        map.put("fechaPubliMilis", System.currentTimeMillis());
+                        map.put("imagenPubli", "no");
+                        ref.child(idPubli).setValue(map);
+                    } else {
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("user", task.getResult().getValue());
+                        map.put("texto", texto);
+                        map.put("userId", mAuth.getCurrentUser().getUid());
+                        map.put("fechaPubliMilis", System.currentTimeMillis());
+                        map.put("imagenPubli", idPubli + "_publi.jpg");
+                        ref.child(idPubli).setValue(map);
+
+                        StorageReference fileRef = mStorRef.child(idPubli + "_publi.jpg");
+                        fileRef.putFile(imagen).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(getApplicationContext(), R.string.toast_foto_subida, Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                    }
+
                 }
             }
         });

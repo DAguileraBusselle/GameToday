@@ -61,12 +61,13 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
         private DatabaseReference bdd;
 
         TextView tvUser, tvTexto, tvHora;
-        ImageView ivFoto, btnBorrar;
+        ImageView ivFoto, btnBorrar, ivImagenPubli;
 
         public FeedVH(@NonNull View itemView) {
             super(itemView);
 
             ivFoto = itemView.findViewById(R.id.ivProfilePic);
+            ivImagenPubli = itemView.findViewById(R.id.ivImagenPubli);
 
             tvTexto = itemView.findViewById(R.id.tvTextoPubli);
             tvUser = itemView.findViewById(R.id.tvNombreUserPubli);
@@ -106,14 +107,32 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 }
             });
 
+
+            if(!publi.getImagenPubli().equals("no")) {
+                mStorRef.child(publi.getImagenPubli()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(ivImagenPubli);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                        System.out.println(publi.getTexto() + "NO SE PUDO CARGAR LA IMAGEN: " + e.getMessage());
+                        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+                    }
+                });
+            }
+
+
             if (publi.getUserId().equals(mAuth.getCurrentUser().getUid())) {
                 btnBorrar.setVisibility(View.VISIBLE);
                 btnBorrar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-
-
                         bdd.child("Publicaciones").child(publi.getPubliId()).removeValue();
                     }
                 });

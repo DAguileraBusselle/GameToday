@@ -67,9 +67,17 @@
             android:fontFamily="@font/conthrax_sb"
             />
 
+        <ImageView
+            android:id="@+id/ivImagenPubli"
+            app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
         <LinearLayout
             android:id="@+id/llBorrarFecha"
-            app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
+            app:layout_constraintTop_toBottomOf="@id/ivImagenPubli"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

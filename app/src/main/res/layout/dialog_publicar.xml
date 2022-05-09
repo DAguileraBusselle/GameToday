@@ -15,8 +15,6 @@
         android:src="@drawable/cross"
         />
 
-
-
     <EditText
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/btnCancelarPubli"
@@ -35,6 +33,21 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/tick"/>
+
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@id/btnSubirImagenPubli"
+        android:id="@+id/ivPreviewImagenPubli"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    
+    <ImageView
+        android:id="@+id/btnSubirImagenPubli"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/galeria"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/etTextoPubli"/>
 
 
 

@@ -101,6 +101,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
             finish();
         } else if (v.equals(btnFoto)) {
             Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            i.setType("image/*");
             startActivityForResult(i, CLAVE_CAMBIAR_FOTO);
         } else if (v.equals(btnCancel)) {
             Intent i = new Intent(PerfilActivity.this, HomeActivity.class);
@@ -118,13 +119,10 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
                 if (data.getData() != null) {
                     Uri imagenUri = data.getData();
                     ivFotoPerfil.setImageURI(imagenUri);
-
                     subirFoto(imagenUri);
                 }
-
             }
         }
-
     }
 
     private void subirFoto(Uri imagenUri) {
