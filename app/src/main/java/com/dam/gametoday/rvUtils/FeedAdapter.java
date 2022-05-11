@@ -77,13 +77,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
         }
 
         public void bindFeed(Publicacion publi) {
-            tvUser.setText(publi.getUser());
-            tvTexto.setText(publi.getTexto());
 
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
-            Date resultDate = new Date(publi.getFechaPubli());
-
-            tvHora.setText(sdf.format(resultDate));
 
             mStorRef = FirebaseStorage.getInstance().getReference();
             mAuth = FirebaseAuth.getInstance();
@@ -94,6 +88,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
             System.out.println(publi.getUserId());
             System.out.println("##################################################");
+
+            ivFoto.setImageResource(defaulPic);
 
             mStorRef.child(publi.getUserId() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
@@ -107,16 +103,22 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 }
             });
 
+            ivImagenPubli.setVisibility(View.GONE);
 
             if(!publi.getImagenPubli().equals("no")) {
                 mStorRef.child(publi.getImagenPubli()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
+                        ivImagenPubli.setVisibility(View.VISIBLE);
+
+
                         Picasso.get().load(uri).into(ivImagenPubli);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        Picasso.get().cancelRequest(ivImagenPubli);
+
                         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                         System.out.println(publi.getTexto() + "NO SE PUDO CARGAR LA IMAGEN: " + e.getMessage());
@@ -125,7 +127,17 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
                     }
                 });
+            } else {
+                Picasso.get().cancelRequest(ivImagenPubli);
             }
+
+            tvUser.setText(publi.getUser());
+            tvTexto.setText(publi.getTexto());
+
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
+            Date resultDate = new Date(publi.getFechaPubli());
+
+            tvHora.setText(sdf.format(resultDate));
 
 
             if (publi.getUserId().equals(mAuth.getCurrentUser().getUid())) {

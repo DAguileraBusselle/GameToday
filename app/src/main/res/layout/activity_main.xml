@@ -8,13 +8,14 @@
     android:background="@drawable/fondohex"
     android:padding="@dimen/padding">
 
+
     <ImageView
-        android:id="@+id/ivLogoMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/btnIniciarSesion"
+        android:layout_height="wrap_content"
         android:src="@drawable/g2dlogo"
-        android:layout_alignParentTop="true" />
+        android:layout_above="@id/btnIniciarSesion"
+        />
+
 
     <Button
         android:id="@+id/btnIniciarSesion"

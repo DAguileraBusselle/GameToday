@@ -128,6 +128,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 Toast.makeText(getApplicationContext(), R.string.toast_foto_subida, Toast.LENGTH_SHORT).show();
+
+                                Intent i = new Intent (HomeActivity.this, HomeActivity.class);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(i);
+                                finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/gris_guay"
+    android:background="@color/trans"
     >
 
     <LinearLayout
@@ -35,7 +35,6 @@
                 android:id="@+id/tvNombreUserPubli"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="powdavyd"
                 android:layout_weight="0.9"
                 android:textColor="@color/morao_chilling"
                 android:fontFamily="@font/conthrax_sb"
@@ -73,6 +72,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="fill_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:layout_height="wrap_content"/>
 
         <LinearLayout
