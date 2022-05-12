@@ -1,7 +1,5 @@
 package com.dam.gametoday.model;
 
-import java.util.Date;
-
 public class Publicacion {
 
     private String publiId;
@@ -10,15 +8,21 @@ public class Publicacion {
     private long fechaPubliMilis;
     private String userId;
     private String imagenPubli;
+    private long likes;
 
-    public Publicacion(String publiId, String nombreUser, String texto, long fechaPubliMilis, String userId, String imagenPubli) {
+    public Publicacion(String publiId, String nombreUser, String texto, long fechaPubliMilis, String userId, String imagenPubli, long likes) {
         this.publiId = publiId;
         this.nombreUser = nombreUser;
         this.texto = texto;
         this.fechaPubliMilis = fechaPubliMilis;
         this.userId = userId;
         this.imagenPubli = imagenPubli;
+        this.likes = likes;
     }
+
+    public long getLikes() { return likes; }
+
+    public void setLikes(long likes) { this.likes = likes; }
 
     public String getPubliId() { return publiId; }
 

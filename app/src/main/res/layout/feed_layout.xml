@@ -85,9 +85,28 @@
             <ImageView
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="8dp"
+                android:id="@+id/btnLikePubli"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/heart"/>
+            <TextView
+                android:id="@+id/tvNumLikes"
+                android:layout_marginLeft="2dp"
+                android:textColor="@color/morao_chilling"
+                android:fontFamily="@font/conthrax_sb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text=""/>
+
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
                 android:id="@+id/btnBorrarPubli"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
                 android:src="@drawable/papelera"/>
 
             <TextView

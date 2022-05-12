@@ -83,8 +83,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         } if (v.equals(btnSearch)) {
 
-            SearchFragment feed = new SearchFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
+            SearchFragment search = new SearchFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flHome, search).addToBackStack(null).commit();
 
         } else if (v.equals(btnPerfil)) {
             Intent i = new Intent (HomeActivity.this, PerfilActivity.class);
@@ -114,6 +114,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         map.put("fechaPubliMilis", System.currentTimeMillis());
                         map.put("imagenPubli", "no");
                         ref.child(idPubli).setValue(map);
+
+                        FeedFragment feed = new FeedFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
                     } else {
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("user", task.getResult().getValue());
@@ -129,10 +132,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 Toast.makeText(getApplicationContext(), R.string.toast_foto_subida, Toast.LENGTH_SHORT).show();
 
-                                Intent i = new Intent (HomeActivity.this, HomeActivity.class);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(i);
-                                finish();
+                                FeedFragment feed = new FeedFragment();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

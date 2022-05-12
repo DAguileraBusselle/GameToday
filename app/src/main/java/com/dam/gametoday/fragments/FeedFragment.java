@@ -33,6 +33,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class FeedFragment extends Fragment implements View.OnClickListener {
 
@@ -41,6 +43,8 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
 
     LinearLayoutManager llm;
     FeedAdapter adapter;
+
+    private Timer refrescarTimer;
 
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
@@ -73,19 +77,23 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
+
+
     private void actualizarFeed() {
 
-        FirebaseDatabase.getInstance().getReference().child("Publicaciones").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Publicaciones").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaPublicaciones.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
                     Publicacion publicacion = new Publicacion(snapshot.getKey(),
                                             snapshot.child("user").getValue().toString(),
                                             snapshot.child("texto").getValue().toString(),
                                             (long) snapshot.child("fechaPubliMilis").getValue(),
                                             snapshot.child("userId").getValue().toString(),
-                                            snapshot.child("imagenPubli").getValue().toString());
+                                            snapshot.child("imagenPubli").getValue().toString(),
+                                            snapshot.child("likes").getChildrenCount());
 
                     System.out.println(snapshot.child("fechaPubliMilis").getValue().toString());
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
@@ -129,4 +137,31 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refrescarTimer = new Timer();
+        refrescarTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        updateHTML();
+                    }
+                });
+            }
+        }, 0, 300000); // actualiza cada minuto
+    }
+
+    private void updateHTML(){
+        actualizarFeed();
+    }
+
+    @Override
+    public void onPause() {
+        refrescarTimer.cancel();
+        super.onPause();
+    }
 }
+
+

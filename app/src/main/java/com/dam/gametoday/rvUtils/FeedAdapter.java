@@ -1,5 +1,6 @@
 package com.dam.gametoday.rvUtils;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +9,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dam.gametoday.R;
+import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.model.Publicacion;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -26,12 +32,14 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
     private ArrayList<Publicacion> listaFeed;
     private int defaulPic;
     private View.OnClickListener listener;
+    Context context;
 
     public FeedAdapter(ArrayList<Publicacion> feed, int defaultPic){this.listaFeed = feed; this.defaulPic = defaultPic;}
 
@@ -42,6 +50,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 .inflate(R.layout.feed_layout, parent, false);
         FeedAdapter.FeedVH vh = new FeedAdapter.FeedVH(v);
         return vh;
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        context = recyclerView.getContext();
     }
 
     @Override
@@ -60,8 +74,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
         private FirebaseAuth mAuth;
         private DatabaseReference bdd;
 
-        TextView tvUser, tvTexto, tvHora;
-        ImageView ivFoto, btnBorrar, ivImagenPubli;
+        TextView tvUser, tvTexto, tvHora, tvNumLikes;
+        ImageView ivFoto, btnBorrar, btnLike, ivImagenPubli;
 
         public FeedVH(@NonNull View itemView) {
             super(itemView);
@@ -69,10 +83,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             ivFoto = itemView.findViewById(R.id.ivProfilePic);
             ivImagenPubli = itemView.findViewById(R.id.ivImagenPubli);
 
+            tvNumLikes = itemView.findViewById(R.id.tvNumLikes);
             tvTexto = itemView.findViewById(R.id.tvTextoPubli);
             tvUser = itemView.findViewById(R.id.tvNombreUserPubli);
             tvHora = itemView.findViewById(R.id.tvFechaHoraPubli);
 
+            btnLike = itemView.findViewById(R.id.btnLikePubli);
             btnBorrar = itemView.findViewById(R.id.btnBorrarPubli);
         }
 
@@ -134,6 +150,69 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             tvUser.setText(publi.getUser());
             tvTexto.setText(publi.getTexto());
 
+            tvNumLikes.setText(String.valueOf(publi.getLikes()));
+
+            bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Boolean likeDado = false;
+
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
+                            likeDado = true;
+                            btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_full));
+                        }
+                    }
+
+                    if (!likeDado) {
+                        btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart));
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            btnLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Boolean likeDado = false;
+
+
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
+                                    likeDado = true;
+                                    bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").child(dataSnapshot.getKey()).removeValue();
+                                    btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart));
+                                    tvNumLikes.setText(String.valueOf(Integer.parseInt(tvNumLikes.getText().toString()) - 1));
+                                }
+                            }
+
+                            if (!likeDado) {
+                                bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").push().setValue(mAuth.getCurrentUser().getUid());
+                                btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_full));
+                                tvNumLikes.setText(String.valueOf(Integer.parseInt(tvNumLikes.getText().toString()) + 1));
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
+                }
+            });
+
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
             Date resultDate = new Date(publi.getFechaPubli());
 
@@ -147,6 +226,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                     public void onClick(View view) {
                         mStorRef.child(publi.getImagenPubli()).delete();
                         bdd.child("Publicaciones").child(publi.getPubliId()).removeValue();
+
+                        FeedFragment feed = new FeedFragment();
+                        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
+
                     }
                 });
 
