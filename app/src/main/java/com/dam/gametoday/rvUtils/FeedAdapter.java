@@ -189,6 +189,21 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                 if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
                                     likeDado = true;
+                                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("likes").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot dataSnapshot2 : snapshot.getChildren()) {
+                                                if (dataSnapshot2.getValue().toString().equals(publi.getPubliId())) {
+                                                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("likes").child(dataSnapshot2.getKey()).removeValue();
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                     bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").child(dataSnapshot.getKey()).removeValue();
                                     btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart));
                                     tvNumLikes.setText(String.valueOf(Integer.parseInt(tvNumLikes.getText().toString()) - 1));
@@ -196,6 +211,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                             }
 
                             if (!likeDado) {
+                                bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("likes").push().setValue(publi.getPubliId());
                                 bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").push().setValue(mAuth.getCurrentUser().getUid());
                                 btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_full));
                                 tvNumLikes.setText(String.valueOf(Integer.parseInt(tvNumLikes.getText().toString()) + 1));
