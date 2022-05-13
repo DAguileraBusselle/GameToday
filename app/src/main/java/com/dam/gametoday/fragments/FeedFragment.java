@@ -1,5 +1,6 @@
 package com.dam.gametoday.fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -87,6 +88,7 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaPublicaciones.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
 
                     Publicacion publicacion = new Publicacion(snapshot.getKey(),
                                             snapshot.child("user").getValue().toString(),

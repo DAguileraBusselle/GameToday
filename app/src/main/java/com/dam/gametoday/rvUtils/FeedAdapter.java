@@ -74,7 +74,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
         private FirebaseAuth mAuth;
         private DatabaseReference bdd;
 
-        TextView tvUser, tvTexto, tvHora, tvNumLikes;
+        TextView tvUser, tvCorreo, tvTexto, tvHora, tvNumLikes;
         ImageView ivFoto, btnBorrar, btnLike, ivImagenPubli;
 
         public FeedVH(@NonNull View itemView) {
@@ -86,6 +86,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             tvNumLikes = itemView.findViewById(R.id.tvNumLikes);
             tvTexto = itemView.findViewById(R.id.tvTextoPubli);
             tvUser = itemView.findViewById(R.id.tvNombreUserPubli);
+            tvCorreo = itemView.findViewById(R.id.tvCorreoUser);
             tvHora = itemView.findViewById(R.id.tvFechaHoraPubli);
 
             btnLike = itemView.findViewById(R.id.btnLikePubli);
@@ -148,6 +149,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             }
 
             tvUser.setText(publi.getUser());
+            bdd.child("Users").child(publi.getUserId()).child("correo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    tvCorreo.setText(dataSnapshot.getValue().toString());
+                }
+            });
             tvTexto.setText(publi.getTexto());
 
             tvNumLikes.setText(String.valueOf(publi.getLikes()));
