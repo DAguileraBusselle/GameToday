@@ -15,6 +15,7 @@
     <color name="rojo_suave">#FFB6B1</color>
     <color name="morao_trans">#333A1F78</color>
     <color name="trans">#00000000</color>
+    <color name="trans_menos">#99000000</color>
     <color name="morao_trans_oscuro">#33160343</color>
     <color name="morao_trans_menos">#88AF92F3</color>
     <color name="morrao">#810D68</color>

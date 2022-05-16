@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dam.gametoday.dialog.AceptarDialog;
+import com.dam.gametoday.dialog.OnAceptar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,9 +34,10 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PerfilActivity extends AppCompatActivity implements View.OnClickListener {
+public class PerfilActivity extends AppCompatActivity implements View.OnClickListener, OnAceptar {
 
     public static final int CLAVE_CAMBIAR_FOTO = 1;
+    public static final String CLAVE_CONFIRMAR = "CERRAR SESION";
 
     TextView btnCerrarSesion;
     ImageView ivFotoPerfil;
@@ -94,11 +97,13 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (v.equals(btnCerrarSesion)) {
-            mAuth.signOut();
-            Intent i = new Intent(PerfilActivity.this, MainActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-            finish();
+            AceptarDialog dialog = new AceptarDialog();
+            Bundle args = new Bundle();
+            args.putString(CLAVE_CONFIRMAR, getString(R.string.cerrar_sesion_confirm));
+            dialog.setArguments(args);
+            dialog.setCancelable(true);
+            dialog.show(getSupportFragmentManager(), "AceptarDialog");
+
         } else if (v.equals(btnFoto)) {
             Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             i.setType("image/*");
@@ -146,6 +151,15 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         Intent i = new Intent(PerfilActivity.this, HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+        finish();
+    }
+
+    @Override
+    public void aceptar() {
+        mAuth.signOut();
+        Intent i = new Intent(PerfilActivity.this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();

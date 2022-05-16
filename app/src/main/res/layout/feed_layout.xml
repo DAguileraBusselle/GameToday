@@ -18,7 +18,7 @@
             android:id="@+id/ivProfilePic"
             android:src="@drawable/default_pic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="5"
             />
 
@@ -81,12 +81,11 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_gravity="center"
                 android:id="@+id/btnLikePubli"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/heart"/>
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/heart_outline"/>
             <TextView
                 android:id="@+id/tvNumLikes"
                 android:layout_marginLeft="2dp"
@@ -98,11 +97,10 @@
                 android:text=""/>
 
             <ImageView
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_gravity="center"
                 android:id="@+id/btnBorrarPubli"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/papelera"/>

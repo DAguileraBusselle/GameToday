@@ -32,10 +32,7 @@ public class PublicarDialog extends DialogFragment {
 
     OnAceptarPubliListener listener;
     EditText etTexto;
-    ImageView btnCancel;
-    ImageView btnAceptar;
-    ImageView btnGaleria;
-    ImageView ivFotoPreview;
+    ImageView btnCancel, btnAceptar, btnGaleria, ivFotoPreview, btnQuitarImg;
 
     Uri imagenUri;
 
@@ -50,18 +47,39 @@ public class PublicarDialog extends DialogFragment {
         btnCancel = v.findViewById(R.id.btnCancelarPubli);
         btnAceptar = v.findViewById(R.id.btnAceptarPubli);
         btnGaleria = v.findViewById(R.id.btnSubirImagenPubli);
+        btnQuitarImg = v.findViewById(R.id.btnQuitarImagen);
+
         ivFotoPreview = v.findViewById(R.id.ivPreviewImagenPubli);
 
         builder.setView(v);
 
         AlertDialog ad = builder.create();
         ad.setCanceledOnTouchOutside(false);
+        ad.getWindow().setBackgroundDrawable(getResources().getDrawable(R.color.trans));
 
         ad.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
 
+                btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_trans));
+
                 btnAceptar.setEnabled(false);
+
+                btnQuitarImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (etTexto.getText().toString().trim().isEmpty()) {
+                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_trans));
+
+                            btnAceptar.setEnabled(false);
+                        }
+
+
+                        ivFotoPreview.setImageDrawable(null);
+                        imagenUri = null;
+                    }
+                });
+
                 btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -77,12 +95,12 @@ public class PublicarDialog extends DialogFragment {
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (etTexto.getText().toString().isEmpty()) {
+                        if (etTexto.getText().toString().trim().isEmpty() && ivFotoPreview.getDrawable() == null) {
                             btnAceptar.setEnabled(false);
-                            btnAceptar.setBackground(getResources().getDrawable(R.drawable.tick_trans));
+                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_trans));
                         } else {
                             btnAceptar.setEnabled(true);
-                            btnAceptar.setBackground(getResources().getDrawable(R.drawable.tick));
+                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick));
                         }
                     }
 
@@ -138,6 +156,8 @@ public class PublicarDialog extends DialogFragment {
         if (requestCode == CLAVE_ELEGIR_FOTO) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data.getData() != null) {
+                    btnAceptar.setEnabled(true);
+                    btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick));
                     imagenUri = data.getData();
                     ivFotoPreview.setImageURI(imagenUri);
                 }

@@ -2,6 +2,7 @@ package com.dam.gametoday.rvUtils;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dam.gametoday.PerfilActivity;
 import com.dam.gametoday.R;
+import com.dam.gametoday.dialog.AceptarDialog;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.model.Publicacion;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,7 +25,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,7 +33,6 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
@@ -173,7 +173,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                     }
 
                     if (!likeDado) {
-                        btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart));
+                        btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_outline));
 
                     }
                 }
@@ -191,7 +191,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Boolean likeDado = false;
-
 
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                 if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
@@ -212,7 +211,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                                         }
                                     });
                                     bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").child(dataSnapshot.getKey()).removeValue();
-                                    btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart));
+                                    btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_outline));
                                     tvNumLikes.setText(String.valueOf(Integer.parseInt(tvNumLikes.getText().toString()) - 1));
                                 }
                             }

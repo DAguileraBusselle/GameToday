@@ -69,7 +69,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (etSearch.getText().toString().isEmpty()) {
+                if (etSearch.getText().toString().trim().isEmpty()) {
                     tvAviso.setText(getResources().getText(R.string.introduce_search));
                     tvAviso.setVisibility(View.VISIBLE);
                     listaUsuarios.clear();

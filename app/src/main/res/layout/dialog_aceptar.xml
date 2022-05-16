@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/outline_dialog"
+    android:padding="@dimen/padding">
+
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@id/tvTextoConfirmacion"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/btnCancelarConfirm"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/cross"
+        />
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tvTextoConfirmacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textColor="@color/morao_chilling"
+        android:backgroundTint="@color/morao_chilling"
+        android:fontFamily="@font/conthrax_sb"
+        android:layout_marginBottom="5dp"
+        />
+
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@id/tvTextoConfirmacion"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/btnAceptarConfirm"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/tick"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

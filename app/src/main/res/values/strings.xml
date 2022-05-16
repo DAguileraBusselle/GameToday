@@ -49,4 +49,6 @@
     <string name="btn_seguir">SEGUIR</string>
     <string name="introduce_search">Introduce un nombre de usuario para buscarlo</string>
     <string name="no_result_search">No encontramos lo que buscas :(</string>
+    <string name="borrar_publi_confirm">¿BORRAR PUBLICACIÓN?</string>
+    <string name="cerrar_sesion_confirm">¿CERRAR SESIÓN?</string>
 </resources>
