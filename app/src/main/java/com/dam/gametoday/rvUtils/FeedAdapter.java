@@ -3,7 +3,9 @@ package com.dam.gametoday.rvUtils;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -95,7 +97,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
         public void bindFeed(Publicacion publi) {
 
-
             mStorRef = FirebaseStorage.getInstance().getReference();
             mAuth = FirebaseAuth.getInstance();
             bdd = FirebaseDatabase.getInstance().getReference();
@@ -164,7 +165,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Boolean likeDado = false;
 
-
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
                             likeDado = true;
@@ -230,6 +230,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
                         }
                     });
+                    view.setEnabled(false);
+                    view.postDelayed(new Runnable(){
+                        public void run(){
+                            view.setEnabled(true);
+                        }
+                    }, 100);
 
 
                 }

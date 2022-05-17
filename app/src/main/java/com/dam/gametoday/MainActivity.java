@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Ejecutar al menos una vez el sign out para crear un usuario nuevo
         //mAuth.signOut();
 
-        if (mAuth.getCurrentUser() != null && bdd.child("Users").child(mAuth.getCurrentUser().getUid()) != null) {
+        if (mAuth.getCurrentUser() != null) {
             Intent i = new Intent(MainActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

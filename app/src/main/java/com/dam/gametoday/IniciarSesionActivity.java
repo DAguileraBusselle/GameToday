@@ -121,8 +121,6 @@ public class IniciarSesionActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    //Toast.makeText(getApplicationContext(), R.string.toast_exito, Toast.LENGTH_SHORT).show();
-
                     Intent i = new Intent(IniciarSesionActivity.this, HomeActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
