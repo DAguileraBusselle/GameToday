@@ -218,6 +218,7 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            rootRef.child("Users").child(auth.getCurrentUser().getUid()).child("siguiendo").push().setValue(auth.getCurrentUser().getUid());
                             Toast.makeText(getApplicationContext(), R.string.toast_usuario_creado, Toast.LENGTH_SHORT).show();
                             Intent i = new Intent (RegistrarActivity.this, MainActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -21,6 +21,7 @@ import com.dam.gametoday.model.Publicacion;
 import com.dam.gametoday.model.Usuario;
 import com.dam.gametoday.rvUtils.FeedAdapter;
 import com.dam.gametoday.rvUtils.SearchAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,6 +38,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     TextView tvAviso;
     ImageView btnBorrarTexto;
 
+    private FirebaseAuth mAuth;
     LinearLayoutManager llm;
     SearchAdapter adapter;
 
@@ -49,6 +51,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         etSearch = v.findViewById(R.id.etSearchUsuario);
         rvSearch = v.findViewById(R.id.rvSearch);
         tvAviso = v.findViewById(R.id.tvAviso);
+
+        mAuth = FirebaseAuth.getInstance();
 
         btnBorrarTexto = v.findViewById(R.id.btnBorrarSearch);
         btnBorrarTexto.setOnClickListener(this);
@@ -102,8 +106,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaUsuarios.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Usuario usuario = new Usuario(snapshot.child("displayName").getValue().toString(), snapshot.child("correo").toString(), snapshot.getKey());
-                    listaUsuarios.add(usuario);
+                    if (!snapshot.child("id").getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
+                        Usuario usuario = new Usuario(snapshot.child("displayName").getValue().toString(), snapshot.child("correo").toString(), snapshot.getKey());
+                        listaUsuarios.add(usuario);
+                    }
+
                 }
 
                 if (listaUsuarios.isEmpty()) {

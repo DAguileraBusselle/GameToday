@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
@@ -9,11 +9,10 @@
     >
 
     <LinearLayout
-        android:layout_marginLeft="5dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignParentLeft="true"
         android:id="@+id/llUserFeed"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@id/btnSeguir"
         android:layout_height="50dp"
         android:orientation="horizontal">
 
@@ -29,9 +28,8 @@
             android:layout_marginLeft="5dp"
             android:maxLines="1"
             android:textScaleX="1"
-            android:layout_marginRight="120dp"
             android:id="@+id/tvNombreUserSearch"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="aaaaaaaaaaaaaaaaaaaaaaa"
             android:textColor="@color/morao_chilling"
@@ -48,17 +46,17 @@
     <Button
         android:id="@+id/btnSeguir"
         android:background="@drawable/outline_button"
-        android:text="@string/btn_seguir"
+        android:text="@string/siguiendo"
         android:layout_marginRight="5dp"
         android:fontFamily="@font/conthrax_sb"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_width="145dp"
         android:layout_height="wrap_content"
+
         />
 
 
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

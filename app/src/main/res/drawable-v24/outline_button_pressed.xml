@@ -4,7 +4,7 @@
     <item><shape>
         <stroke android:width="3dp" android:color="@color/morao_trans" />
 
-        <solid android:color="@color/morao_trans_oscuro"/>
+        <solid android:color="@color/morao_chilling"/>
 
         <corners
             android:radius="100dp" />

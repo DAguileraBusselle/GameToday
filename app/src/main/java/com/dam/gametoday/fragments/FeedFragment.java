@@ -19,6 +19,7 @@ import com.dam.gametoday.dialog.PublicarDialog;
 import com.dam.gametoday.model.Publicacion;
 import com.dam.gametoday.rvUtils.FeedAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -73,24 +75,22 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
         adapter = new FeedAdapter(listaPublicaciones, getResources().getIdentifier("@drawable/default_pic", null, getContext().getPackageName()));
         rvFeed.setAdapter(adapter);
 
-        actualizarFeed();
-
-
-        return v;
-    }
-
-
-
-    private void actualizarFeed() {
-
-        FirebaseDatabase.getInstance().getReference().child("Publicaciones").addListenerForSingleValueEvent(new ValueEventListener() {
+        bdd.child("Publicaciones").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaPublicaciones.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot1) {
+                            for (DataSnapshot snapshot2 : snapshot1.getChildren()) {
+                                System.out.println("ªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªª");
+                                System.out.println(snapshot.child("userId").getValue().toString());
+                                System.out.println(snapshot2.getValue().toString());
+                                System.out.println("ªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªª");
 
-
-                    Publicacion publicacion = new Publicacion(snapshot.getKey(),
+                                if (snapshot.child("userId").getValue().toString().equals(snapshot2.getValue().toString())) {
+                                    Publicacion publicacion = new Publicacion(snapshot.getKey(),
                                             snapshot.child("user").getValue().toString(),
                                             snapshot.child("texto").getValue().toString(),
                                             (long) snapshot.child("fechaPubliMilis").getValue(),
@@ -98,17 +98,25 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
                                             snapshot.child("imagenPubli").getValue().toString(),
                                             snapshot.child("likes").getChildrenCount());
 
-                    System.out.println(snapshot.child("fechaPubliMilis").getValue().toString());
-                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
-                    Date resultDate = new Date(publicacion.getFechaPubli());
-                    System.out.println(sdf.format(resultDate));
-                    listaPublicaciones.add(publicacion);
+                                    System.out.println(snapshot.child("fechaPubliMilis").getValue().toString());
+                                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
+                                    Date resultDate = new Date(publicacion.getFechaPubli());
+                                    System.out.println(sdf.format(resultDate));
+                                    listaPublicaciones.add(publicacion);
+                                }
+                            }
+
+                            sortListReverse(listaPublicaciones);
+
+
+                            adapter.notifyDataSetChanged();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
-
-                sortListReverse(listaPublicaciones);
-
-
-                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -117,6 +125,63 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        return v;
+    }
+
+
+
+    private void actualizarFeed() {
+        /*
+
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                System.out.println("esto no deberia repetirse");
+
+                System.out.println(dataSnapshot.getChildrenCount());
+                for (DataSnapshot snapshot1 : dataSnapshot.getChildren()) {
+                    bdd.child("Publicaciones").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                System.out.println(snapshot1.getValue());
+                                System.out.println(dataSnapshot1.child("userId").getValue());
+                                if (snapshot1.getValue().toString().equals(dataSnapshot1.child("userId").getValue().toString())) {
+                                    Publicacion publicacion = new Publicacion(dataSnapshot1.getKey(),
+                                            dataSnapshot1.child("user").getValue().toString(),
+                                            dataSnapshot1.child("texto").getValue().toString(),
+                                            (long) dataSnapshot1.child("fechaPubliMilis").getValue(),
+                                            dataSnapshot1.child("userId").getValue().toString(),
+                                            dataSnapshot1.child("imagenPubli").getValue().toString(),
+                                            dataSnapshot1.child("likes").getChildrenCount());
+
+                                    System.out.println(dataSnapshot1.child("fechaPubliMilis").getValue().toString());
+                                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
+                                    Date resultDate = new Date(publicacion.getFechaPubli());
+                                    System.out.println(sdf.format(resultDate));
+                                    listaPublicaciones.add(publicacion);
+                                }
+                            }
+                            for (Publicacion publi : listaPublicaciones) {
+                                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                                System.out.println(publi.getPubliId());
+                                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+                            }
+
+                            sortListReverse(listaPublicaciones);
+
+
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+                }
+            }
+        });
+
+         */
     }
 
     @Override
@@ -139,7 +204,7 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
-
+/*
     @Override
     public void onResume() {
         super.onResume();
@@ -165,6 +230,7 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
         refrescarTimer.cancel();
         super.onPause();
     }
-}
 
+ */
+}
 

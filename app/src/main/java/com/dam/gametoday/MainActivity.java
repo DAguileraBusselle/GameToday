@@ -12,7 +12,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Ejecutar al menos una vez el sign out para crear un usuario nuevo
         //mAuth.signOut();
+
 
         if (mAuth.getCurrentUser() != null) {
             Intent i = new Intent(MainActivity.this, HomeActivity.class);

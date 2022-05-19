@@ -1,9 +1,11 @@
 package com.dam.gametoday.rvUtils;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +18,11 @@ import com.dam.gametoday.model.Usuario;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -31,6 +36,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
     private ArrayList<Usuario> listaSearch;
     private int defaulPic;
     private View.OnClickListener listener;
+    Context context;
 
     public SearchAdapter(ArrayList<Usuario> feed, int defaultPic){this.listaSearch = feed; this.defaulPic = defaultPic;}
 
@@ -41,6 +47,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                 .inflate(R.layout.search_layout, parent, false);
         SearchAdapter.SearchVH vh = new SearchAdapter.SearchVH(v);
         return vh;
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        context = recyclerView.getContext();
     }
 
     @Override
@@ -61,11 +73,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
 
         TextView tvNombreUser;
         ImageView ivFotoUser;
+        Button btnSeguir;
 
         public SearchVH(@NonNull View itemView) {
             super(itemView);
             tvNombreUser = itemView.findViewById(R.id.tvNombreUserSearch);
             ivFotoUser = itemView.findViewById(R.id.ivFotoPerfilSearch);
+            btnSeguir = itemView.findViewById(R.id.btnSeguir);
         }
 
         public void bindSearch(Usuario user) {
@@ -85,6 +99,92 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     ivFotoUser.setImageResource(defaulPic);
+                }
+            });
+
+            bdd.child("Users").child(user.getUserId()).child("seguidores").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Boolean likeDado = false;
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
+                            likeDado = true;
+                            btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button_pressed));
+                            btnSeguir.setTextColor(context.getResources().getColor(R.color.gris_guay));
+                            btnSeguir.setText(context.getString(R.string.siguiendo));
+                        }
+                    }
+
+                    if (!likeDado) {
+                        btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button));
+                        btnSeguir.setTextColor(context.getResources().getColor(R.color.morao_chilling));
+                        btnSeguir.setText(context.getString(R.string.btn_seguir));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            btnSeguir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bdd.child("Users").child(user.getUserId()).child("seguidores").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Boolean siguiendo = false;
+
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
+                                    siguiendo = true;
+                                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot dataSnapshot2 : snapshot.getChildren()) {
+                                                if (dataSnapshot2.getValue().toString().equals(user.getUserId())) {
+                                                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").child(dataSnapshot2.getKey()).removeValue();
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                    bdd.child("Users").child(user.getUserId()).child("seguidores").child(dataSnapshot.getKey()).removeValue();
+                                    btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button_pressed));
+                                    btnSeguir.setTextColor(context.getResources().getColor(R.color.gris_guay));
+                                    btnSeguir.setText(context.getString(R.string.siguiendo));
+                                }
+                            }
+
+                            if (!siguiendo) {
+                                bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").push().setValue(user.getUserId());
+                                bdd.child("Users").child(user.getUserId()).child("seguidores").push().setValue(mAuth.getCurrentUser().getUid());
+                                btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button));
+                                btnSeguir.setTextColor(context.getResources().getColor(R.color.morao_chilling));
+                                btnSeguir.setText(context.getString(R.string.btn_seguir));
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    view.setEnabled(false);
+                    view.postDelayed(new Runnable(){
+                        public void run(){
+                            view.setEnabled(true);
+                        }
+                    }, 175);
+
+
                 }
             });
 
