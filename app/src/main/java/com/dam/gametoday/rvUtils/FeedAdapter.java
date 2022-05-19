@@ -235,7 +235,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                         public void run(){
                             view.setEnabled(true);
                         }
-                    }, 100);
+                    }, 125);
 
 
                 }
