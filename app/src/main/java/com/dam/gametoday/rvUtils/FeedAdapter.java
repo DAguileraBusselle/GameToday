@@ -2,10 +2,7 @@ package com.dam.gametoday.rvUtils;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,9 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dam.gametoday.PerfilActivity;
 import com.dam.gametoday.R;
-import com.dam.gametoday.dialog.AceptarDialog;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.model.Publicacion;
 import com.google.android.gms.tasks.OnFailureListener;

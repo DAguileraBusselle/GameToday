@@ -30,11 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class PerfilActivity extends AppCompatActivity implements View.OnClickListener, OnAceptar {
+public class PerfilPersonalActivity extends AppCompatActivity implements View.OnClickListener, OnAceptar {
 
     public static final int CLAVE_CAMBIAR_FOTO = 1;
     public static final String CLAVE_CONFIRMAR = "CERRAR SESION";
@@ -53,7 +49,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.activity_perfil_personal);
 
         btnFoto = findViewById(R.id.btnCambiarFoto);
         btnFoto.setOnClickListener(this);
@@ -109,7 +105,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
             i.setType("image/*");
             startActivityForResult(i, CLAVE_CAMBIAR_FOTO);
         } else if (v.equals(btnCancel)) {
-            Intent i = new Intent(PerfilActivity.this, HomeActivity.class);
+            Intent i = new Intent(PerfilPersonalActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
@@ -150,7 +146,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(PerfilActivity.this, HomeActivity.class);
+        Intent i = new Intent(PerfilPersonalActivity.this, HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
@@ -159,7 +155,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void aceptar() {
         mAuth.signOut();
-        Intent i = new Intent(PerfilActivity.this, MainActivity.class);
+        Intent i = new Intent(PerfilPersonalActivity.this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();

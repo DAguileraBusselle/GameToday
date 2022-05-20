@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameToday">
         <activity
-            android:name=".PerfilActivity"
+            android:name=".PerfilPersonalActivity"
             android:exported="true" />
         <activity
             android:name=".HomeActivity"

@@ -1,17 +1,10 @@
 package com.dam.gametoday.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import com.dam.gametoday.PerfilActivity;
+import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
 
 public class AceptarDialog extends DialogFragment {
@@ -52,7 +45,7 @@ public class AceptarDialog extends DialogFragment {
             @Override
             public void onShow(DialogInterface dialog) {
 
-                tvMensaje.setText(getArguments().getString(PerfilActivity.CLAVE_CONFIRMAR));
+                tvMensaje.setText(getArguments().getString(PerfilPersonalActivity.CLAVE_CONFIRMAR));
 
                 btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override

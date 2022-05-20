@@ -27,8 +27,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarPubliListener {
@@ -41,6 +39,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
     StorageReference mStorRef;
+    private Boolean fueraDeCasa = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +61,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         FeedFragment feed = new FeedFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
 
+        btnHome.setImageDrawable(getResources().getDrawable(R.drawable.homeline));
+
         mStorRef = FirebaseStorage.getInstance().getReference();
 
         mStorRef.child(mAuth.getCurrentUser().getUid() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -80,14 +81,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             FeedFragment feed = new FeedFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
+            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.homeline));
+            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
+            fueraDeCasa = false;
+
 
         } if (v.equals(btnSearch)) {
 
             SearchFragment search = new SearchFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, search).addToBackStack(null).commit();
+            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.home));
+            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.lupaline));
+            fueraDeCasa = true;
 
         } else if (v.equals(btnPerfil)) {
-            Intent i = new Intent (HomeActivity.this, PerfilActivity.class);
+            Intent i = new Intent (HomeActivity.this, PerfilPersonalActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         }
@@ -151,7 +159,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onBackPressed() {
-        finish();
+
+        if (fueraDeCasa) {
+            FeedFragment feed = new FeedFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
+            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.homeline));
+            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
+            fueraDeCasa = false;
+        } else {
+            finish();
+
+        }
+
     }
 
 }

@@ -61,6 +61,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         rvSearch.setLayoutManager(llm);
 
         listaUsuarios = new ArrayList<Usuario>();
+        tvAviso.setText(getResources().getText(R.string.introduce_search));
+        tvAviso.setVisibility(View.VISIBLE);
 
         adapter = new SearchAdapter(listaUsuarios, getResources().getIdentifier("@drawable/default_pic", null, getContext().getPackageName()));
         rvSearch.setAdapter(adapter);
