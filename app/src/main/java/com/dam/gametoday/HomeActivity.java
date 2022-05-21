@@ -167,7 +167,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
             fueraDeCasa = false;
         } else {
-            finish();
+
+            finishAffinity();
 
         }
 

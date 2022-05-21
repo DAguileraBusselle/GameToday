@@ -18,10 +18,12 @@
             android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".IniciarSesionActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:noHistory="true"/>
         <activity
             android:name=".RegistrarActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:noHistory="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

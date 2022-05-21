@@ -52,4 +52,8 @@
     <string name="borrar_publi_confirm">¿BORRAR PUBLICACIÓN?</string>
     <string name="cerrar_sesion_confirm">¿CERRAR SESIÓN?</string>
     <string name="siguiendo">Siguiendo</string>
+    <string name="seguidores">Seguidores</string>
+    <string name="publiciones">Publicaciones</string>
+    <string name="likes">Likes</string>
+    <string name="multimedia">Multimedia</string>
 </resources>

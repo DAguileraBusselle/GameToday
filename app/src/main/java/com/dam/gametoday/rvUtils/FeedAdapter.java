@@ -96,11 +96,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             mAuth = FirebaseAuth.getInstance();
             bdd = FirebaseDatabase.getInstance().getReference();
 
-            System.out.println("##################################################");
-            System.out.println(publi.getUser());
 
-            System.out.println(publi.getUserId());
-            System.out.println("##################################################");
 
             ivFoto.setImageResource(defaulPic);
 
@@ -131,12 +127,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Picasso.get().cancelRequest(ivImagenPubli);
-
-                        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                        System.out.println(publi.getTexto() + "NO SE PUDO CARGAR LA IMAGEN: " + e.getMessage());
-                        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
                     }
                 });

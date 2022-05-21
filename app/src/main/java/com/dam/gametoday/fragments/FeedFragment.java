@@ -84,10 +84,6 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot1) {
                             for (DataSnapshot snapshot2 : snapshot1.getChildren()) {
-                                System.out.println("ªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªª");
-                                System.out.println(snapshot.child("userId").getValue().toString());
-                                System.out.println(snapshot2.getValue().toString());
-                                System.out.println("ªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªªª");
 
                                 if (snapshot.child("userId").getValue().toString().equals(snapshot2.getValue().toString())) {
                                     Publicacion publicacion = new Publicacion(snapshot.getKey(),
@@ -98,10 +94,8 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
                                             snapshot.child("imagenPubli").getValue().toString(),
                                             snapshot.child("likes").getChildrenCount());
 
-                                    System.out.println(snapshot.child("fechaPubliMilis").getValue().toString());
                                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
                                     Date resultDate = new Date(publicacion.getFechaPubli());
-                                    System.out.println(sdf.format(resultDate));
                                     listaPublicaciones.add(publicacion);
                                 }
                             }
