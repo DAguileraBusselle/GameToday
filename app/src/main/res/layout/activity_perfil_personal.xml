@@ -43,21 +43,29 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivFotoPerfilPerfil"
-                android:layout_width="80dp"
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_weight="2"
+                android:layout_gravity="start"
                 android:layout_marginLeft="30dp"
                 android:src="@drawable/default_pic"
                 />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                />
+
             <Button
                 android:id="@+id/btnSeguirPerfil"
-                android:visibility="gone"
-                android:enabled="false"
+                android:visibility="visible"
+                android:enabled="true"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
-                android:layout_marginLeft="120dp"
+                android:layout_weight="0"
                 android:background="@drawable/outline_button"
                 android:fontFamily="@font/conthrax_sb"
                 android:text="@string/btn_seguir"
