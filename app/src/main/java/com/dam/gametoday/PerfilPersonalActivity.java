@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,16 +49,20 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
     public static final int CLAVE_CAMBIAR_FOTO = 1;
     public static final String CLAVE_CONFIRMAR = "CERRAR SESION";
 
+
     TextView btnCerrarSesion, tvNombre, tvCorreo, tvSeguidores, tvSiguiendo, btnPublis, btnLikes, btnMedia;
     View underlinePubli, underlineLike, underlineMedia;
     ImageView ivFotoPerfil, btnCancel;
     RecyclerView rvPublis;
+    Button btnSeguir;
+    //TODO: btnEditarPerfil
 
     LinearLayoutManager llm;
     FeedAdapter adapter;
 
     private ArrayList<Publicacion> listaPublicaciones;
 
+    private String user;
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
     StorageReference mStorRef;
@@ -66,6 +71,51 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_personal);
+
+        mAuth = FirebaseAuth.getInstance();
+        bdd = FirebaseDatabase.getInstance().getReference();
+        mStorRef = FirebaseStorage.getInstance().getReference();
+
+        btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+        ivFotoPerfil = findViewById(R.id.ivFotoPerfilPerfil);
+
+        if(getIntent().getStringExtra(HomeActivity.CLAVE_USUARIO).equals(mAuth.getCurrentUser().getUid())){
+            user = mAuth.getCurrentUser().getUid();
+            btnCerrarSesion.setOnClickListener(this);
+            ivFotoPerfil.setOnClickListener(this);
+        }else{
+            user = getIntent().getStringExtra(HomeActivity.CLAVE_USUARIO);
+            btnSeguir = findViewById(R.id.btnSeguirPerfil);
+            btnSeguir.setVisibility(View.VISIBLE);
+            btnSeguir.setEnabled(true);
+            btnSeguir.setOnClickListener(this);
+            bdd.child("Users").child(user).child("seguidores").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Boolean likeDado = false;
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
+                            likeDado = true;
+                            btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_pressed));
+                            btnSeguir.setTextColor(getResources().getColor(R.color.gris_guay));
+                            btnSeguir.setText(getString(R.string.siguiendo));
+                        }
+                    }
+
+                    if (!likeDado) {
+                        btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button));
+                        btnSeguir.setTextColor(getResources().getColor(R.color.morao_chilling));
+                        btnSeguir.setText(getString(R.string.btn_seguir));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
 
         btnPublis = findViewById(R.id.btnPublisPersonal);
         btnLikes = findViewById(R.id.btnLikesPersonal);
@@ -95,18 +145,10 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
         btnCancel = findViewById(R.id.btnCancelarPerfil);
         btnCancel.setOnClickListener(this);
 
-        btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
-        btnCerrarSesion.setOnClickListener(this);
-
-        ivFotoPerfil = findViewById(R.id.ivFotoPerfilPerfil);
-        ivFotoPerfil.setOnClickListener(this);
 
         tvNombre = findViewById(R.id.tvNombreUserPerfil);
         tvCorreo = findViewById(R.id.tvCorreoUserPerfil);
 
-        mAuth = FirebaseAuth.getInstance();
-        bdd = FirebaseDatabase.getInstance().getReference();
-        mStorRef = FirebaseStorage.getInstance().getReference();
 
         underlinePubli.setVisibility(View.VISIBLE);
 
@@ -116,7 +158,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                 listaPublicaciones.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    if (snapshot.child("userId").getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
+                    if (snapshot.child("userId").getValue().toString().equals(user)) {
                         Publicacion publicacion = new Publicacion(snapshot.getKey(),
                                 snapshot.child("user").getValue().toString(),
                                 snapshot.child("texto").getValue().toString(),
@@ -144,28 +186,28 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
             }
         });
 
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("seguidores").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        bdd.child("Users").child(user).child("seguidores").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 tvSeguidores.setText(String.valueOf(dataSnapshot.getChildrenCount()));
             }
         });
 
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        bdd.child("Users").child(user).child("siguiendo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 tvSiguiendo.setText(String.valueOf(dataSnapshot.getChildrenCount() - 1));
             }
         });
 
-        mStorRef.child(mAuth.getCurrentUser().getUid() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        mStorRef.child(user + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.get().load(uri).into(ivFotoPerfil);
             }
         });
 
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        bdd.child("Users").child(user).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -209,7 +251,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                     listaPublicaciones.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                        if (snapshot.child("userId").getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
+                        if (snapshot.child("userId").getValue().toString().equals(user)) {
                             Publicacion publicacion = new Publicacion(snapshot.getKey(),
                                     snapshot.child("user").getValue().toString(),
                                     snapshot.child("texto").getValue().toString(),
@@ -249,7 +291,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                             System.out.println("snapshotLike.getValue()");
                             System.out.println(snapshotLike.getValue());
                             System.out.println("snapshotLike.getValue()");
-                            if (snapshotLike.getValue().equals(mAuth.getCurrentUser().getUid())) {
+                            if (snapshotLike.getValue().equals(user)) {
 
                                 Publicacion publicacion = new Publicacion(snapshot.getKey(),
                                         snapshot.child("user").getValue().toString(),
@@ -289,7 +331,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                     listaPublicaciones.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                        if (snapshot.child("userId").getValue().toString().equals(mAuth.getCurrentUser().getUid()) && !snapshot.child("imagenPubli").getValue().equals("no")) {
+                        if (snapshot.child("userId").getValue().toString().equals(user) && !snapshot.child("imagenPubli").getValue().equals("no")) {
                             Publicacion publicacion = new Publicacion(snapshot.getKey(),
                                     snapshot.child("user").getValue().toString(),
                                     snapshot.child("texto").getValue().toString(),
@@ -315,6 +357,61 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                 }
             });
 
+        } else if (v.equals(btnSeguir)) {
+            bdd.child("Users").child(user).child("seguidores").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Boolean siguiendo = false;
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
+                            siguiendo = true;
+                            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for (DataSnapshot dataSnapshot2 : snapshot.getChildren()) {
+                                        if (dataSnapshot2.getValue().toString().equals(user)) {
+                                            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").child(dataSnapshot2.getKey()).removeValue();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                            bdd.child("Users").child(user).child("seguidores").child(dataSnapshot.getKey()).removeValue();
+                            btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button));
+                            btnSeguir.setTextColor(getResources().getColor(R.color.morao_chilling));
+                            btnSeguir.setText(getString(R.string.btn_seguir));
+                        }
+                    }
+
+                    if (!siguiendo) {
+                        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").push().setValue(user);
+                        bdd.child("Users").child(user).child("seguidores").push().setValue(mAuth.getCurrentUser().getUid());
+                        btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_pressed));
+                        btnSeguir.setTextColor(getResources().getColor(R.color.gris_guay));
+                        btnSeguir.setText(getString(R.string.siguiendo));
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            btnSeguir.setEnabled(false);
+            btnSeguir.postDelayed(new Runnable(){
+                public void run(){
+                    btnSeguir.setEnabled(true);
+                }
+            }, 175);
+
+
+
         }
     }
 
@@ -334,7 +431,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
 
     private void subirFoto(Uri imagenUri) {
 
-        StorageReference fileRef = mStorRef.child(mAuth.getCurrentUser().getUid() + ".jpg");
+        StorageReference fileRef = mStorRef.child(user + ".jpg");
         fileRef.putFile(imagenUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

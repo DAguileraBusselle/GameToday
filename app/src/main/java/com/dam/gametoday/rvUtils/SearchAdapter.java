@@ -1,6 +1,7 @@
 package com.dam.gametoday.rvUtils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dam.gametoday.HomeActivity;
+import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
 import com.dam.gametoday.model.Publicacion;
 import com.dam.gametoday.model.Usuario;
@@ -126,6 +129,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
+
+            ivFotoUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, PerfilPersonalActivity.class);
+                    i.putExtra(HomeActivity.CLAVE_USUARIO, user.getUserId());
+                    context.startActivity(i);
                 }
             });
 

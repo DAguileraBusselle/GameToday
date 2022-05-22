@@ -35,6 +35,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     ImageView btnSearch;
     ImageView btnPerfil;
 
+    public static final String CLAVE_USUARIO = "USUARIO";
 
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
@@ -97,6 +98,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v.equals(btnPerfil)) {
             Intent i = new Intent (HomeActivity.this, PerfilPersonalActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i.putExtra(CLAVE_USUARIO, mAuth.getCurrentUser().getUid());
             startActivity(i);
         }
 
@@ -169,7 +171,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         } else {
 
             finishAffinity();
-
         }
 
     }

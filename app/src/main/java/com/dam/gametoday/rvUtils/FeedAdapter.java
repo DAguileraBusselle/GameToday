@@ -1,6 +1,7 @@
 package com.dam.gametoday.rvUtils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dam.gametoday.HomeActivity;
+import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.model.Publicacion;
@@ -133,6 +136,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             } else {
                 Picasso.get().cancelRequest(ivImagenPubli);
             }
+
+            ivFoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, PerfilPersonalActivity.class);
+                    i.putExtra(HomeActivity.CLAVE_USUARIO, publi.getUserId());
+                    context.startActivity(i);
+                }
+            });
 
             tvUser.setText(publi.getUser());
             bdd.child("Users").child(publi.getUserId()).child("correo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {

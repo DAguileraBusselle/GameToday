@@ -45,13 +45,13 @@
 
     <Button
         android:id="@+id/btnSeguir"
-        android:background="@drawable/outline_button"
-        android:text="@string/siguiendo"
-        android:layout_marginRight="5dp"
-        android:fontFamily="@font/conthrax_sb"
-        android:layout_alignParentRight="true"
         android:layout_width="145dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/outline_button"
+        android:fontFamily="@font/conthrax_sb"
+        android:text="@string/siguiendo"
 
         />
 
