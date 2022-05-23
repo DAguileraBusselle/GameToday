@@ -8,7 +8,9 @@
     tools:context=".PerfilPersonalActivity">
 
 
+
     <ImageView
+        android:id="@+id/fondo"
         android:src="@drawable/headerhex"
         android:scaleType="fitXY"
         android:layout_width="0dp"
@@ -22,7 +24,7 @@
         android:id="@+id/llPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gris_guay_trans"
+        android:background="@color/trans_menos"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -45,32 +47,29 @@
                 android:id="@+id/ivFotoPerfilPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_weight="2"
                 android:layout_gravity="start"
                 android:layout_marginLeft="30dp"
-                android:src="@drawable/default_pic"
-                />
+                android:layout_weight="2"
+                android:src="@drawable/default_pic" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                />
+                android:layout_weight="2" />
 
             <Button
                 android:id="@+id/btnSeguirPerfil"
-                android:visibility="visible"
-                android:enabled="true"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
                 android:layout_weight="0"
                 android:background="@drawable/outline_button"
+                android:enabled="false"
                 android:fontFamily="@font/conthrax_sb"
                 android:text="@string/btn_seguir"
-                android:layout_gravity="center_vertical"
-                />
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -201,7 +200,7 @@
         android:id="@+id/margenBottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/llPerfil"
+        android:layout_above="@id/rvPerfilPersonal"
         android:background="@color/gris_chilling" />
 
     <View
@@ -216,7 +215,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/llCerrarSesion"
-        android:layout_below="@id/llPerfil" />
+        android:layout_below="@id/llPerfil"
+        android:background="@color/black" />
 
     <HorizontalScrollView
         android:layout_marginBottom="5dp"

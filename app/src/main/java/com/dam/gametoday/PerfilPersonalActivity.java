@@ -55,7 +55,6 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
     ImageView ivFotoPerfil, btnCancel;
     RecyclerView rvPublis;
     Button btnSeguir;
-    //TODO: btnEditarPerfil
 
     LinearLayoutManager llm;
     FeedAdapter adapter;
