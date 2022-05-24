@@ -109,7 +109,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 listaUsuarios.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (!snapshot.child("id").getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
-                        Usuario usuario = new Usuario(snapshot.child("displayName").getValue().toString(), snapshot.child("correo").toString(), snapshot.getKey());
+                        Usuario usuario = new Usuario(snapshot.child("displayName").getValue().toString(), snapshot.child("correo").getValue().toString(), snapshot.getKey());
                         listaUsuarios.add(usuario);
                     }
 

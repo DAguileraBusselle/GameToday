@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChatActivity"
-    android:background="@drawable/fondohex">
+
+    >
 
 
     <ImageView
@@ -50,20 +51,21 @@
 
 
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMensajes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/llHeaderMensaje"
-        android:layout_above="@id/llMandarMensaje"/>
+        android:layout_above="@id/llMandarMensaje"
+        android:layout_below="@id/llHeaderMensaje" />
 
     <LinearLayout
         android:id="@+id/llMandarMensaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/padding"
         android:layout_marginLeft="@dimen/padding"
+        android:layout_marginTop="@dimen/padding"
         android:layout_marginRight="@dimen/padding"
         android:layout_marginBottom="@dimen/padding"
         android:background="@drawable/outline_edit_text"

@@ -11,7 +11,9 @@
         android:theme="@style/Theme.GameToday">
         <activity
             android:name=".ChatActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            />
         <activity
             android:name=".PerfilPersonalActivity"
             android:exported="true" />

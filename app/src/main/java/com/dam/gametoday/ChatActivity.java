@@ -61,6 +61,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        getWindow().setBackgroundDrawableResource(R.drawable.fondohex) ;
+
         mStorRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
@@ -85,6 +87,21 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 tvNombre.setText(dataSnapshot.getValue().toString());
+            }
+        });
+
+        rvMensajes.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View view, int i, int i1, int i2, int bottom, int i4, int i5, int i6, int oldBottom) {
+                if ( bottom < oldBottom) {
+                    rvMensajes.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            rvMensajes.scrollToPosition(rvMensajes.getAdapter().getItemCount() - 1);
+                        }
+                    }, 0);
+                }
+
             }
         });
 

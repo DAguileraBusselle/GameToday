@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/morao_chilling"
             android:fontFamily="@font/conthrax_sb"
-            android:textSize="18sp"
+            android:textSize="15sp"
             />
 
         <TextView
@@ -48,9 +48,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/morao_trans_menos"
             android:fontFamily="@font/conthrax_sb"
-            android:textSize="10sp"
+            android:textSize="8sp"
             />
     </LinearLayout>
 
