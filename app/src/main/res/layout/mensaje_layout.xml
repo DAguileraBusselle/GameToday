@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="start"
+    android:background="@color/trans"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/llMensajeEntrante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/mensaje_entrante"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvTextoMensajeEntr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/conthrax_sb"
+                android:maxWidth="300dp"
+                android:padding="8dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/gris_guay_medio_trans" />
+
+            <TextView
+                android:id="@+id/tvFechaHoraMensajeEntr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/conthrax_sb"
+                android:maxWidth="300dp"
+                android:textSize="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMensajeSaliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/mensaje_saliente"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvTextoMensajeSal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/conthrax_sb"
+                android:maxWidth="300dp"
+                android:padding="8dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/gris_guay_medio_trans" />
+
+            <TextView
+                android:id="@+id/tvFechaHoraMensajeSal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/conthrax_sb"
+                android:maxWidth="300dp"
+                android:textSize="8dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -56,4 +56,6 @@
     <string name="publiciones">Publicaciones</string>
     <string name="likes">Likes</string>
     <string name="multimedia">Multimedia</string>
+    <string name="editar_perfil">Editar perfil</string>
+    <string name="msj_saliente">"Tú: "</string>
 </resources>

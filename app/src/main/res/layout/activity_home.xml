@@ -85,6 +85,13 @@
             android:src="@drawable/search"
             android:layout_weight="1"/>
 
+        <ImageView
+            android:id="@+id/btnChats"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/chats"
+            android:layout_weight="1"/>
+
     </LinearLayout>
 
 

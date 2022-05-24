@@ -146,7 +146,13 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 }
             });
 
-            tvUser.setText(publi.getUser());
+            bdd.child("Users").child(publi.getUserId()).child("displayName").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    tvUser.setText(dataSnapshot.getValue().toString());
+                }
+            });
+
             bdd.child("Users").child(publi.getUserId()).child("correo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                 @Override
                 public void onSuccess(DataSnapshot dataSnapshot) {

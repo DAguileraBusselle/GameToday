@@ -74,13 +74,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
         private FirebaseAuth mAuth;
         private DatabaseReference bdd;
 
-        TextView tvNombreUser;
+        TextView tvNombreUser, tvCorreoUser;
         ImageView ivFotoUser;
         Button btnSeguir;
 
         public SearchVH(@NonNull View itemView) {
             super(itemView);
             tvNombreUser = itemView.findViewById(R.id.tvNombreUserSearch);
+            tvCorreoUser = itemView.findViewById(R.id.tvCorreoUserSearch);
             ivFotoUser = itemView.findViewById(R.id.ivFotoPerfilSearch);
             btnSeguir = itemView.findViewById(R.id.btnSeguir);
         }
@@ -92,6 +93,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
             bdd = FirebaseDatabase.getInstance().getReference();
 
             tvNombreUser.setText(user.getDisplayName());
+            tvCorreoUser.setText(user.getCorreo());
 
             mStorRef.child(user.getUserId() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
@@ -129,6 +131,24 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
+
+            tvCorreoUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, PerfilPersonalActivity.class);
+                    i.putExtra(HomeActivity.CLAVE_USUARIO, user.getUserId());
+                    context.startActivity(i);
+                }
+            });
+
+            tvNombreUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, PerfilPersonalActivity.class);
+                    i.putExtra(HomeActivity.CLAVE_USUARIO, user.getUserId());
+                    context.startActivity(i);
                 }
             });
 

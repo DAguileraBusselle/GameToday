@@ -52,9 +52,9 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
 
     TextView btnCerrarSesion, tvNombre, tvCorreo, tvSeguidores, tvSiguiendo, btnPublis, btnLikes, btnMedia;
     View underlinePubli, underlineLike, underlineMedia;
-    ImageView ivFotoPerfil, btnCancel;
+    ImageView ivFotoPerfil, btnCancel, btnMsj;
     RecyclerView rvPublis;
-    Button btnSeguir;
+    Button btnSeguir, btnEditar;
 
     LinearLayoutManager llm;
     FeedAdapter adapter;
@@ -77,13 +77,22 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
 
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
         ivFotoPerfil = findViewById(R.id.ivFotoPerfilPerfil);
+        btnEditar = findViewById(R.id.btnEditarPrefil);
 
         if(getIntent().getStringExtra(HomeActivity.CLAVE_USUARIO).equals(mAuth.getCurrentUser().getUid())){
             user = mAuth.getCurrentUser().getUid();
             btnCerrarSesion.setOnClickListener(this);
             ivFotoPerfil.setOnClickListener(this);
+            btnEditar.setVisibility(View.VISIBLE);
+            btnEditar.setEnabled(true);
+            //TODO: editar perfil
         }else{
             user = getIntent().getStringExtra(HomeActivity.CLAVE_USUARIO);
+
+            btnMsj = findViewById(R.id.btnMandarMsj);
+            btnMsj.setVisibility(View.VISIBLE);
+            btnMsj.setOnClickListener(this);
+
             btnSeguir = findViewById(R.id.btnSeguirPerfil);
             btnSeguir.setVisibility(View.VISIBLE);
             btnSeguir.setEnabled(true);
@@ -91,18 +100,18 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
             bdd.child("Users").child(user).child("seguidores").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Boolean likeDado = false;
+                    Boolean siguiendo = false;
 
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
-                            likeDado = true;
+                            siguiendo = true;
                             btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_pressed));
                             btnSeguir.setTextColor(getResources().getColor(R.color.gris_guay));
                             btnSeguir.setText(getString(R.string.siguiendo));
                         }
                     }
 
-                    if (!likeDado) {
+                    if (!siguiendo) {
                         btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button));
                         btnSeguir.setTextColor(getResources().getColor(R.color.morao_chilling));
                         btnSeguir.setText(getString(R.string.btn_seguir));
@@ -234,6 +243,12 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
             Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             i.setType("image/*");
             startActivityForResult(i, CLAVE_CAMBIAR_FOTO);
+        } else if (v.equals(btnMsj)) {
+            Intent i = new Intent(PerfilPersonalActivity.this, ChatActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra(HomeActivity.CLAVE_USUARIO, user);
+            startActivity(i);
+            finish();
         } else if (v.equals(btnCancel)) {
             Intent i = new Intent(PerfilPersonalActivity.this, HomeActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

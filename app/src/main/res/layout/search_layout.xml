@@ -23,6 +23,13 @@
             android:layout_height="wrap_content"
             />
 
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        >
         <TextView
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
@@ -31,12 +38,21 @@
             android:id="@+id/tvNombreUserSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="aaaaaaaaaaaaaaaaaaaaaaa"
             android:textColor="@color/morao_chilling"
             android:fontFamily="@font/conthrax_sb"
             android:textSize="18sp"
             />
 
+        <TextView
+            android:id="@+id/tvCorreoUserSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="@color/morao_trans_menos"
+            android:fontFamily="@font/conthrax_sb"
+            android:textSize="10sp"
+            />
+    </LinearLayout>
 
 
 

@@ -8,33 +8,35 @@
     android:background="@color/trans_menos">
 
     <LinearLayout
-        android:layout_marginTop="@dimen/padding"
-        android:layout_marginLeft="@dimen/padding"
-        android:layout_marginRight="@dimen/padding"
         android:id="@+id/llSearchUsuario"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/outline_button">
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginTop="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:background="@drawable/outline_edit_text"
+        android:orientation="horizontal">
 
         <EditText
-            android:layout_marginLeft="15dp"
-            android:backgroundTint="@color/trans"
-            android:layout_weight="1"
-            android:fontFamily="@font/conthrax_sb"
             android:id="@+id/etSearchUsuario"
-            android:textSize="24sp"
-            android:textColor="@color/morao_trans_menos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/trans"
+            android:fontFamily="@font/conthrax_sb"
+            android:textColor="@color/morao_trans_menos"
+            android:textSize="24sp"
 
             />
+
         <ImageView
             android:id="@+id/btnBorrarSearch"
-            android:layout_width="50dp"
-            android:layout_height="55dp"
-            android:layout_marginRight="2dp"
-            android:src="@drawable/cross"/>
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/cross" />
     </LinearLayout>
 
     <TextView

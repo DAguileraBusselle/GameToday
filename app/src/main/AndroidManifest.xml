@@ -10,20 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameToday">
         <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".PerfilPersonalActivity"
             android:exported="true" />
         <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".IniciarSesionActivity"
             android:exported="true"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".RegistrarActivity"
             android:exported="true"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

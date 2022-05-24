@@ -48,8 +48,6 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
     LinearLayoutManager llm;
     FeedAdapter adapter;
 
-    private Timer refrescarTimer;
-
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
 
@@ -124,60 +122,6 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
 
 
 
-    private void actualizarFeed() {
-        /*
-
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                System.out.println("esto no deberia repetirse");
-
-                System.out.println(dataSnapshot.getChildrenCount());
-                for (DataSnapshot snapshot1 : dataSnapshot.getChildren()) {
-                    bdd.child("Publicaciones").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                        @Override
-                        public void onSuccess(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                System.out.println(snapshot1.getValue());
-                                System.out.println(dataSnapshot1.child("userId").getValue());
-                                if (snapshot1.getValue().toString().equals(dataSnapshot1.child("userId").getValue().toString())) {
-                                    Publicacion publicacion = new Publicacion(dataSnapshot1.getKey(),
-                                            dataSnapshot1.child("user").getValue().toString(),
-                                            dataSnapshot1.child("texto").getValue().toString(),
-                                            (long) dataSnapshot1.child("fechaPubliMilis").getValue(),
-                                            dataSnapshot1.child("userId").getValue().toString(),
-                                            dataSnapshot1.child("imagenPubli").getValue().toString(),
-                                            dataSnapshot1.child("likes").getChildrenCount());
-
-                                    System.out.println(dataSnapshot1.child("fechaPubliMilis").getValue().toString());
-                                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
-                                    Date resultDate = new Date(publicacion.getFechaPubli());
-                                    System.out.println(sdf.format(resultDate));
-                                    listaPublicaciones.add(publicacion);
-                                }
-                            }
-                            for (Publicacion publi : listaPublicaciones) {
-                                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                                System.out.println(publi.getPubliId());
-                                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-
-                            }
-
-                            sortListReverse(listaPublicaciones);
-
-
-                            adapter.notifyDataSetChanged();
-                        }
-                    });
-                }
-            }
-        });
-
-         */
-    }
-
     @Override
     public void onClick(View v) {
         if (v.equals(btnPubli)) {
@@ -198,33 +142,6 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
-/*
-    @Override
-    public void onResume() {
-        super.onResume();
-        refrescarTimer = new Timer();
-        refrescarTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                getActivity().runOnUiThread(new Runnable() {
-                    public void run() {
-                        updateHTML();
-                    }
-                });
-            }
-        }, 0, 300000); // actualiza cada minuto
-    }
 
-    private void updateHTML(){
-        actualizarFeed();
-    }
-
-    @Override
-    public void onPause() {
-        refrescarTimer.cancel();
-        super.onPause();
-    }
-
- */
 }
 

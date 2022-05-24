@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dam.gametoday.dialog.OnAceptarPubliListener;
+import com.dam.gametoday.fragments.ChatsFragment;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.fragments.SearchFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,9 +32,7 @@ import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarPubliListener {
 
-    ImageView btnHome;
-    ImageView btnSearch;
-    ImageView btnPerfil;
+    ImageView btnHome, btnSearch, btnChats, btnPerfil;
 
     public static final String CLAVE_USUARIO = "USUARIO";
 
@@ -48,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
 
 
+        btnChats = findViewById(R.id.btnChats);
         btnHome = findViewById(R.id.btnHome);
         btnSearch = findViewById(R.id.btnSearch);
         btnPerfil = findViewById(R.id.btnPersonalProfile);
@@ -55,6 +55,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
 
+        btnChats.setOnClickListener(this);
         btnHome.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
         btnPerfil.setOnClickListener(this);
@@ -84,22 +85,34 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
             btnHome.setImageDrawable(getResources().getDrawable(R.drawable.homeline));
             btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
+            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chats));
             fueraDeCasa = false;
 
-
-        } if (v.equals(btnSearch)) {
+        } else if (v.equals(btnSearch)) {
 
             SearchFragment search = new SearchFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, search).addToBackStack(null).commit();
             btnHome.setImageDrawable(getResources().getDrawable(R.drawable.home));
-            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.lupaline));
+            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.searchline));
+            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chats));
+            fueraDeCasa = true;
+
+        } else if (v.equals(btnChats)) {
+
+            ChatsFragment chats = new ChatsFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flHome, chats).addToBackStack(null).commit();
+            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.home));
+            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
+            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chatsline));
             fueraDeCasa = true;
 
         } else if (v.equals(btnPerfil)) {
+
             Intent i = new Intent (HomeActivity.this, PerfilPersonalActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.putExtra(CLAVE_USUARIO, mAuth.getCurrentUser().getUid());
             startActivity(i);
+
         }
 
     }
@@ -167,6 +180,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
             btnHome.setImageDrawable(getResources().getDrawable(R.drawable.homeline));
             btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
+            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chats));
             fueraDeCasa = false;
         } else {
 
