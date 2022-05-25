@@ -17,6 +17,7 @@ import com.dam.gametoday.dialog.OnAceptarPubliListener;
 import com.dam.gametoday.fragments.ChatsFragment;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.fragments.SearchFragment;
+import com.dam.gametoday.model.Mensaje;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,6 +47,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseReference bdd;
     StorageReference mStorRef;
     private Boolean fueraDeCasa = false;
+
+    DatabaseReference bddRef;
+    ValueEventListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,29 +86,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int cont = 0;
-                for (DataSnapshot snapChats : snapshot.getChildren()) {
-                    for (DataSnapshot snapMensajes : snapChats.getChildren()) {
-                        if (snapMensajes.child("entrante").getValue().equals(true) && snapMensajes.child("leido").getValue().equals("no")) {
-                            cont ++;
-                        }
-                    }
-                }
-                if (cont > 0) {
-                    llTvNumMsj.setVisibility(View.VISIBLE);
-                    tvNumMsjNoLeidos.setText(String.valueOf(cont));
-                }
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
 
 
@@ -217,10 +199,43 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chats));
             fueraDeCasa = false;
         } else {
-
+            if (bddRef != null && listener != null) {
+                bddRef.removeEventListener(listener);
+            }
             finishAffinity();
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        bddRef = bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats");
+
+        listener = bddRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int cont = 0;
+                for (DataSnapshot snapChats : snapshot.getChildren()) {
+                    for (DataSnapshot snapMensajes : snapChats.getChildren()) {
+                        if (snapMensajes.child("entrante").getValue().equals(true) && snapMensajes.child("leido").getValue().equals("no")) {
+                            cont ++;
+                        }
+                    }
+                }
+                if (cont > 0) {
+                    llTvNumMsj.setVisibility(View.VISIBLE);
+                    tvNumMsjNoLeidos.setText(String.valueOf(cont));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

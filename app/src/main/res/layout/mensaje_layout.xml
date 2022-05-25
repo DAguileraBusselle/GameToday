@@ -72,7 +72,7 @@
                     android:id="@+id/tvFechaHoraMensajeSal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="7"
+                    android:layout_weight="1"
                     android:layout_gravity="bottom"
                     android:textColor="@color/gris_guay_medio_trans_menos"
                     android:fontFamily="@font/conthrax_sb"
@@ -81,9 +81,13 @@
 
                 <ImageView
                     android:id="@+id/ivCheckMensaje"
-                    android:layout_width="15dp"
+                    android:layout_width="11dp"
                     android:layout_weight="1"
-                    android:layout_height="15dp"
+                    android:layout_height="11dp"
+                    android:src="@drawable/visto"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
                     android:layout_gravity="bottom"
                     />
 

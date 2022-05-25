@@ -67,8 +67,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
 
-
-
         rvMensajes = findViewById(R.id.rvMensajes);
         etMensaje = findViewById(R.id.etEscribirMensaje);
         btnEnviar = findViewById(R.id.btnMandarMsj);
@@ -93,44 +91,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bddRef = bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user);
 
-        listener = bddRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listaMensajes.clear();
-                for (DataSnapshot snapMensaje : snapshot.getChildren()) {
-                    if (snapMensaje.child("entrante").getValue().equals(true)) {
-                        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child(snapMensaje.getKey()).child("leido").setValue("si");
-                        bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                            @Override
-                            public void onSuccess(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot snapChatOtroUser : dataSnapshot.getChildren()) {
-                                    bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).child(snapChatOtroUser.getKey()).child("leido").setValue("si");
-                                }
-                            }
-                        });
-                    }
-
-                    Mensaje msj = new Mensaje(user,
-                            Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
-                            snapMensaje.child("texto").getValue().toString(),
-                            snapMensaje.child("leido").getValue().toString(),
-                            Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
-                    listaMensajes.add(msj);
-                }
-
-                sortList(listaMensajes);
-
-                adapter.notifyDataSetChanged();
-                rvMensajes.scrollToPosition(adapter.getItemCount()-1);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         rvMensajes.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -190,7 +151,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         Intent i = new Intent(ChatActivity.this, HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        super.onStop();
         if (bddRef != null && listener != null) {
             bddRef.removeEventListener(listener);
         }
@@ -235,7 +195,48 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onStop() {
+    protected void onResume() {
+        super.onResume();
 
+        bddRef = bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user);
+
+        listener = bddRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listaMensajes.clear();
+                for (DataSnapshot snapMensaje : snapshot.getChildren()) {
+                    if (snapMensaje.child("entrante").getValue().equals(true)) {
+                        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child(snapMensaje.getKey()).child("leido").setValue("si");
+                        bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                            @Override
+                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapChatOtroUser : dataSnapshot.getChildren()) {
+                                    if (snapChatOtroUser.child("entrante").getValue().equals(false)) {
+                                        bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).child(snapChatOtroUser.getKey()).child("leido").setValue("si");
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    Mensaje msj = new Mensaje(user,
+                            Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
+                            snapMensaje.child("texto").getValue().toString(),
+                            snapMensaje.child("leido").getValue().toString(),
+                            Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
+                    listaMensajes.add(msj);
+                }
+
+                sortList(listaMensajes);
+
+                adapter.notifyDataSetChanged();
+                rvMensajes.scrollToPosition(adapter.getItemCount()-1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

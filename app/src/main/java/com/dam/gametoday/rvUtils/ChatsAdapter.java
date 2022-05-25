@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -86,8 +87,9 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
         private FirebaseAuth mAuth;
         private DatabaseReference bdd;
 
-        TextView tvNombreUser, tvFechaHora, tvUltimoMsj, tvCorreoUser;
+        TextView tvNombreUser, tvFechaHora, tvUltimoMsj, tvCorreoUser, tvNumMensajes;
         ImageView ivFotoUser;
+        LinearLayout llNumMensajes;
 
         public ChatsVH(@NonNull View itemView) {
             super(itemView);
@@ -96,6 +98,9 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
             tvUltimoMsj = itemView.findViewById(R.id.tvTextoChats);
             tvCorreoUser = itemView.findViewById(R.id.tvCorreoUserChats);
             ivFotoUser = itemView.findViewById(R.id.ivFotoPerfilChats);
+
+            tvNumMensajes = itemView.findViewById(R.id.tvNumMsjNoLeidosChat);
+            llNumMensajes = itemView.findViewById(R.id.llNumMensajesChat);
         }
 
         public void bindChats(Mensaje mensaje) {
@@ -142,6 +147,34 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                     ivFotoUser.setImageResource(defaulPic);
                 }
             });
+
+
+            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(mensaje.getParticipante()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int cont = 0;
+                for (DataSnapshot snapChats : snapshot.getChildren()) {
+                    if (snapChats.child("entrante").getValue().equals(true) && snapChats.child("leido").getValue().equals("no")) {
+                        cont ++;
+                    }
+                }
+                if (cont > 0) {
+                    llNumMensajes.setVisibility(View.VISIBLE);
+                    tvNumMensajes.setText(String.valueOf(cont));
+                    itemView.setBackground(context.getDrawable(R.color.morao_trans_menos));
+                } else {
+                    llNumMensajes.setVisibility(View.GONE);
+                    itemView.setBackground(context.getDrawable(R.color.trans));
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         }

@@ -113,9 +113,9 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
                 tvFechaHoraSal.setText(sdf.format(resultDate));
 
                 if (mensaje.getLeido().equals("no")) {
-                    ivVisto.setImageDrawable(context.getResources().getDrawable(R.drawable.cross));
+                    ivVisto.setImageDrawable(context.getResources().getDrawable(R.drawable.enviado));
                 } else {
-                    ivVisto.setImageDrawable(context.getResources().getDrawable(R.drawable.tick));
+                    ivVisto.setImageDrawable(context.getResources().getDrawable(R.drawable.visto));
                 }
 
             }

@@ -105,15 +105,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/num_mensajes_no_leidos">
+
                 <TextView
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
                     android:id="@+id/tvNumMsjNoLeidosHome"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/conthrax_sb"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="@font/conthrax_sb"
                     android:text="0"
-                    android:visibility="visible"/>
+                    android:textColor="@color/gris_chilling"
+                    android:visibility="visible" />
             </LinearLayout>
 
 

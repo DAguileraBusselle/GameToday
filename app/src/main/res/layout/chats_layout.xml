@@ -85,6 +85,27 @@
                     android:textColor="@color/morao_chilling"
                     tools:layout_editor_absoluteX="0dp" />
 
+                <LinearLayout
+                    app:layout_constraintTop_toTopOf="@id/btnChats"
+                    app:layout_constraintLeft_toRightOf="@id/btnChats"
+                    android:id="@+id/llNumMensajesChat"
+                    android:visibility="gone"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/num_mensajes_no_leidos">
+
+                    <TextView
+                        android:id="@+id/tvNumMsjNoLeidosChat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:fontFamily="@font/conthrax_sb"
+                        android:text="0"
+                        android:textColor="@color/gris_chilling"
+                        android:visibility="visible" />
+                </LinearLayout>
 
 
             </LinearLayout>
