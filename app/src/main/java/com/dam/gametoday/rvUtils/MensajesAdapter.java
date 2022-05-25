@@ -74,13 +74,15 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
         TextView tvTextoSal, tvFechaHoraSal;
         LinearLayout llMensajeSal;
 
+        ImageView ivVisto;
+
         public MensajeVH(@NonNull View itemView) {
             super(itemView);
         }
 
         public void bindMensaje(Mensaje mensaje) {
 
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             Date resultDate = new Date(mensaje.getFechaHoraMsj());
 
             llMensajeEnt = itemView.findViewById(R.id.llMensajeEntrante);
@@ -90,6 +92,10 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
             tvTextoSal = itemView.findViewById(R.id.tvTextoMensajeSal);
             tvFechaHoraSal = itemView.findViewById(R.id.tvFechaHoraMensajeSal);
 
+            ivVisto = itemView.findViewById(R.id.ivCheckMensaje);
+
+
+
 
 
             if (mensaje.getMsjEntrante()) {
@@ -98,11 +104,19 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
                 tvTextoEnt.setText(mensaje.getTexto());
                 tvFechaHoraEnt.setText(sdf.format(resultDate));
 
+
+
             } else {
                 llMensajeSal.setVisibility(View.VISIBLE);
                 llMensajeEnt.setVisibility(View.GONE);
                 tvTextoSal.setText(mensaje.getTexto());
                 tvFechaHoraSal.setText(sdf.format(resultDate));
+
+                if (mensaje.getLeido().equals("no")) {
+                    ivVisto.setImageDrawable(context.getResources().getDrawable(R.drawable.cross));
+                } else {
+                    ivVisto.setImageDrawable(context.getResources().getDrawable(R.drawable.tick));
+                }
 
             }
 

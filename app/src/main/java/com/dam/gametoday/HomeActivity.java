@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dam.gametoday.dialog.OnAceptarPubliListener;
@@ -21,8 +23,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -33,6 +37,8 @@ import java.util.HashMap;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarPubliListener {
 
     ImageView btnHome, btnSearch, btnChats, btnPerfil;
+    TextView tvNumMsjNoLeidos;
+    LinearLayout llTvNumMsj;
 
     public static final String CLAVE_USUARIO = "USUARIO";
 
@@ -46,7 +52,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        tvNumMsjNoLeidos = findViewById(R.id.tvNumMsjNoLeidosHome);
+        llTvNumMsj = findViewById(R.id.llNumMensajes);
         btnChats = findViewById(R.id.btnChats);
         btnHome = findViewById(R.id.btnHome);
         btnSearch = findViewById(R.id.btnSearch);
@@ -73,6 +80,33 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Picasso.get().load(uri).into(btnPerfil);
             }
         });
+
+
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int cont = 0;
+                for (DataSnapshot snapChats : snapshot.getChildren()) {
+                    for (DataSnapshot snapMensajes : snapChats.getChildren()) {
+                        if (snapMensajes.child("entrante").getValue().equals(true) && snapMensajes.child("leido").getValue().equals("no")) {
+                            cont ++;
+                        }
+                    }
+                }
+                if (cont > 0) {
+                    llTvNumMsj.setVisibility(View.VISIBLE);
+                    tvNumMsjNoLeidos.setText(String.valueOf(cont));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
     }
 

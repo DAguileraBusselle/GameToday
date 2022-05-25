@@ -77,20 +77,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:text=""
             android:backgroundTint="@color/trans"
             android:fontFamily="@font/conthrax_sb"
             android:textColor="@color/morao_trans_menos"
-            android:textSize="24sp"
+            android:textSize="15sp"
 
             />
 
         <ImageView
             android:id="@+id/btnMandarMsj"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
-            android:src="@drawable/send" />
+            android:src="@drawable/sendtrans" />
     </LinearLayout>
 
 

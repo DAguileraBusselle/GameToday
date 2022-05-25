@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.model.Mensaje;
-import com.dam.gametoday.rvUtils.ChatsAdapter;
 import com.dam.gametoday.rvUtils.MensajesAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,8 +51,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     MensajesAdapter adapter;
     LinearLayoutManager llm;
-
-
+    DatabaseReference bddRef;
+    ValueEventListener listener;
 
     private ArrayList<Mensaje> listaMensajes = new ArrayList<Mensaje>();
 
@@ -67,6 +67,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
 
+
+
         rvMensajes = findViewById(R.id.rvMensajes);
         etMensaje = findViewById(R.id.etEscribirMensaje);
         btnEnviar = findViewById(R.id.btnMandarMsj);
@@ -74,6 +76,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         tvNombre = findViewById(R.id.tvNombreUserMensajes);
 
         btnEnviar.setOnClickListener(this);
+        btnEnviar.setEnabled(false);
 
         llm = new LinearLayoutManager(this);
         rvMensajes.setLayoutManager(llm);
@@ -87,6 +90,45 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 tvNombre.setText(dataSnapshot.getValue().toString());
+            }
+        });
+
+        bddRef = bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user);
+
+        listener = bddRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listaMensajes.clear();
+                for (DataSnapshot snapMensaje : snapshot.getChildren()) {
+                    if (snapMensaje.child("entrante").getValue().equals(true)) {
+                        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child(snapMensaje.getKey()).child("leido").setValue("si");
+                        bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                            @Override
+                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapChatOtroUser : dataSnapshot.getChildren()) {
+                                    bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).child(snapChatOtroUser.getKey()).child("leido").setValue("si");
+                                }
+                            }
+                        });
+                    }
+
+                    Mensaje msj = new Mensaje(user,
+                            Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
+                            snapMensaje.child("texto").getValue().toString(),
+                            snapMensaje.child("leido").getValue().toString(),
+                            Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
+                    listaMensajes.add(msj);
+                }
+
+                sortList(listaMensajes);
+
+                adapter.notifyDataSetChanged();
+                rvMensajes.scrollToPosition(adapter.getItemCount()-1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
@@ -117,29 +159,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listaMensajes.clear();
-                for (DataSnapshot snapMensaje : snapshot.getChildren()) {
-                    Mensaje msj = new Mensaje(user,
-                            Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
-                            snapMensaje.child("texto").getValue().toString(),
-                            Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
-                    listaMensajes.add(msj);
-                }
 
-                sortList(listaMensajes);
-
-                adapter.notifyDataSetChanged();
-                rvMensajes.scrollToPosition(adapter.getItemCount()-1);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         etMensaje.addTextChangedListener(new TextWatcher() {
             @Override
@@ -151,10 +171,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (etMensaje.getText().toString().trim().isEmpty()) {
                     btnEnviar.setEnabled(false);
-                    //btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_trans));
+                    btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.sendtrans));
                 } else {
                     btnEnviar.setEnabled(true);
-                    //btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick));
+                    btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.send));
                 }
             }
 
@@ -170,6 +190,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         Intent i = new Intent(ChatActivity.this, HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        super.onStop();
+        if (bddRef != null && listener != null) {
+            bddRef.removeEventListener(listener);
+        }
         startActivity(i);
         finish();
     }
@@ -193,6 +217,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             HashMap<String, Object> msj = new HashMap<>();
             msj.put("entrante", false);
             msj.put("texto", texto);
+            msj.put("leido", "no");
             msj.put("fechaMsjMilis", System.currentTimeMillis());
 
             bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).push().setValue(msj);
@@ -200,11 +225,17 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             HashMap<String, Object> msj2 = new HashMap<>();
             msj2.put("entrante", true);
             msj2.put("texto", texto);
+            msj2.put("leido", "no");
             msj2.put("fechaMsjMilis", System.currentTimeMillis());
 
             bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).push().setValue(msj2);
 
             etMensaje.setText("");
         }
+    }
+
+    @Override
+    public void onStop() {
+
     }
 }

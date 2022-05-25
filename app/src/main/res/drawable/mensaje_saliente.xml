@@ -7,7 +7,7 @@
         <solid android:color="@color/morrao_chilling_trans"/>
 
         <corners
-            android:radius="20dp" />
+            android:radius="13dp" />
     </shape></item>
 
 </selector>

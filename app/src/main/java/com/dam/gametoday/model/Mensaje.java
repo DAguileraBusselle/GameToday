@@ -4,18 +4,28 @@ public class Mensaje {
     private String participante;
     private Boolean msjEntrante;
     private String texto;
+    private String leido;
     private long fechaHoraMsj;
 
 
-    public Mensaje(String participante, Boolean msjEntrante, String texto, long fechaHoraMsj) {
+    public Mensaje(String participante, Boolean msjEntrante, String texto, String leido, long fechaHoraMsj) {
         this.participante = participante;
         this.msjEntrante = msjEntrante;
         this.texto = texto;
+        this.leido = leido;
         this.fechaHoraMsj = fechaHoraMsj;
     }
 
     public String getParticipante() {
         return participante;
+    }
+
+    public String getLeido() {
+        return leido;
+    }
+
+    public void setLeido(String leido) {
+        this.leido = leido;
     }
 
     public void setParticipante(String participante) {

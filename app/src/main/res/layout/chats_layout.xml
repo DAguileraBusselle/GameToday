@@ -18,6 +18,7 @@
             android:id="@+id/ivFotoPerfilChats"
             android:src="@drawable/default_pic"
             android:layout_width="match_parent"
+            android:layout_marginRight="3dp"
             android:layout_height="60dp"
             android:layout_weight="5"
             />
@@ -37,7 +38,6 @@
                 android:layout_weight="1"
                 >
                 <TextView
-                    android:text="powdavyd"
                     android:layout_gravity="center_vertical"
                     android:id="@+id/tvNombreUserChats"
                     android:layout_width="wrap_content"
@@ -50,7 +50,6 @@
                     />
 
                 <TextView
-                    android:text="powdavyd@gmail.com"
                     android:id="@+id/tvCorreoUserChats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +60,7 @@
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/morao_trans_menos"
                     android:fontFamily="@font/conthrax_sb"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     />
             </LinearLayout>
 
@@ -81,26 +80,25 @@
                     android:lines="1"
                     android:layout_weight="1"
                     android:scrollHorizontally="true"
-                    android:textSize="13sp"
-                    android:text="the fitness grand pacer test is a multicapacity aerobics capacity test"
+                    android:textSize="12sp"
+                    android:layout_marginRight="5dp"
                     android:textColor="@color/morao_chilling"
                     tools:layout_editor_absoluteX="0dp" />
 
-                <TextView
-                    android:id="@+id/tvFechaHoraChats"
-                    android:text="18:34"
-                    app:layout_constraintTop_toBottomOf="@id/llUserFeed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
-                    android:layout_weight="3"
-                    android:textSize="8sp"
-                    android:textColor="@color/morao_trans_menos"
-                    android:fontFamily="@font/conthrax_sb"
-                    />
+
 
             </LinearLayout>
-
+            <TextView
+                android:id="@+id/tvFechaHoraChats"
+                app:layout_constraintTop_toBottomOf="@id/llUserFeed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:textSize="8sp"
+                android:layout_marginRight="3dp"
+                android:textColor="@color/morao_trans_menos"
+                android:fontFamily="@font/conthrax_sb"
+                />
 
         </LinearLayout>
 

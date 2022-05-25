@@ -7,7 +7,7 @@
         <solid android:color="@color/morao_trans_menos_mas_menos_mas_mas_menos"/>
 
         <corners
-            android:radius="20dp" />
+            android:radius="13dp" />
     </shape></item>
 
 </selector>
