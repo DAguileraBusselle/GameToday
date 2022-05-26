@@ -1,10 +1,17 @@
 package com.dam.gametoday;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,20 +25,26 @@ import com.dam.gametoday.fragments.ChatsFragment;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.fragments.SearchFragment;
 import com.dam.gametoday.model.Mensaje;
+import com.dam.gametoday.model.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+//import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
 
 import java.util.HashMap;
 
@@ -46,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
     StorageReference mStorRef;
-    private Boolean fueraDeCasa = false;
+    public static Boolean fueraDeCasa = false;
 
     DatabaseReference bddRef;
     ValueEventListener listener;
@@ -85,11 +98,25 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        updateToken();
+
+        if (fueraDeCasa) {
+            ChatsFragment chats = new ChatsFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flHome, chats).addToBackStack(null).commit();
+            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.home));
+            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
+            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chatsline));
+        }
 
 
 
+    }
 
-
+    private void updateToken() {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        String refreshToken = FirebaseInstanceId.getInstance().getToken();
+        Token token = new Token(refreshToken);
+        FirebaseDatabase.getInstance().getReference().child("Tokens").child(mAuth.getCurrentUser().getUid()).setValue(token);
     }
 
 
@@ -221,6 +248,35 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     for (DataSnapshot snapMensajes : snapChats.getChildren()) {
                         if (snapMensajes.child("entrante").getValue().equals(true) && snapMensajes.child("leido").getValue().equals("no")) {
                             cont ++;
+                            /*NotificationCompat.Builder builder = new NotificationCompat.Builder(HomeActivity.this, "notifMensaje");
+                            bdd.child("Users").child(snapChats.getKey()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                @Override
+                                public void onSuccess(DataSnapshot dataSnapshot) {
+                                    builder.setContentTitle(dataSnapshot.child("displayName").getValue().toString());
+                                }
+                            });
+
+                            builder.setContentText(snapMensajes.child("texto").getValue().toString());
+                            mStorRef.child(snapMensajes.child(snapshot.getKey()) + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @RequiresApi(api = Build.VERSION_CODES.M)
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    builder.setSmallIcon(IconCompat.createWithContentUri(uri));
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                }
+                            });
+                            builder.setSmallIcon(R.drawable.logosinborde);
+                            builder.setAutoCancel(true);
+
+                            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(HomeActivity.this);
+                            managerCompat.notify(1, builder.build());
+
+
+                             */
+
                         }
                     }
                 }
@@ -237,5 +293,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+
+
+
 
 }

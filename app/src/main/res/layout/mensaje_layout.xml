@@ -19,15 +19,16 @@
             android:layout_gravity="start"
             android:layout_marginTop="5dp"
             android:background="@drawable/mensaje_entrante"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="5dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/tvTextoMensajeEntr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:text="poppy es una mierda y tu tamboenm"
                 android:fontFamily="@font/conthrax_sb"
                 android:maxWidth="300dp"
                 android:padding="8dp"
@@ -38,9 +39,10 @@
                 android:id="@+id/tvFechaHoraMensajeEntr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
+                android:layout_gravity="end"
+                android:text="43:34"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:textColor="@color/gris_guay_medio_trans_menos"
                 android:fontFamily="@font/conthrax_sb"
                 android:textSize="9dp" />
@@ -53,8 +55,9 @@
             android:layout_gravity="end"
             android:layout_marginTop="5dp"
             android:background="@drawable/mensaje_saliente"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="5dp"
+            android:layout_marginLeft="30dp"
             android:visibility="visible">
 
                 <TextView
@@ -62,34 +65,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
+                    android:text="aaaaaaaaaaaaaaaaaaaa"
                     android:fontFamily="@font/conthrax_sb"
                     android:maxWidth="300dp"
                     android:padding="8dp"
                     android:textAlignment="textStart"
                     android:textColor="@color/gris_guay_medio_trans" />
 
-                <TextView
-                    android:id="@+id/tvFechaHoraMensajeSal"
+                <LinearLayout
+                    android:layout_gravity="end"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="bottom"
-                    android:textColor="@color/gris_guay_medio_trans_menos"
-                    android:fontFamily="@font/conthrax_sb"
-                    android:maxWidth="300dp"
-                    android:textSize="9dp" />
+                    android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/ivCheckMensaje"
-                    android:layout_width="11dp"
-                    android:layout_weight="1"
-                    android:layout_height="11dp"
-                    android:src="@drawable/visto"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginLeft="3dp"
-                    android:layout_gravity="bottom"
-                    />
+                    <TextView
+                        android:id="@+id/tvFechaHoraMensajeSal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="textEnd"
+                        android:layout_marginLeft="10dp"
+                        android:text="23:32"
+                        android:textColor="@color/gris_guay_medio_trans_menos"
+                        android:fontFamily="@font/conthrax_sb"
+                        android:maxWidth="300dp"
+                        android:textSize="9dp" />
+
+                    <ImageView
+                        android:id="@+id/ivCheckMensaje"
+                        android:layout_width="11dp"
+                        android:layout_weight="0"
+                        android:layout_height="11dp"
+                        android:src="@drawable/visto"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_gravity="bottom"
+                        />
+                </LinearLayout>
 
             </LinearLayout>
 

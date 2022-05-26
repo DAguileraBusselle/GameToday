@@ -14,9 +14,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dam.gametoday.fragments.ChatsFragment;
 import com.dam.gametoday.fragments.FeedFragment;
+import com.dam.gametoday.model.DatosNoti;
 import com.dam.gametoday.model.Mensaje;
+import com.dam.gametoday.notif.APIService;
+import com.dam.gametoday.notif.Client;
+import com.dam.gametoday.notif.MyResponse;
+import com.dam.gametoday.notif.NotificationSender;
 import com.dam.gametoday.rvUtils.MensajesAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +43,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvMensajes;
@@ -54,6 +65,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     DatabaseReference bddRef;
     ValueEventListener listener;
 
+    private APIService apiService;
+
     private ArrayList<Mensaje> listaMensajes = new ArrayList<Mensaje>();
 
     @Override
@@ -61,7 +74,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        getWindow().setBackgroundDrawableResource(R.drawable.fondohex) ;
+        getWindow().setBackgroundDrawableResource(R.drawable.fondohex);
 
         mStorRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -83,6 +96,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         rvMensajes.setAdapter(adapter);
 
         user = getIntent().getStringExtra(HomeActivity.CLAVE_USUARIO);
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         bdd.child("Users").child(user).child("displayName").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
@@ -155,6 +169,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             bddRef.removeEventListener(listener);
         }
         startActivity(i);
+        HomeActivity.fueraDeCasa = true;
         finish();
     }
 
@@ -191,6 +206,21 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).push().setValue(msj2);
 
             etMensaje.setText("");
+
+
+            bdd.child("Tokens").child(user).child("token").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                @Override
+                public void onSuccess(DataSnapshot dataSnapshot) {
+                    bdd.child("Users").child(user).child("displayName").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot1) {
+                            //sendNotifications(dataSnapshot.getValue().toString(), dataSnapshot1.getValue().toString(), texto);
+                        }
+                    });
+
+                }
+            });
+
         }
     }
 
@@ -239,4 +269,32 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+    public void sendNotifications(String usertoken, String title, String message) {
+        DatosNoti data = new DatosNoti(title, message);
+        NotificationSender sender = new NotificationSender(data, usertoken);
+        apiService.sendNotifcation(sender).enqueue(new Callback<MyResponse>() {
+            @Override
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                if (response.code() == 200) {
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                    if (response.body().success != 1) {
+
+                        System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+                        System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+                        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                        System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+                        System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+                        Toast.makeText(ChatActivity.this, "Failed to notify", Toast.LENGTH_LONG);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
 }

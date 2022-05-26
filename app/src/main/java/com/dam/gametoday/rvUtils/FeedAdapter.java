@@ -115,27 +115,33 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 }
             });
 
+            Picasso.get().cancelRequest(ivImagenPubli);
             ivImagenPubli.setVisibility(View.GONE);
 
-            if(!publi.getImagenPubli().equals("no")) {
-                mStorRef.child(publi.getImagenPubli()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
+
+            mStorRef.child(publi.getImagenPubli()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    ivImagenPubli.setVisibility(View.GONE);
+                    Picasso.get().cancelRequest(ivImagenPubli);
+
+                    if(!publi.getImagenPubli().equals("no")) {
                         ivImagenPubli.setVisibility(View.VISIBLE);
-
-
                         Picasso.get().load(uri).into(ivImagenPubli);
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Picasso.get().cancelRequest(ivImagenPubli);
 
-                    }
-                });
-            } else {
-                Picasso.get().cancelRequest(ivImagenPubli);
-            }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    ivImagenPubli.setImageResource(0);
+                    ivImagenPubli.setVisibility(View.GONE);
+
+
+                }
+            });
+
+
 
             ivFoto.setOnClickListener(new View.OnClickListener() {
                 @Override

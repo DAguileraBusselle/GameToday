@@ -165,7 +165,6 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                 } else {
                     llNumMensajes.setVisibility(View.GONE);
                     itemView.setBackground(context.getDrawable(R.color.trans));
-
                 }
 
             }

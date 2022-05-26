@@ -104,8 +104,6 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
                 tvTextoEnt.setText(mensaje.getTexto());
                 tvFechaHoraEnt.setText(sdf.format(resultDate));
 
-
-
             } else {
                 llMensajeSal.setVisibility(View.VISIBLE);
                 llMensajeEnt.setVisibility(View.GONE);
