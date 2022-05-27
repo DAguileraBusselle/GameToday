@@ -41,9 +41,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -58,7 +60,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView rvMensajes;
     ImageView btnEnviar, ivFoto, ivEscribiendo;
     EditText etMensaje;
-    TextView tvNombre;
+    TextView tvNombre, tvFecha;
 
     StorageReference mStorRef;
     private FirebaseAuth mAuth;
@@ -94,6 +96,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         btnEnviar = findViewById(R.id.btnMandarMsj);
         ivFoto = findViewById(R.id.ivFotoPerfilMensajes);
         tvNombre = findViewById(R.id.tvNombreUserMensajes);
+        tvFecha = findViewById(R.id.tvFechaMensajes);
         ivEscribiendo = findViewById(R.id.ivEscribiendo);
 
         btnEnviar.setOnClickListener(this);
@@ -170,11 +173,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-
-                                bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(true);
-
-
-
             }
 
             @Override
@@ -189,8 +187,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.send));
                 }
 
-
+                if (!etMensaje.getText().toString().trim().isEmpty()) {
                     bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(true);
+
+                }
 
 
 
@@ -214,6 +214,31 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 );
 
 
+
+            }
+        });
+
+        rvMensajes.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int primeraPosicionVisible = llm.findFirstCompletelyVisibleItemPosition();
+                if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() <= System.currentTimeMillis() - 86400000) {
+                    tvFecha.setVisibility(View.VISIBLE);
+
+                    if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() >= System.currentTimeMillis() - (86400000*2)) {
+                        tvFecha.setText(getString(R.string.ayer));
+                    } else {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+                        Date resultDate = new Date(listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj());
+
+                        tvFecha.setText(sdf.format(resultDate));
+                    }
+
+                } else  {
+                    tvFecha.setVisibility(View.GONE);
+
+                }
 
             }
         });

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dam.gametoday.ChatActivity;
 import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
@@ -40,6 +41,7 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
 
     private ArrayList<Mensaje> listaMensajes;
     Context context;
+
 
     public MensajesAdapter(ArrayList<Mensaje> feed){this.listaMensajes = feed;}
 
@@ -85,6 +87,7 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             Date resultDate = new Date(mensaje.getFechaHoraMsj());
 
+
             llMensajeEnt = itemView.findViewById(R.id.llMensajeEntrante);
             tvTextoEnt = itemView.findViewById(R.id.tvTextoMensajeEntr);
             tvFechaHoraEnt = itemView.findViewById(R.id.tvFechaHoraMensajeEntr);
@@ -93,8 +96,6 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
             tvFechaHoraSal = itemView.findViewById(R.id.tvFechaHoraMensajeSal);
 
             ivVisto = itemView.findViewById(R.id.ivCheckMensaje);
-
-
 
 
 

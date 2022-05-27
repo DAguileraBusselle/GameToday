@@ -59,4 +59,5 @@
     <string name="editar_perfil">Editar perfil</string>
     <string name="msj_saliente">"Tú: "</string>
     <string name="escribiendo">Escribiendo...</string>
+    <string name="ayer">Ayer</string>
 </resources>
