@@ -46,6 +46,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,6 +66,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     String user;
 
+    private Timer timer = new Timer();
     MensajesAdapter adapter;
     LinearLayoutManager llm;
     DatabaseReference bddRef;
@@ -166,15 +169,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         etMensaje.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (s.toString().trim().length() == 0) {
 
-                                bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
-
-                } else {
 
                                 bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(true);
 
-                }
 
 
             }
@@ -191,26 +189,30 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.send));
                 }
 
-                            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(true);
+
+                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(true);
+
+
+
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().trim().length() == 0) {
-                    /*bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).child("escribiendo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                        @Override
-                        public void onSuccess(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.getValue().equals(true)) {
+
+
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(
+                        new TimerTask() {
+                            @Override
+                            public void run() {
                                 bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
+
                             }
-                        }
-                    });
+                        }, 750
+                );
 
-                     */
-                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
-
-                }
 
 
             }

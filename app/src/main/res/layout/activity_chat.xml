@@ -95,13 +95,14 @@
             android:src="@drawable/sendtrans" />
     </LinearLayout>
 
-    <ImageView
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/ivEscribiendo"
         android:layout_width="40dp"
         android:layout_height="10dp"
         android:layout_above="@id/llMandarMensaje"
         android:layout_marginLeft="20dp"
         android:src="@drawable/escribiendo"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_marginBottom="3dp"/>
 
 </RelativeLayout>

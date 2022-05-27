@@ -34,6 +34,7 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Timer;
 
 public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
         implements View.OnClickListener {
@@ -86,6 +87,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
 
         private FirebaseAuth mAuth;
         private DatabaseReference bdd;
+
 
         TextView tvNombreUser, tvFechaHora, tvUltimoMsj, tvCorreoUser, tvNumMensajes;
         ImageView ivFotoUser, ivCheck;
