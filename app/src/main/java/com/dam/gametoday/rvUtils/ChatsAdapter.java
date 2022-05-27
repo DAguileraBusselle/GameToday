@@ -186,6 +186,45 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
             }
         });
 
+            bdd.child("Users").child(mensaje.getParticipante()).child("chats").child(mAuth.getCurrentUser().getUid()).child("escribiendo").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.getValue() != null) {
+                        if (snapshot.getValue().equals(true)) {
+                            tvUltimoMsj.setText(context.getString(R.string.escribiendo));
+                            tvFechaHora.setText("");
+                            ivCheck.setVisibility(View.GONE);
+                        } else {
+                            tvUltimoMsj.setText(mensaje.getTexto());
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
+                            Date resultDate = new Date(mensaje.getFechaHoraMsj());
+
+                            tvFechaHora.setText(sdf.format(resultDate));
+
+                            if (mensaje.getMsjEntrante()) {
+                                tvUltimoMsj.setTextColor(context.getResources().getColor(R.color.morao_chilling));
+                                ivCheck.setVisibility(View.GONE);
+                            } else {
+                                ivCheck.setVisibility(View.VISIBLE);
+                                if (mensaje.getLeido().equals("no")) {
+                                    ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.enviado));
+                                } else {
+                                    ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.visto));
+                                }
+                                tvUltimoMsj.setTextColor(context.getResources().getColor(R.color.morrao_chilling));
+                            }
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
 
         }
     }

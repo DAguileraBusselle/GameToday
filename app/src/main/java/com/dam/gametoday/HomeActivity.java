@@ -285,6 +285,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 if (cont > 0) {
                     llTvNumMsj.setVisibility(View.VISIBLE);
                     tvNumMsjNoLeidos.setText(String.valueOf(cont));
+                } else {
+                    llTvNumMsj.setVisibility(View.GONE);
                 }
 
             }
