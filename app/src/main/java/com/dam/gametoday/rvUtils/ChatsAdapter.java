@@ -88,7 +88,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
         private DatabaseReference bdd;
 
         TextView tvNombreUser, tvFechaHora, tvUltimoMsj, tvCorreoUser, tvNumMensajes;
-        ImageView ivFotoUser;
+        ImageView ivFotoUser, ivCheck;
         LinearLayout llNumMensajes;
 
         public ChatsVH(@NonNull View itemView) {
@@ -98,6 +98,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
             tvUltimoMsj = itemView.findViewById(R.id.tvTextoChats);
             tvCorreoUser = itemView.findViewById(R.id.tvCorreoUserChats);
             ivFotoUser = itemView.findViewById(R.id.ivFotoPerfilChats);
+            ivCheck = itemView.findViewById(R.id.ivCheckChats);
 
             tvNumMensajes = itemView.findViewById(R.id.tvNumMsjNoLeidosChat);
             llNumMensajes = itemView.findViewById(R.id.llNumMensajesChat);
@@ -132,7 +133,14 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
 
             if (mensaje.getMsjEntrante()) {
                 tvUltimoMsj.setTextColor(context.getResources().getColor(R.color.morao_chilling));
+                ivCheck.setVisibility(View.GONE);
             } else {
+                ivCheck.setVisibility(View.VISIBLE);
+                if (mensaje.getLeido().equals("no")) {
+                    ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.enviado));
+                } else {
+                    ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.visto));
+                }
                 tvUltimoMsj.setTextColor(context.getResources().getColor(R.color.morrao_chilling));
             }
 
@@ -154,9 +162,12 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int cont = 0;
                 for (DataSnapshot snapChats : snapshot.getChildren()) {
-                    if (snapChats.child("entrante").getValue().equals(true) && snapChats.child("leido").getValue().equals("no")) {
-                        cont ++;
+                    if (!snapChats.getKey().equals("escribiendo")) {
+                        if (snapChats.child("entrante").getValue().equals(true) && snapChats.child("leido").getValue().equals("no")) {
+                            cont ++;
+                        }
                     }
+
                 }
                 if (cont > 0) {
                     llNumMensajes.setVisibility(View.VISIBLE);
@@ -164,7 +175,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                     itemView.setBackground(context.getDrawable(R.color.morao_trans_menos));
                 } else {
                     llNumMensajes.setVisibility(View.GONE);
-                    itemView.setBackground(context.getDrawable(R.color.trans));
+                    itemView.setBackground(context.getDrawable(R.color.gris_guay_medio_trans_menos));
                 }
 
             }

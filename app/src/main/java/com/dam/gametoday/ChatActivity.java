@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -33,6 +35,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -50,7 +54,7 @@ import retrofit2.Response;
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvMensajes;
-    ImageView btnEnviar, ivFoto;
+    ImageView btnEnviar, ivFoto, ivEscribiendo;
     EditText etMensaje;
     TextView tvNombre;
 
@@ -63,7 +67,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     MensajesAdapter adapter;
     LinearLayoutManager llm;
     DatabaseReference bddRef;
+    DatabaseReference bddRef2;
     ValueEventListener listener;
+    ValueEventListener listener2;
 
     private APIService apiService;
 
@@ -85,6 +91,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         btnEnviar = findViewById(R.id.btnMandarMsj);
         ivFoto = findViewById(R.id.ivFotoPerfilMensajes);
         tvNombre = findViewById(R.id.tvNombreUserMensajes);
+        ivEscribiendo = findViewById(R.id.ivEscribiendo);
 
         btnEnviar.setOnClickListener(this);
         btnEnviar.setEnabled(false);
@@ -105,7 +112,26 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        bddRef2 = bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).child("escribiendo");
 
+        listener2 = bddRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    if (snapshot.getValue().equals(true)) {
+                        ivEscribiendo.setVisibility(View.VISIBLE);
+                    } else {
+                        ivEscribiendo.setVisibility(View.GONE);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         rvMensajes.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -134,16 +160,29 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
 
 
         etMensaje.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (s.toString().trim().length() == 0) {
+
+                                bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
+
+                } else {
+
+                                bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(true);
+
+                }
+
 
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
                 if (etMensaje.getText().toString().trim().isEmpty()) {
                     btnEnviar.setEnabled(false);
                     btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.sendtrans));
@@ -151,10 +190,28 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     btnEnviar.setEnabled(true);
                     btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.send));
                 }
+
+                            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(true);
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.toString().trim().length() == 0) {
+                    /*bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).child("escribiendo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.getValue().equals(true)) {
+                                bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
+                            }
+                        }
+                    });
+
+                     */
+                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
+
+                }
+
 
             }
         });
@@ -165,8 +222,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         Intent i = new Intent(ChatActivity.this, HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        if (bddRef != null && listener != null) {
+        if (bddRef != null && listener != null && listener2 != null) {
             bddRef.removeEventListener(listener);
+            bddRef2.removeEventListener(listener2);
         }
         startActivity(i);
         HomeActivity.fueraDeCasa = true;
@@ -214,7 +272,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     bdd.child("Users").child(user).child("displayName").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                         @Override
                         public void onSuccess(DataSnapshot dataSnapshot1) {
-                            //sendNotifications(dataSnapshot.getValue().toString(), dataSnapshot1.getValue().toString(), texto);
+                            if (dataSnapshot.getValue() != null) {
+                                sendNotifications(dataSnapshot.getValue().toString(), dataSnapshot1.getValue().toString(), texto);
+
+                            }
                         }
                     });
 
@@ -235,26 +296,32 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaMensajes.clear();
                 for (DataSnapshot snapMensaje : snapshot.getChildren()) {
-                    if (snapMensaje.child("entrante").getValue().equals(true)) {
-                        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child(snapMensaje.getKey()).child("leido").setValue("si");
-                        bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                            @Override
-                            public void onSuccess(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot snapChatOtroUser : dataSnapshot.getChildren()) {
-                                    if (snapChatOtroUser.child("entrante").getValue().equals(false)) {
-                                        bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).child(snapChatOtroUser.getKey()).child("leido").setValue("si");
+                    if (!snapMensaje.getKey().equals("escribiendo")) {
+
+                        if (snapMensaje.child("entrante").getValue().equals(true)) {
+                            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child(snapMensaje.getKey()).child("leido").setValue("si");
+                            bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                @Override
+                                public void onSuccess(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapChatOtroUser : dataSnapshot.getChildren()) {
+                                        if (!snapChatOtroUser.getKey().equals("escribiendo")) {
+                                            if (snapChatOtroUser.child("entrante").getValue().equals(false)) {
+                                                bdd.child("Users").child(user).child("chats").child(mAuth.getCurrentUser().getUid()).child(snapChatOtroUser.getKey()).child("leido").setValue("si");
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        });
-                    }
+                            });
+                        }
 
-                    Mensaje msj = new Mensaje(user,
-                            Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
-                            snapMensaje.child("texto").getValue().toString(),
-                            snapMensaje.child("leido").getValue().toString(),
-                            Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
-                    listaMensajes.add(msj);
+
+                        Mensaje msj = new Mensaje(user,
+                                Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
+                                snapMensaje.child("texto").getValue().toString(),
+                                snapMensaje.child("leido").getValue().toString(),
+                                Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
+                        listaMensajes.add(msj);
+                    }
                 }
 
                 sortList(listaMensajes);
@@ -270,8 +337,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    public void sendNotifications(String usertoken, String title, String message) {
-        DatosNoti data = new DatosNoti(title, message);
+    public void sendNotifications(String usertoken, String title, String texto) {
+        /*DatosNoti data = new DatosNoti(title, message);
         NotificationSender sender = new NotificationSender(data, usertoken);
         apiService.sendNotifcation(sender).enqueue(new Callback<MyResponse>() {
             @Override
@@ -295,6 +362,25 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+
+         */
+
+
+        String registrationToken = usertoken;
+
+// See documentation on defining a message payload.
+
+
+        RemoteMessage message = new RemoteMessage.Builder(registrationToken)
+                .addData("Title", title)
+                .addData("Message", texto)
+                .build();
+        FirebaseMessaging.getInstance().send(message);
+
+// Send a message to the device corresponding to the provided
+// registration token.
+// Response is a message ID string.
+        System.out.println("Successfully sent message: ");
     }
 
 }

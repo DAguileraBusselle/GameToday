@@ -85,12 +85,14 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
                 for (DataSnapshot snapChat : snapshot.getChildren()) {
                     ArrayList<Mensaje> listaMensajesChat = new ArrayList<Mensaje>();
                     for (DataSnapshot snapMensaje : snapChat.getChildren()) {
-                        Mensaje msj = new Mensaje(snapChat.getKey(),
-                                Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
-                                snapMensaje.child("texto").getValue().toString(),
-                                snapMensaje.child("leido").getValue().toString(),
-                                Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
-                        listaMensajesChat.add(msj);
+                        if (!snapMensaje.getKey().equals("escribiendo")) {
+                            Mensaje msj = new Mensaje(snapChat.getKey(),
+                                    Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
+                                    snapMensaje.child("texto").getValue().toString(),
+                                    snapMensaje.child("leido").getValue().toString(),
+                                    Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
+                            listaMensajesChat.add(msj);
+                        }
                     }
                     sortList(listaMensajesChat);
                     listaChats.add(listaMensajesChat.get(listaMensajesChat.size() - 1));

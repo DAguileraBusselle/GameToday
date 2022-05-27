@@ -246,8 +246,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 int cont = 0;
                 for (DataSnapshot snapChats : snapshot.getChildren()) {
                     for (DataSnapshot snapMensajes : snapChats.getChildren()) {
-                        if (snapMensajes.child("entrante").getValue().equals(true) && snapMensajes.child("leido").getValue().equals("no")) {
-                            cont ++;
+                        if (!snapMensajes.getKey().equals("escribiendo")) {
+
+                            if (snapMensajes.child("entrante").getValue().equals(true) && snapMensajes.child("leido").getValue().equals("no")) {
+                                cont++;
                             /*NotificationCompat.Builder builder = new NotificationCompat.Builder(HomeActivity.this, "notifMensaje");
                             bdd.child("Users").child(snapChats.getKey()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                                 @Override
@@ -276,7 +278,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
                              */
-
+                            }
                         }
                     }
                 }
