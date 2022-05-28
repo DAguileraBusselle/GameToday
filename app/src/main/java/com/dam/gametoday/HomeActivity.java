@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ProcessLifecycleOwner;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -36,6 +40,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 //import com.google.firebase.messaging.FirebaseMessaging;
@@ -48,7 +53,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarPubliListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarPubliListener, LifecycleObserver {
 
     ImageView btnHome, btnSearch, btnChats, btnPerfil;
     TextView tvNumMsjNoLeidos;
@@ -69,6 +74,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+
         tvNumMsjNoLeidos = findViewById(R.id.tvNumMsjNoLeidosHome);
         llTvNumMsj = findViewById(R.id.llNumMensajes);
         btnChats = findViewById(R.id.btnChats);
@@ -83,6 +90,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnHome.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
         btnPerfil.setOnClickListener(this);
+        System.out.println(mAuth.getCurrentUser().getUid());
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").setValue(true);
+
 
         FeedFragment feed = new FeedFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
@@ -109,6 +119,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").onDisconnect().setValue(false);
 
     }
 
@@ -298,8 +309,30 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onAppBackgrounded() {
+        if (mAuth != null) {
+            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").setValue(false);
 
+        }
 
+    }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onAppForegrounded() {
+        if (mAuth != null) {
+
+            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").setValue(true);
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onAppDestroyed() {
+        if (mAuth != null) {
+            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").setValue(false);
+
+        }
+
+    }
 
 }

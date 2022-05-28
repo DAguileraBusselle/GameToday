@@ -14,14 +14,35 @@
         android:layout_height="60dp"
         android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivFotoPerfilChats"
-            android:src="@drawable/default_pic"
-            android:layout_width="match_parent"
-            android:layout_marginRight="3dp"
-            android:layout_height="60dp"
+        <RelativeLayout
+            android:layout_marginRight="6dp"
             android:layout_weight="5"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_alignLeft="@id/ivFotoPerfilChats"
+                android:layout_alignRight="@id/ivFotoPerfilChats"
+                android:layout_alignTop="@id/ivFotoPerfilChats"
+                android:layout_alignBottom="@id/ivFotoPerfilChats"
+                android:id="@+id/ivConectado"
+                android:src="@drawable/desconectado"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivFotoPerfilChats"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:padding="2dp"
+                android:src="@drawable/default_pic"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </RelativeLayout>
+
+
 
         <LinearLayout
             android:layout_weight="1"

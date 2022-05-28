@@ -90,7 +90,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
 
 
         TextView tvNombreUser, tvFechaHora, tvUltimoMsj, tvCorreoUser, tvNumMensajes;
-        ImageView ivFotoUser, ivCheck;
+        ImageView ivFotoUser, ivCheck, ivEstado;
         LinearLayout llNumMensajes;
 
         public ChatsVH(@NonNull View itemView) {
@@ -101,6 +101,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
             tvCorreoUser = itemView.findViewById(R.id.tvCorreoUserChats);
             ivFotoUser = itemView.findViewById(R.id.ivFotoPerfilChats);
             ivCheck = itemView.findViewById(R.id.ivCheckChats);
+            ivEstado = itemView.findViewById(R.id.ivConectado);
 
             tvNumMensajes = itemView.findViewById(R.id.tvNumMsjNoLeidosChat);
             llNumMensajes = itemView.findViewById(R.id.llNumMensajesChat);
@@ -227,6 +228,25 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                 }
             });
 
+
+            bdd.child("Users").child(mensaje.getParticipante()).child("conectado").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.getValue() != null) {
+                        if (snapshot.getValue().equals(true)) {
+                            ivEstado.setImageDrawable(context.getResources().getDrawable(R.drawable.conectado));
+                        } else {
+                            ivEstado.setImageDrawable(context.getResources().getDrawable(R.drawable.desconectado));
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
         }
     }
