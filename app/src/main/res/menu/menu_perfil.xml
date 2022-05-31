@@ -5,9 +5,15 @@
     tools:context=".HomeActivity">
 
     <item
-        android:id="@+id/menuCuenta"
-        android:title="@string/btn_iniciar"
+        android:id="@+id/menuSettings"
+        android:title="@string/menu_settings"
         android:orderInCategory="1"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/menuSignOut"
+        android:title="@string/menu_sign_out"
+        android:orderInCategory="2"
         app:showAsAction="never"/>
 
 </menu>

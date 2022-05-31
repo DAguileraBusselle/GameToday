@@ -19,6 +19,16 @@
         android:scaleType="fitXY"
         android:src="@drawable/headerhex" />
 
+    <ImageView
+        android:id="@+id/imgMenu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/tres_rayas"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        />
+
     <LinearLayout
         android:id="@+id/llPerfil"
         android:layout_width="match_parent"
@@ -56,6 +66,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2.3" />
 
+
             <Button
                 android:id="@+id/btnSeguirPerfil"
                 android:layout_width="145dp"
@@ -74,9 +85,8 @@
                 android:id="@+id/btnMandarMsj"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:src="@drawable/send"
-                />
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btnEditarPrefil"
@@ -336,16 +346,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/padding">
 
-        <TextView
-            android:id="@+id/btnCerrarSesion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_cerrar_sesion"
-            android:textSize="23sp"
-            android:textColor="@color/morrao"
-            android:fontFamily="@font/conthrax_sb"
-            android:layout_alignParentBottom="true"
-            android:textAlignment="center"/>
 
         <View
             android:layout_width="match_parent"

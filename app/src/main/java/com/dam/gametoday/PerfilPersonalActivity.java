@@ -12,9 +12,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,9 +52,10 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
     public static final String CLAVE_CONFIRMAR = "CERRAR SESION";
 
 
-    TextView btnCerrarSesion, tvNombre, tvCorreo, tvSeguidores, tvSiguiendo, btnPublis, btnLikes, btnMedia;
+
+    TextView tvNombre, tvCorreo, tvSeguidores, tvSiguiendo, btnPublis, btnLikes, btnMedia;
     View underlinePubli, underlineLike, underlineMedia;
-    ImageView ivFotoPerfil, btnCancel, btnMsj;
+    ImageView ivFotoPerfil, btnCancel, btnMsj, btnMenu;
     RecyclerView rvPublis;
     Button btnSeguir, btnEditar;
 
@@ -75,13 +78,15 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
         bdd = FirebaseDatabase.getInstance().getReference();
         mStorRef = FirebaseStorage.getInstance().getReference();
 
-        btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+
         ivFotoPerfil = findViewById(R.id.ivFotoPerfilPerfil);
         btnEditar = findViewById(R.id.btnEditarPrefil);
 
+        btnMenu = findViewById(R.id.imgMenu);
+        btnMenu.setOnClickListener(this);
+
         if(getIntent().getStringExtra(HomeActivity.CLAVE_USUARIO).equals(mAuth.getCurrentUser().getUid())){
             user = mAuth.getCurrentUser().getUid();
-            btnCerrarSesion.setOnClickListener(this);
             ivFotoPerfil.setOnClickListener(this);
             btnEditar.setVisibility(View.VISIBLE);
             btnEditar.setEnabled(true);
@@ -231,13 +236,31 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        if (v.equals(btnCerrarSesion)) {
-            AceptarDialog dialog = new AceptarDialog();
-            Bundle args = new Bundle();
-            args.putString(CLAVE_CONFIRMAR, getString(R.string.cerrar_sesion_confirm));
-            dialog.setArguments(args);
-            dialog.setCancelable(true);
-            dialog.show(getSupportFragmentManager(), "AceptarDialog");
+        if(v.equals(btnMenu)) {
+            PopupMenu menu = new PopupMenu(PerfilPersonalActivity.this, btnMenu);
+
+            menu.getMenuInflater().inflate(R.menu.menu_perfil, menu.getMenu());
+
+            menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    if (item.getItemId() == R.id.menuSettings) {
+                        Intent i = new Intent(PerfilPersonalActivity.this, SettingsActivity.class);
+                        startActivity(i);
+                    } else {
+                        AceptarDialog dialog = new AceptarDialog();
+                        Bundle args = new Bundle();
+                        args.putString(CLAVE_CONFIRMAR, getString(R.string.cerrar_sesion_confirm));
+                        dialog.setArguments(args);
+                        dialog.setCancelable(true);
+                        dialog.show(getSupportFragmentManager(), "AceptarDialog");
+                    }
+
+                    return true;
+                }
+            });
+
+            menu.show();
 
         } else if (v.equals(ivFotoPerfil)) {
             Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
