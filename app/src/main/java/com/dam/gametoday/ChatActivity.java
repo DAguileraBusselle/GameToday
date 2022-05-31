@@ -193,14 +193,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
 
-
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
-
                 timer.cancel();
                 timer = new Timer();
                 timer.schedule(
@@ -210,7 +206,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                                 bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
 
                             }
-                        }, 750
+                        }, 150
                 );
 
 

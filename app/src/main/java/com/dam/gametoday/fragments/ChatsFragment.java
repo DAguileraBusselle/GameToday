@@ -95,7 +95,10 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                     sortList(listaMensajesChat);
-                    listaChats.add(listaMensajesChat.get(listaMensajesChat.size() - 1));
+                    if (listaMensajesChat.size() > 0) {
+                        listaChats.add(listaMensajesChat.get(listaMensajesChat.size() - 1));
+
+                    }
                 }
 
                 adapter.notifyDataSetChanged();

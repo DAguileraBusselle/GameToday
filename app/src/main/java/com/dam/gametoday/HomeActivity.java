@@ -121,13 +121,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").onDisconnect().setValue(false);
 
+
     }
 
     private void updateToken() {
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         String refreshToken = FirebaseInstanceId.getInstance().getToken();
         Token token = new Token(refreshToken);
-        FirebaseDatabase.getInstance().getReference().child("Tokens").child(mAuth.getCurrentUser().getUid()).setValue(token);
+        FirebaseDatabase.getInstance().getReference().child("Tokens").child(firebaseUser.getUid()).setValue(token);
     }
 
 

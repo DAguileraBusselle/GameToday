@@ -112,14 +112,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/llHeaderMensaje"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
         android:background="@drawable/fecha_outline"
         android:fontFamily="@font/conthrax_sb"
         android:paddingStart="@dimen/padding"
-        android:layout_marginTop="5dp"
         android:paddingEnd="@dimen/padding"
         android:text="13/23/2222"
         android:textAlignment="center"
         android:textColor="@color/gris_chilling_menos"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
 </RelativeLayout>
