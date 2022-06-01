@@ -3,10 +3,14 @@ package com.dam.gametoday.rvUtils;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
-import com.dam.gametoday.fragments.FeedFragment;
+import com.dam.gametoday.dialog.AceptarBorrarPubliDialog;
+import com.dam.gametoday.dialog.AceptarCerrarSesionDialog;
+import com.dam.gametoday.dialog.EditarPubliDialog;
 import com.dam.gametoday.model.Publicacion;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +42,8 @@ import java.util.Date;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
+    public static final String CLAVE_BORRAR_PUBLI = "BORRAR PUBLI";
+    public static final String CLAVE_EDITAR_PUBLI = "EDITAR PUBLI";
     private ArrayList<Publicacion> listaFeed;
     private int defaulPic;
     private View.OnClickListener listener;
@@ -75,7 +83,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
         private DatabaseReference bdd;
 
         TextView tvUser, tvCorreo, tvTexto, tvHora, tvNumLikes;
-        ImageView ivFoto, btnBorrar, btnLike, ivImagenPubli;
+        ImageView ivFoto, btnMenu, btnLike, ivImagenPubli;
 
         public FeedVH(@NonNull View itemView) {
             super(itemView);
@@ -90,7 +98,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             tvHora = itemView.findViewById(R.id.tvFechaHoraPubli);
 
             btnLike = itemView.findViewById(R.id.btnLikePubli);
-            btnBorrar = itemView.findViewById(R.id.btnBorrarPubli);
+            btnMenu = itemView.findViewById(R.id.btnMenuPubli);
         }
 
         public void bindFeed(Publicacion publi) {
@@ -257,21 +265,54 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
 
             if (publi.getUserId().equals(mAuth.getCurrentUser().getUid())) {
-                btnBorrar.setVisibility(View.VISIBLE);
-                btnBorrar.setOnClickListener(new View.OnClickListener() {
+                btnMenu.setVisibility(View.VISIBLE);
+                btnMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        /*
                         mStorRef.child(publi.getImagenPubli()).delete();
                         bdd.child("Publicaciones").child(publi.getPubliId()).removeValue();
 
                         FeedFragment feed = new FeedFragment();
                         ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
 
+
+                         */
+                        Context wrapper = new ContextThemeWrapper(context, R.style.AppTheme_PopupMenu);
+                        PopupMenu menu = new PopupMenu(wrapper, btnMenu);
+                        menu.inflate(R.menu.menu_publi);
+
+                        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem menuItem) {
+                                if (menuItem.getItemId() == R.id.menuEditPubli) {
+                                    EditarPubliDialog dialog = new EditarPubliDialog();
+                                    Bundle args = new Bundle();
+                                    args.putString(FeedAdapter.CLAVE_EDITAR_PUBLI, publi.getPubliId());
+                                    dialog.setArguments(args);
+                                    dialog.setCancelable(true);
+                                    dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "EditarPubli");
+                                } else if (menuItem.getItemId() == R.id.menuBorrarPubli){
+                                    AceptarBorrarPubliDialog dialog = new AceptarBorrarPubliDialog();
+                                    Bundle args = new Bundle();
+                                    args.putString(FeedAdapter.CLAVE_BORRAR_PUBLI, publi.getPubliId());
+                                    dialog.setArguments(args);
+                                    dialog.setCancelable(true);
+                                    dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "BorrarPubli");
+                                }
+
+                                return false;
+                            }
+                        });
+
+                        menu.show();
+
+
                     }
                 });
 
             } else {
-                btnBorrar.setVisibility(View.INVISIBLE);
+                btnMenu.setVisibility(View.GONE);
             }
 
         }

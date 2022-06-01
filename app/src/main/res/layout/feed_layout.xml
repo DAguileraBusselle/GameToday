@@ -4,11 +4,22 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/trans"
+    android:layout_marginTop="@dimen/padding"
     >
 
-    <LinearLayout
-        android:layout_marginTop="@dimen/padding"
+
+    <ImageView
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/btnMenuPubli"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/trespuntos"/>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/btnMenuPubli"
         android:id="@+id/llUserFeed"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -95,15 +106,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text=""/>
-
-            <ImageView
-                android:layout_gravity="center"
-                android:id="@+id/btnBorrarPubli"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/papelera"/>
 
             <TextView
                 android:padding="10dp"

@@ -16,10 +16,10 @@ import androidx.fragment.app.DialogFragment;
 import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
 
-public class AceptarDialog extends DialogFragment {
+public class AceptarCerrarSesionDialog extends DialogFragment {
 
 
-    OnAceptar listener;
+    OnAceptarCerrarSesion listener;
     ImageView btnCancel;
     ImageView btnAceptar;
     TextView tvMensaje;
@@ -45,7 +45,7 @@ public class AceptarDialog extends DialogFragment {
             @Override
             public void onShow(DialogInterface dialog) {
 
-                tvMensaje.setText(getArguments().getString(PerfilPersonalActivity.CLAVE_CONFIRMAR));
+                tvMensaje.setText(getContext().getString(R.string.cerrar_sesion_confirm));
 
                 btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -61,7 +61,7 @@ public class AceptarDialog extends DialogFragment {
                     @Override
                     public void onClick(View view) {
 
-                        listener.aceptar();
+                        listener.aceptarCerrarSesion();
                         dialog.dismiss();
 
                     }
@@ -75,8 +75,8 @@ public class AceptarDialog extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnAceptar) {
-            listener = (OnAceptar) context;
+        if (context instanceof OnAceptarCerrarSesion) {
+            listener = (OnAceptarCerrarSesion) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnAceptar ");

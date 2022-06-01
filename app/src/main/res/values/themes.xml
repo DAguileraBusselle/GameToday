@@ -19,6 +19,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@color/gris_chilling_menos</item>
+        <item name="android:textColorSecondary">@color/morrao_chilling</item>
+        <item name="fontFamily">@font/conthrax_sb</item>
+        <item name="android:backgroundTint">@color/gris_chilling</item>
+    </style>
+
     <style name="Theme.GameToday.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.GameToday.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

@@ -39,11 +39,11 @@
 
         <ImageView
             android:id="@+id/btnCancelarPerfil"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/crossred"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/atras"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -245,7 +245,7 @@
         android:id="@+id/rvPerfilPersonal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/llCerrarSesion"
+        android:layout_above="@id/margenPerfil"
         android:layout_below="@id/llPerfil"
         android:background="@color/black" />
 
@@ -337,21 +337,13 @@
 
     </HorizontalScrollView>
 
-    <LinearLayout
-        android:id="@+id/llCerrarSesion"
-        android:orientation="vertical"
-        android:layout_above="@id/svOpcionesPublisPerfil"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding">
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/morrao"/>
-    </LinearLayout>
+    <View
+        android:id="@+id/margenPerfil"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_height="1dp"
+        android:background="@color/gris_chilling"
+        android:layout_above="@id/svOpcionesPublisPerfil" />
 
 
 

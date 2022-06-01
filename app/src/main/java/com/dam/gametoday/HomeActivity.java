@@ -1,21 +1,14 @@
 package com.dam.gametoday;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,11 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dam.gametoday.dialog.OnAceptarBorrarPubli;
+import com.dam.gametoday.dialog.OnAceptarCerrarSesion;
 import com.dam.gametoday.dialog.OnAceptarPubliListener;
+import com.dam.gametoday.dialog.OnEditarPubliListener;
 import com.dam.gametoday.fragments.ChatsFragment;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.fragments.SearchFragment;
-import com.dam.gametoday.model.Mensaje;
 import com.dam.gametoday.model.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,11 +35,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 //import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -53,7 +46,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarPubliListener, LifecycleObserver {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarPubliListener, LifecycleObserver, OnAceptarBorrarPubli, OnEditarPubliListener {
 
     ImageView btnHome, btnSearch, btnChats, btnPerfil;
     TextView tvNumMsjNoLeidos;
@@ -65,6 +58,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseReference bdd;
     StorageReference mStorRef;
     public static Boolean fueraDeCasa = false;
+    public static Boolean fotoEditada = false;
 
     DatabaseReference bddRef;
     ValueEventListener listener;
@@ -170,6 +164,40 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
+    }
+
+    @Override
+    public void aceptarEditarPubli(String texto, Uri imagen, String id) {
+        bdd.child("Publicaciones").child(id).child("texto").setValue(texto);
+        if (imagen == null) {
+            bdd.child("Publicaciones").child(id).child("imagenPubli").setValue("no");
+
+            System.out.println(id + "_publi.jpg");
+
+            mStorRef.child(id + "_publi.jpg").delete();
+            FeedFragment feed = new FeedFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
+        } else {
+            bdd.child("Publicaciones").child(id).child("imagenPubli").setValue(id + "_publi.jpg");
+
+
+            StorageReference fileRef = mStorRef.child(id + "_publi.jpg");
+            fileRef.putFile(imagen).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    FeedFragment feed = new FeedFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }
+
+        fotoEditada = false;
     }
 
     @Override
@@ -335,5 +363,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    @Override
+    public void aceptarBorrarPubli(String idPubli) {
+        mStorRef.child(idPubli + "_publi.jgp").delete();
+        bdd.child("Publicaciones").child(idPubli).removeValue();
+
+        FeedFragment feed = new FeedFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
+    }
+
 
 }

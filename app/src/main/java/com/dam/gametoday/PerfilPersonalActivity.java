@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +22,10 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dam.gametoday.dialog.AceptarDialog;
-import com.dam.gametoday.dialog.OnAceptar;
+import com.dam.gametoday.dialog.AceptarCerrarSesionDialog;
+import com.dam.gametoday.dialog.OnAceptarBorrarPubli;
+import com.dam.gametoday.dialog.OnAceptarCerrarSesion;
+import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.model.Publicacion;
 import com.dam.gametoday.rvUtils.FeedAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,11 +50,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class PerfilPersonalActivity extends AppCompatActivity implements View.OnClickListener, OnAceptar {
+public class PerfilPersonalActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarCerrarSesion, OnAceptarBorrarPubli {
 
     public static final int CLAVE_CAMBIAR_FOTO = 1;
-    public static final String CLAVE_CONFIRMAR = "CERRAR SESION";
-
 
 
     TextView tvNombre, tvCorreo, tvSeguidores, tvSiguiendo, btnPublis, btnLikes, btnMedia;
@@ -237,8 +239,8 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
         if(v.equals(btnMenu)) {
-            PopupMenu menu = new PopupMenu(PerfilPersonalActivity.this, btnMenu);
-
+            Context wrapper = new ContextThemeWrapper(PerfilPersonalActivity.this,  R.style.AppTheme_PopupMenu);
+            PopupMenu menu = new PopupMenu(wrapper, btnMenu);
             menu.getMenuInflater().inflate(R.menu.menu_perfil, menu.getMenu());
 
             menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -247,11 +249,8 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                     if (item.getItemId() == R.id.menuSettings) {
                         Intent i = new Intent(PerfilPersonalActivity.this, SettingsActivity.class);
                         startActivity(i);
-                    } else {
-                        AceptarDialog dialog = new AceptarDialog();
-                        Bundle args = new Bundle();
-                        args.putString(CLAVE_CONFIRMAR, getString(R.string.cerrar_sesion_confirm));
-                        dialog.setArguments(args);
+                    } else if (item.getItemId() == R.id.menuSignOut){
+                        AceptarCerrarSesionDialog dialog = new AceptarCerrarSesionDialog();
                         dialog.setCancelable(true);
                         dialog.show(getSupportFragmentManager(), "AceptarDialog");
                     }
@@ -504,11 +503,54 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    public void aceptar() {
+    public void aceptarCerrarSesion() {
         mAuth.signOut();
         Intent i = new Intent(PerfilPersonalActivity.this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
+    }
+
+    @Override
+    public void aceptarBorrarPubli(String idPubli) {
+
+        mStorRef.child(idPubli + "_publi.jgp").delete();
+        bdd.child("Publicaciones").child(idPubli).removeValue();
+
+        underlinePubli.setVisibility(View.VISIBLE);
+        underlineMedia.setVisibility(View.GONE);
+        underlineLike.setVisibility(View.GONE);
+
+        bdd.child("Publicaciones").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaPublicaciones.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    if (snapshot.child("userId").getValue().toString().equals(user)) {
+                        Publicacion publicacion = new Publicacion(snapshot.getKey(),
+                                snapshot.child("user").getValue().toString(),
+                                snapshot.child("texto").getValue().toString(),
+                                (long) snapshot.child("fechaPubliMilis").getValue(),
+                                snapshot.child("userId").getValue().toString(),
+                                snapshot.child("imagenPubli").getValue().toString(),
+                                snapshot.child("likes").getChildrenCount());
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
+                        Date resultDate = new Date(publicacion.getFechaPubli());
+                        listaPublicaciones.add(publicacion);
+                    }
+
+                }
+
+                sortListReverse(listaPublicaciones);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
