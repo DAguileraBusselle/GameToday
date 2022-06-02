@@ -77,6 +77,7 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
         LinearLayout llMensajeSal;
 
         ImageView ivVisto;
+        TextView tvFecha;
 
         public MensajeVH(@NonNull View itemView) {
             super(itemView);
@@ -96,8 +97,26 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
             tvFechaHoraSal = itemView.findViewById(R.id.tvFechaHoraMensajeSal);
 
             ivVisto = itemView.findViewById(R.id.ivCheckMensaje);
+            tvFecha = itemView.findViewById(R.id.tvFechaPrimerMensajeChat);
+
+            if (mensaje.isPrimerMsjDelDia()) {
+                tvFecha.setVisibility(View.VISIBLE);
+
+                if (mensaje.getFechaHoraMsj() <= System.currentTimeMillis() && mensaje.getFechaHoraMsj() >= System.currentTimeMillis() - 86400000) {
+                    tvFecha.setText(context.getString(R.string.hoy));
+                } else if (mensaje.getFechaHoraMsj() <= System.currentTimeMillis() - 86400000 && mensaje.getFechaHoraMsj() >= System.currentTimeMillis() - (86400000*2)) {
+                    tvFecha.setText(context.getString(R.string.ayer));
+                } else {
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yy");
+                    Date resultDate2 = new Date(mensaje.getFechaHoraMsj());
+
+                    tvFecha.setText(sdf2.format(resultDate2));
+                }
 
 
+            } else {
+                tvFecha.setVisibility(View.GONE);
+            }
 
             if (mensaje.getMsjEntrante()) {
                 llMensajeEnt.setVisibility(View.VISIBLE);

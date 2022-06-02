@@ -7,9 +7,25 @@
     android:background="@color/trans"
     >
 
+    <TextView
+        android:id="@+id/tvFechaPrimerMensajeChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/fecha_outline"
+        android:fontFamily="@font/conthrax_sb"
+        android:paddingStart="@dimen/padding"
+        android:paddingEnd="@dimen/padding"
+        android:text="13/23/2222"
+        android:textAlignment="center"
+        android:textColor="@color/gris_chilling_menos"
+        android:visibility="gone" />
 
 
     <LinearLayout
+        android:layout_below="@id/tvFechaPrimerMensajeChat"
+        android:id="@+id/llMensajes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

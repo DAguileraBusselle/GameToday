@@ -8,24 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.dam.gametoday.fragments.ChatsFragment;
-import com.dam.gametoday.fragments.FeedFragment;
-import com.dam.gametoday.model.DatosNoti;
 import com.dam.gametoday.model.Mensaje;
 import com.dam.gametoday.notif.APIService;
 import com.dam.gametoday.notif.Client;
-import com.dam.gametoday.notif.MyResponse;
-import com.dam.gametoday.notif.NotificationSender;
 import com.dam.gametoday.rvUtils.MensajesAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,10 +42,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -206,7 +194,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                                 bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
 
                             }
-                        }, 150
+                        }, 500
                 );
 
 
@@ -219,22 +207,29 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int primeraPosicionVisible = llm.findFirstCompletelyVisibleItemPosition();
-                if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() <= System.currentTimeMillis() - 86400000) {
-                    tvFecha.setVisibility(View.VISIBLE);
+                int ultimaPosicionVisible = llm.findLastCompletelyVisibleItemPosition();
+                if (listaMensajes.get(ultimaPosicionVisible).getFechaHoraMsj() <= System.currentTimeMillis() - 86400000) {
+                    if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() <= System.currentTimeMillis() - 86400000) {
+                        tvFecha.setVisibility(View.VISIBLE);
 
-                    if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() >= System.currentTimeMillis() - (86400000*2)) {
-                        tvFecha.setText(getString(R.string.ayer));
-                    } else {
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-                        Date resultDate = new Date(listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj());
+                        if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() >= System.currentTimeMillis() - (86400000*2)) {
+                            tvFecha.setText(getString(R.string.ayer));
+                        } else {
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+                            Date resultDate = new Date(listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj());
 
-                        tvFecha.setText(sdf.format(resultDate));
+                            tvFecha.setText(sdf.format(resultDate));
+                        }
+
+                    } else  {
+                        tvFecha.setVisibility(View.GONE);
+
                     }
-
                 } else  {
                     tvFecha.setVisibility(View.GONE);
-
                 }
+
+
 
             }
         });
@@ -317,9 +312,19 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         listener = bddRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String fechaUltimoMsj = "";
                 listaMensajes.clear();
                 for (DataSnapshot snapMensaje : snapshot.getChildren()) {
                     if (!snapMensaje.getKey().equals("escribiendo")) {
+                        Boolean primerMsjDelDia = false;
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+                        Date resultDate = new Date(Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
+                        System.out.println(sdf.format(resultDate) + " || " + snapMensaje.child("texto").getValue().toString());
+                        if (!fechaUltimoMsj.equals(sdf.format(resultDate))) {
+                            primerMsjDelDia = true;
+                        }
+
+                        fechaUltimoMsj = sdf.format(resultDate);
 
                         if (snapMensaje.child("entrante").getValue().equals(true)) {
                             bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child(snapMensaje.getKey()).child("leido").setValue("si");
@@ -337,12 +342,12 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                             });
                         }
 
-
                         Mensaje msj = new Mensaje(user,
                                 Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
                                 snapMensaje.child("texto").getValue().toString(),
                                 snapMensaje.child("leido").getValue().toString(),
-                                Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
+                                Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()),
+                                primerMsjDelDia);
                         listaMensajes.add(msj);
                     }
                 }

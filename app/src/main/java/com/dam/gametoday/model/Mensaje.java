@@ -6,14 +6,16 @@ public class Mensaje {
     private String texto;
     private String leido;
     private long fechaHoraMsj;
+    private boolean primerMsjDelDia;
 
 
-    public Mensaje(String participante, Boolean msjEntrante, String texto, String leido, long fechaHoraMsj) {
+    public Mensaje(String participante, Boolean msjEntrante, String texto, String leido, long fechaHoraMsj, boolean primerMsjDelDia) {
         this.participante = participante;
         this.msjEntrante = msjEntrante;
         this.texto = texto;
         this.leido = leido;
         this.fechaHoraMsj = fechaHoraMsj;
+        this.primerMsjDelDia = primerMsjDelDia;
     }
 
     public String getParticipante() {
@@ -55,4 +57,8 @@ public class Mensaje {
     public void setFechaHoraMsj(long fechaHoraMsj) {
         this.fechaHoraMsj = fechaHoraMsj;
     }
+
+    public boolean isPrimerMsjDelDia() { return primerMsjDelDia; }
+
+    public void setPrimerMsjDelDia(boolean ultimoMsjDelDia) { this.primerMsjDelDia = ultimoMsjDelDia; }
 }

@@ -90,7 +90,8 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
                                     Boolean.parseBoolean(snapMensaje.child("entrante").getValue().toString()),
                                     snapMensaje.child("texto").getValue().toString(),
                                     snapMensaje.child("leido").getValue().toString(),
-                                    Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()));
+                                    Long.parseLong(snapMensaje.child("fechaMsjMilis").getValue().toString()),
+                                    false);
                             listaMensajesChat.add(msj);
                         }
                     }
