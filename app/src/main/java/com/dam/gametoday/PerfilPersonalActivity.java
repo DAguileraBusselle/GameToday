@@ -85,9 +85,10 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
         btnEditar = findViewById(R.id.btnEditarPrefil);
 
         btnMenu = findViewById(R.id.imgMenu);
-        btnMenu.setOnClickListener(this);
 
         if(getIntent().getStringExtra(HomeActivity.CLAVE_USUARIO).equals(mAuth.getCurrentUser().getUid())){
+            btnMenu.setOnClickListener(this);
+            btnMenu.setVisibility(View.VISIBLE);
             user = mAuth.getCurrentUser().getUid();
             ivFotoPerfil.setOnClickListener(this);
             btnEditar.setVisibility(View.VISIBLE);
