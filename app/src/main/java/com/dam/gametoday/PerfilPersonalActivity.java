@@ -55,7 +55,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
     public static final int CLAVE_CAMBIAR_FOTO = 1;
 
 
-    TextView tvNombre, tvCorreo, tvSeguidores, tvSiguiendo, btnPublis, btnLikes, btnMedia;
+    TextView tvNombre, tvCorreo, tvBio, tvSeguidores, tvSiguiendo, btnPublis, btnLikes, btnMedia;
     View underlinePubli, underlineLike, underlineMedia;
     ImageView ivFotoPerfil, btnCancel, btnMsj, btnMenu;
     RecyclerView rvPublis;
@@ -93,7 +93,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
             ivFotoPerfil.setOnClickListener(this);
             btnEditar.setVisibility(View.VISIBLE);
             btnEditar.setEnabled(true);
-            //TODO: editar perfil
+            btnEditar.setOnClickListener(this);
         }else{
             user = getIntent().getStringExtra(HomeActivity.CLAVE_USUARIO);
 
@@ -164,7 +164,17 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
 
         tvNombre = findViewById(R.id.tvNombreUserPerfil);
         tvCorreo = findViewById(R.id.tvCorreoUserPerfil);
+        tvBio = findViewById(R.id.tvBioPerfilPersonal);
 
+        bdd.child("Users").child(user).child("bio").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    tvBio.setVisibility(View.VISIBLE);
+                    tvBio.setText(dataSnapshot.getValue().toString());
+                }
+            }
+        });
 
         underlinePubli.setVisibility(View.VISIBLE);
 
@@ -191,7 +201,6 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                     }
 
                 }
-
                 sortListReverse(listaPublicaciones);
                 adapter.notifyDataSetChanged();
             }
@@ -239,7 +248,11 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        if(v.equals(btnMenu)) {
+        if (v.equals(btnEditar)) {
+            Intent i = new Intent(PerfilPersonalActivity.this, EditarPerfilActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        } else if(v.equals(btnMenu)) {
             Context wrapper = new ContextThemeWrapper(PerfilPersonalActivity.this,  R.style.AppTheme_PopupMenu);
             PopupMenu menu = new PopupMenu(wrapper, btnMenu);
             menu.getMenuInflater().inflate(R.menu.menu_perfil, menu.getMenu());
@@ -249,6 +262,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                 public boolean onMenuItemClick(MenuItem item) {
                     if (item.getItemId() == R.id.menuSettings) {
                         Intent i = new Intent(PerfilPersonalActivity.this, SettingsActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                     } else if (item.getItemId() == R.id.menuSignOut){
                         AceptarCerrarSesionDialog dialog = new AceptarCerrarSesionDialog();

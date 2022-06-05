@@ -16,15 +16,56 @@
     <color name="morao_trans">#333A1F78</color>
     <color name="trans">#00000000</color>
     <color name="trans_menos">#99000000</color>
+
+
+<!--    COLORES MORADO-->
     <color name="morao_trans_oscuro">#33160343</color>
     <color name="morao_trans_menos">#88AF92F3</color>
-    <color name="morao_trans_menos_mas_menos_mas_mas_menos">#CDBA92F3</color>
+    <color name="morao_trans_menos_mas_menos_mas_mas_menos">#EDBA92F3</color>
     <color name="morao_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E6BA92F3</color>
-    <color name="morrao">#810D68</color>
     <color name="morrao_chilling">#FA61FF</color>
-    <color name="morrao_chilling_trans">#DAE76DEB</color>
-    <color name="blue_chiller">#ABBDF4</color>
+    <color name="morrao_chilling_trans">#EEE76DEB</color>
     <color name="morao_chilling">#C39AFF</color>
+
+<!--    COLORES VERDE-->
+    <color name="verde_trans_oscuro">#33114303</color>
+    <color name="verde_trans_menos">#8895F392</color>
+    <color name="verde_trans_menos_mas_menos_mas_mas_menos">#ED98F392</color>
+    <color name="verde_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E698F392</color>
+    <color name="verrde_chilling">#4EFF8F</color>
+    <color name="verrde_chilling_trans">#EE6DEB9B</color>
+    <color name="verde_chilling">#62CF43</color>
+
+
+<!--    COLORES ROJO-->
+    <color name="rojo_trans_oscuro">#33430303</color>
+    <color name="rojo_trans_menos">#88F39292</color>
+    <color name="rojo_trans_menos_mas_menos_mas_mas_menos">#EDFB6C6C</color>
+    <color name="rojo_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E6E67B7B</color>
+    <color name="rrojo_chilling">#C34040</color>
+    <color name="rrojo_chilling_trans">#C1E94646</color>
+    <color name="rojo_chilling">#EC2020</color>
+
+<!--    COLORES AZUL-->
+    <color name="azul_trans_oscuro">#33031143</color>
+    <color name="azul_trans_menos">#8892A7F3</color>
+    <color name="azul_trans_menos_mas_menos_mas_mas_menos">#ED6C8BFB</color>
+    <color name="azul_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E6829EF4</color>
+    <color name="azzul_chilling">#40BFC3</color>
+    <color name="azzul_chilling_trans">#C146DBE9</color>
+    <color name="azul_chilling">#204CEC</color>
+
+<!--    COLORES NARANJA-->
+    <color name="naranja_trans_oscuro">#33431D03</color>
+    <color name="naranja_trans_menos">#9EFF8C00</color>
+    <color name="naranja_trans_menos_mas_menos_mas_mas_menos">#EDFF7D27</color>
+    <color name="naranja_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E6FF872B</color>
+    <color name="narranja_chilling">#F3B008</color>
+    <color name="narranja_chilling_trans">#C1EFBC02</color>
+    <color name="naranja_chilling">#EC7F20</color>
+
+
+    <color name="blue_chiller">#ABBDF4</color>
     <color name="blue_chillest">#B6F0FF</color>
     <color name="gris_guay">#232323</color>
     <color name="gris_guay_medio_trans">#E6191919</color>

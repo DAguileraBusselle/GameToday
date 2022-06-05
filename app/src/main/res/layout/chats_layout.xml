@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/gris_guay_medio_trans_menos">
+    android:background="@color/trans">
 
     <LinearLayout
         android:layout_marginTop="@dimen/padding"
@@ -96,13 +96,13 @@
                     android:id="@+id/tvTextoChats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
                     android:fontFamily="@font/conthrax_sb"
+                    android:ellipsize="end"
                     android:lines="1"
                     android:layout_weight="1"
                     android:scrollHorizontally="true"
                     android:textSize="12sp"
-                    android:text="agarra el orto hijo de puta este jueves"
+                    android:text=""
                     android:layout_marginRight="5dp"
                     android:textColor="@color/morao_chilling"
                     tools:layout_editor_absoluteX="0dp" />
@@ -127,7 +127,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/num_mensajes_no_leidos">
+                    android:background="@drawable/num_mensajes_no_leidos_morao">
 
                     <TextView
                         android:id="@+id/tvNumMsjNoLeidosChat"

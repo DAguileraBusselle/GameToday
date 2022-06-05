@@ -99,18 +99,34 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
             ivVisto = itemView.findViewById(R.id.ivCheckMensaje);
             tvFecha = itemView.findViewById(R.id.tvFechaPrimerMensajeChat);
 
+
+
             if (mensaje.isPrimerMsjDelDia()) {
                 tvFecha.setVisibility(View.VISIBLE);
 
-                if (mensaje.getFechaHoraMsj() <= System.currentTimeMillis() && mensaje.getFechaHoraMsj() >= System.currentTimeMillis() - 86400000) {
+                SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yy");
+                Date resultDate2 = new Date(mensaje.getFechaHoraMsj());
+
+                String fechaMensaje = sdf2.format(resultDate2);
+
+
+                SimpleDateFormat sdfHoy = new SimpleDateFormat("dd/MM/yy");
+                Date resultDateHoy = new Date(System.currentTimeMillis());
+
+                String fechaHoy = sdfHoy.format(resultDateHoy);
+
+                SimpleDateFormat sdfAyer = new SimpleDateFormat("dd/MM/yy");
+                Date resultDateAyer = new Date(System.currentTimeMillis() - 86400000);
+
+                String fechaAyer = sdfAyer.format(resultDateAyer);
+
+                if (fechaMensaje.equals(fechaHoy)) {
                     tvFecha.setText(context.getString(R.string.hoy));
-                } else if (mensaje.getFechaHoraMsj() <= System.currentTimeMillis() - 86400000 && mensaje.getFechaHoraMsj() >= System.currentTimeMillis() - (86400000*2)) {
+                } else if (fechaMensaje.equals(fechaAyer)) {
                     tvFecha.setText(context.getString(R.string.ayer));
                 } else {
-                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yy");
-                    Date resultDate2 = new Date(mensaje.getFechaHoraMsj());
+                    tvFecha.setText(fechaMensaje);
 
-                    tvFecha.setText(sdf2.format(resultDate2));
                 }
 
 

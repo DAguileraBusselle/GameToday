@@ -3,9 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/trans"
-    android:layout_marginTop="@dimen/padding"
-    >
+    android:background="@color/gris_guay_medio_trans_menos"
+    android:padding="@dimen/padding">
 
 
     <ImageView
@@ -46,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.9"
-                android:textColor="@color/morao_chilling"
+                android:textColor="@color/morrao_chilling"
                 android:fontFamily="@font/conthrax_sb"
                 android:textSize="23sp"
                 />

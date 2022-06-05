@@ -17,31 +17,22 @@
         android:layout_alignRight="@id/llPerfil"
         android:layout_alignBottom="@id/llPerfil"
         android:scaleType="fitXY"
-        android:src="@drawable/headerhex" />
+        android:src="@drawable/header_sw" />
 
-    <ImageView
-        android:id="@+id/imgMenu"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/tres_rayas"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:visibility="gone"
-        />
+
 
     <LinearLayout
         android:id="@+id/llPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/trans_menos"
+        android:background="@color/gris_guay_medio_trans"
         android:orientation="vertical"
         android:padding="10dp">
 
         <ImageView
             android:id="@+id/btnCancelarPerfil"
-            android:layout_width="35dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@drawable/atras"
@@ -224,7 +215,11 @@
             android:fontFamily="@font/conthrax_sb"
             android:textColor="@color/morao_chilling"
             android:textSize="8sp"
-            android:visibility="gone" />
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:visibility="visible"
+            android:maxLength="250"
+            android:text=""/>
 
     </LinearLayout>
 
@@ -347,7 +342,16 @@
         android:layout_above="@id/svOpcionesPublisPerfil" />
 
 
-
+    <ImageView
+        android:id="@+id/imgMenu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/tres_rayas"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        />
 
 
 

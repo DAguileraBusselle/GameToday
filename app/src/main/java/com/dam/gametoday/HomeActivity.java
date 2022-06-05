@@ -2,12 +2,14 @@ package com.dam.gametoday;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,12 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dam.gametoday.dialog.OnAceptarBorrarPubli;
-import com.dam.gametoday.dialog.OnAceptarCerrarSesion;
 import com.dam.gametoday.dialog.OnAceptarPubliListener;
 import com.dam.gametoday.dialog.OnEditarPubliListener;
 import com.dam.gametoday.fragments.ChatsFragment;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.fragments.SearchFragment;
+import com.dam.gametoday.model.Tema;
 import com.dam.gametoday.model.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -60,6 +62,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public static Boolean fueraDeCasa = false;
     public static Boolean fotoEditada = false;
 
+    Drawable imagenHomeLinea;
+    Drawable imagenHome;
+    Drawable imagenSearchLinea;
+    Drawable imagenSearch;
+    Drawable imagenChatsLinea;
+    Drawable imagenChats;
+
     DatabaseReference bddRef;
     ValueEventListener listener;
 
@@ -80,18 +89,38 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
 
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").setValue("verde");
+
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    establecerTema(dataSnapshot.getValue().toString());
+                    ((Game2dayApplication) getApplicationContext()).setColor(dataSnapshot.getValue().toString());
+
+
+                } else {
+                    establecerTema("");
+                    ((Game2dayApplication) getApplicationContext()).setColor("morao");
+                }
+                establecerIconosYColores();
+
+            }
+        });
+
+
+
         btnChats.setOnClickListener(this);
         btnHome.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
         btnPerfil.setOnClickListener(this);
-        System.out.println(mAuth.getCurrentUser().getUid());
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").setValue(true);
+
 
 
         FeedFragment feed = new FeedFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
 
-        btnHome.setImageDrawable(getResources().getDrawable(R.drawable.homeline));
 
         mStorRef = FirebaseStorage.getInstance().getReference();
 
@@ -107,13 +136,97 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (fueraDeCasa) {
             ChatsFragment chats = new ChatsFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, chats).addToBackStack(null).commit();
-            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.home));
-            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
-            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chatsline));
+            btnHome.setImageDrawable(imagenHome);
+            btnSearch.setImageDrawable(imagenSearch);
+            btnChats.setImageDrawable(imagenChatsLinea);
         }
 
 
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").onDisconnect().setValue(false);
+
+
+    }
+
+    private void establecerIconosYColores() {
+        imagenHomeLinea = ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/homeline_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName()));
+        imagenHome = ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/home_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName()));
+        imagenSearchLinea = ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/searchline_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName()));
+        imagenSearch = ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/search_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName()));
+        imagenChatsLinea = ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/chatsline_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName()));
+        imagenChats = ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/chats_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName()));
+
+        llTvNumMsj.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/num_mensajes_no_leidos_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+
+        if (fueraDeCasa) {
+            ChatsFragment chats = new ChatsFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flHome, chats).addToBackStack(null).commit();
+            btnHome.setImageDrawable(imagenHome);
+            btnSearch.setImageDrawable(imagenSearch);
+            btnChats.setImageDrawable(imagenChatsLinea);
+        } else {
+            btnHome.setImageDrawable(imagenHomeLinea);
+            btnSearch.setImageDrawable(imagenSearch);
+            btnChats.setImageDrawable(imagenChats);
+
+        }
+
+
+    }
+
+    private void establecerTema(String color) {
+        int colorTransOscuro = R.color.morao_trans_oscuro;
+        int colorTransMenos = R.color.morao_trans_menos;
+        int colorTransMenosMasMenosMasMasMenos = R.color.morao_trans_menos_mas_menos_mas_mas_menos;
+        int colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = R.color.morao_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos;
+        int colorrChilling = R.color.morrao_chilling;
+        int colorrChillingTrans = R.color.morrao_chilling_trans;
+        int colorChilling = R.color.morao_chilling;
+
+        switch (color) {
+            case "verde":
+                colorTransOscuro = R.color.verde_trans_oscuro;
+                colorTransMenos = R.color.verde_trans_menos;
+                colorTransMenosMasMenosMasMasMenos = R.color.verde_trans_menos_mas_menos_mas_mas_menos;
+                colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = R.color.verde_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos;
+                colorrChilling = R.color.verrde_chilling;
+                colorrChillingTrans = R.color.verrde_chilling_trans;
+                colorChilling = R.color.verde_chilling;
+                break;
+            case "rojo":
+                colorTransOscuro = R.color.rojo_trans_oscuro;
+                colorTransMenos = R.color.rojo_trans_menos;
+                colorTransMenosMasMenosMasMasMenos = R.color.rojo_trans_menos_mas_menos_mas_mas_menos;
+                colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = R.color.rojo_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos;
+                colorrChilling = R.color.rrojo_chilling;
+                colorrChillingTrans = R.color.rrojo_chilling_trans;
+                colorChilling = R.color.rojo_chilling;
+                break;
+            case "azul":
+                colorTransOscuro = R.color.azul_trans_oscuro;
+                colorTransMenos = R.color.azul_trans_menos;
+                colorTransMenosMasMenosMasMasMenos = R.color.azul_trans_menos_mas_menos_mas_mas_menos;
+                colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = R.color.azul_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos;
+                colorrChilling = R.color.azzul_chilling;
+                colorrChillingTrans = R.color.azzul_chilling_trans;
+                colorChilling = R.color.azul_chilling;
+                break;
+            case "naranja":
+                colorTransOscuro = R.color.naranja_trans_oscuro;
+                colorTransMenos = R.color.naranja_trans_menos;
+                colorTransMenosMasMenosMasMasMenos = R.color.naranja_trans_menos_mas_menos_mas_mas_menos;
+                colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = R.color.naranja_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos;
+                colorrChilling = R.color.narranja_chilling;
+                colorrChillingTrans = R.color.narranja_chilling_trans;
+                colorChilling = R.color.naranja_chilling;
+                break;
+
+        }
+
+        Tema tema = new Tema(colorTransOscuro, colorTransMenos, colorTransMenosMasMenosMasMasMenos,
+                colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos, colorrChilling,
+                colorrChillingTrans, colorChilling);
+
+        ((Game2dayApplication) getApplicationContext()).setTema(tema);
 
 
     }
@@ -132,27 +245,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             FeedFragment feed = new FeedFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
-            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.homeline));
-            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
-            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chats));
+            btnHome.setImageDrawable(imagenHomeLinea);
+            btnSearch.setImageDrawable(imagenSearch);
+            btnChats.setImageDrawable(imagenChats);
             fueraDeCasa = false;
 
         } else if (v.equals(btnSearch)) {
 
             SearchFragment search = new SearchFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, search).addToBackStack(null).commit();
-            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.home));
-            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.searchline));
-            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chats));
+            btnHome.setImageDrawable(imagenHome);
+            btnSearch.setImageDrawable(imagenSearchLinea);
+            btnChats.setImageDrawable(imagenChats);
             fueraDeCasa = true;
 
         } else if (v.equals(btnChats)) {
 
             ChatsFragment chats = new ChatsFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, chats).addToBackStack(null).commit();
-            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.home));
-            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
-            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chatsline));
+            btnHome.setImageDrawable(imagenHome);
+            btnSearch.setImageDrawable(imagenSearch);
+            btnChats.setImageDrawable(imagenChatsLinea);
             fueraDeCasa = true;
 
         } else if (v.equals(btnPerfil)) {
@@ -261,9 +374,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (fueraDeCasa) {
             FeedFragment feed = new FeedFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
-            btnHome.setImageDrawable(getResources().getDrawable(R.drawable.homeline));
-            btnSearch.setImageDrawable(getResources().getDrawable(R.drawable.search));
-            btnChats.setImageDrawable(getResources().getDrawable(R.drawable.chats));
+            btnHome.setImageDrawable(imagenHomeLinea);
+            btnSearch.setImageDrawable(imagenSearch);
+            btnChats.setImageDrawable(imagenChats);
             fueraDeCasa = false;
         } else {
             if (bddRef != null && listener != null) {
@@ -290,34 +403,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                             if (snapMensajes.child("entrante").getValue().equals(true) && snapMensajes.child("leido").getValue().equals("no")) {
                                 cont++;
-                            /*NotificationCompat.Builder builder = new NotificationCompat.Builder(HomeActivity.this, "notifMensaje");
-                            bdd.child("Users").child(snapChats.getKey()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                                @Override
-                                public void onSuccess(DataSnapshot dataSnapshot) {
-                                    builder.setContentTitle(dataSnapshot.child("displayName").getValue().toString());
-                                }
-                            });
 
-                            builder.setContentText(snapMensajes.child("texto").getValue().toString());
-                            mStorRef.child(snapMensajes.child(snapshot.getKey()) + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @RequiresApi(api = Build.VERSION_CODES.M)
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    builder.setSmallIcon(IconCompat.createWithContentUri(uri));
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                }
-                            });
-                            builder.setSmallIcon(R.drawable.logosinborde);
-                            builder.setAutoCancel(true);
-
-                            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(HomeActivity.this);
-                            managerCompat.notify(1, builder.build());
-
-
-                             */
                             }
                         }
                     }

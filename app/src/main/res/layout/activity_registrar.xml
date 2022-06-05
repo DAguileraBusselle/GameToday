@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondohex"
+    android:background="@drawable/fondo_hex"
     android:padding="@dimen/padding"
     tools:context=".RegistrarActivity">
 
@@ -127,7 +127,7 @@
             android:layout_weight="1"
             android:text="@string/btn_cancelar" />
         <View
-            android:layout_width="5dp"
+            android:layout_width="15dp"
             android:layout_height="match_parent"/>
 
         <Button

@@ -107,8 +107,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
             mAuth = FirebaseAuth.getInstance();
             bdd = FirebaseDatabase.getInstance().getReference();
 
-
-
             ivFoto.setImageResource(defaulPic);
 
             mStorRef.child(publi.getUserId() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

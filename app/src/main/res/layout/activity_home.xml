@@ -5,9 +5,16 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondohex"
+    android:background="@drawable/fondo_sw"
     >
 
+    <View
+        android:id="@+id/fondoGrisTop"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/margenTop"
+        android:background="@color/gris_guay_medio_trans" />
 
     <LinearLayout
         android:id="@+id/llHeaderHome"
@@ -55,17 +62,26 @@
         android:layout_height="match_parent"
         android:layout_above="@id/margenBottom"
         android:layout_below="@+id/margenTop" />
-
     <View
+        android:id="@+id/fondoGris"
+        android:layout_below="@id/margenBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@id/llNavegacion"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gris_guay_medio_trans" />
+    <View
         android:id="@+id/margenBottom"
-        android:layout_marginBottom="@dimen/padding"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gris_chilling"/>
+        android:layout_above="@id/llNavegacion"
+        android:background="@color/gris_chilling" />
+
+
 
     <LinearLayout
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/padding"
         android:layout_alignParentBottom="true"
         android:id="@+id/llNavegacion"
         android:orientation="horizontal"
@@ -76,14 +92,14 @@
             android:id="@+id/btnHome"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:src="@drawable/home"
+            android:src="@drawable/home_morao"
             android:layout_weight="1"/>
 
         <ImageView
             android:id="@+id/btnSearch"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:src="@drawable/search"
+            android:src="@drawable/search_morao"
             android:layout_weight="1"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,7 +113,7 @@
                 android:id="@+id/btnChats"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/chats"/>
+                android:src="@drawable/chats_morao"/>
             <LinearLayout
                 app:layout_constraintTop_toTopOf="@id/btnChats"
                 app:layout_constraintLeft_toRightOf="@id/btnChats"
@@ -105,7 +121,7 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/num_mensajes_no_leidos">
+                android:background="@drawable/num_mensajes_no_leidos_morao">
 
                 <TextView
                     android:id="@+id/tvNumMsjNoLeidosHome"
