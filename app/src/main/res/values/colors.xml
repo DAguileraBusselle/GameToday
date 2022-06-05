@@ -14,6 +14,10 @@
     <color name="rosa">#FF00FB</color>
     <color name="rojo_suave">#FFB6B1</color>
     <color name="morao_trans">#333A1F78</color>
+    <color name="azul_trans">#33001450</color>
+    <color name="rojo_trans">#33570000</color>
+    <color name="verde_trans">#330B3A00</color>
+    <color name="naranja_trans">#33432000</color>
     <color name="trans">#00000000</color>
     <color name="trans_menos">#99000000</color>
 

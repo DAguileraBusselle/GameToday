@@ -104,7 +104,7 @@
         <Button
             android:id="@+id/btnCancelarEditarPerfil"
             android:fontFamily="@font/conthrax_sb"
-            android:background="@drawable/outline_button"
+            android:background="@drawable/outline_button_morao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -116,7 +116,7 @@
         <Button
             android:id="@+id/btnAceptarEditarPerfil"
             android:fontFamily="@font/conthrax_sb"
-            android:background="@drawable/outline_button"
+            android:background="@drawable/outline_button_morao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

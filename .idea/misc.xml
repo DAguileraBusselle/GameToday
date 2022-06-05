@@ -3,6 +3,45 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable-v24/num_mensajes_no_leidos_rojo.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable-v24/num_mensajes_no_leidos_verde.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable-v24/outline_button.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable-v24/outline_button_morao.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable-v24/outline_button_pressed.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable-v24/outline_button_pressed_morao.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/fecha_outline.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_entrante.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_entrante_azul.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_entrante_morao.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_entrante_naranja.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_entrante_rojo.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_entrante_verde.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_saliente.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_saliente_azul.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_saliente_naranja.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_saliente_rojo.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/mensaje_saliente_verde.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/num_mensajes_no_leidos_azul.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/num_mensajes_no_leidos_morao.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/num_mensajes_no_leidos_naranja.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_button_azul.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_button_naranja.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_button_pressed_azul.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_button_pressed_naranja.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_button_pressed_rojo.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_button_pressed_verde.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_button_rojo.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_button_verde.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_dialog_azul.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_dialog_morao.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_dialog_naranja.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_dialog_rojo.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_dialog_verde.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_edit_text_azul.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_edit_text_naranja.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_edit_text_rojo.xml" value="0.2175" />
+        <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/drawable/outline_edit_text_verde.xml" value="0.2175" />
         <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/layout/activity_perfil_personal.xml" value="0.20652173913043478" />
         <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/layout/activity_settings.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ALVARO/AndroidStudioProjects/T3/GameTodayYes/GameToday/app/src/main/res/layout/activity_sign_out.xml" value="0.25416666666666665" />

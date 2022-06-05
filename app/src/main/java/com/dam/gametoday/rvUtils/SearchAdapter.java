@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
-import com.dam.gametoday.model.Publicacion;
 import com.dam.gametoday.model.Usuario;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,9 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> {
 
@@ -115,14 +112,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
                             likeDado = true;
-                            btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button_pressed));
+                            btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button_pressed_morao));
                             btnSeguir.setTextColor(context.getResources().getColor(R.color.gris_guay));
                             btnSeguir.setText(context.getString(R.string.siguiendo));
                         }
                     }
 
                     if (!likeDado) {
-                        btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button));
+                        btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button_morao));
                         btnSeguir.setTextColor(context.getResources().getColor(R.color.morao_chilling));
                         btnSeguir.setText(context.getString(R.string.btn_seguir));
                     }
@@ -188,7 +185,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                                         }
                                     });
                                     bdd.child("Users").child(user.getUserId()).child("seguidores").child(dataSnapshot.getKey()).removeValue();
-                                    btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button_pressed));
+                                    btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button_pressed_morao));
                                     btnSeguir.setTextColor(context.getResources().getColor(R.color.gris_guay));
                                     btnSeguir.setText(context.getString(R.string.siguiendo));
                                 }
@@ -197,7 +194,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                             if (!siguiendo) {
                                 bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").push().setValue(user.getUserId());
                                 bdd.child("Users").child(user.getUserId()).child("seguidores").push().setValue(mAuth.getCurrentUser().getUid());
-                                btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button));
+                                btnSeguir.setBackground(context.getResources().getDrawable(R.drawable.outline_button_morao));
                                 btnSeguir.setTextColor(context.getResources().getColor(R.color.morao_chilling));
                                 btnSeguir.setText(context.getString(R.string.btn_seguir));
 

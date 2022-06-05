@@ -14,7 +14,7 @@
         android:layout_marginLeft="@dimen/padding"
         android:layout_marginTop="@dimen/padding"
         android:layout_marginRight="@dimen/padding"
-        android:background="@drawable/outline_edit_text"
+        android:background="@drawable/outline_edit_text_morao"
         android:orientation="horizontal">
 
         <EditText

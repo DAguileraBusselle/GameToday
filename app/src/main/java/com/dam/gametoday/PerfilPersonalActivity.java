@@ -25,7 +25,6 @@ import android.widget.Toast;
 import com.dam.gametoday.dialog.AceptarCerrarSesionDialog;
 import com.dam.gametoday.dialog.OnAceptarBorrarPubli;
 import com.dam.gametoday.dialog.OnAceptarCerrarSesion;
-import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.model.Publicacion;
 import com.dam.gametoday.rvUtils.FeedAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -113,14 +112,14 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
                             siguiendo = true;
-                            btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_pressed));
+                            btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_pressed_morao));
                             btnSeguir.setTextColor(getResources().getColor(R.color.gris_guay));
                             btnSeguir.setText(getString(R.string.siguiendo));
                         }
                     }
 
                     if (!siguiendo) {
-                        btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button));
+                        btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_morao));
                         btnSeguir.setTextColor(getResources().getColor(R.color.morao_chilling));
                         btnSeguir.setText(getString(R.string.btn_seguir));
                     }
@@ -433,7 +432,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                                 }
                             });
                             bdd.child("Users").child(user).child("seguidores").child(dataSnapshot.getKey()).removeValue();
-                            btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button));
+                            btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_morao));
                             btnSeguir.setTextColor(getResources().getColor(R.color.morao_chilling));
                             btnSeguir.setText(getString(R.string.btn_seguir));
                         }
@@ -442,7 +441,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                     if (!siguiendo) {
                         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").push().setValue(user);
                         bdd.child("Users").child(user).child("seguidores").push().setValue(mAuth.getCurrentUser().getUid());
-                        btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_pressed));
+                        btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_pressed_morao));
                         btnSeguir.setTextColor(getResources().getColor(R.color.gris_guay));
                         btnSeguir.setText(getString(R.string.siguiendo));
 
