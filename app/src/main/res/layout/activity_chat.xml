@@ -8,15 +8,14 @@
     >
 
 
-
     <ImageView
         android:id="@+id/fondo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_below="@id/llHeaderMensaje"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:scaleType="fitXY"
         android:src="@color/trans_menos" />
 
@@ -26,7 +25,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:background="@color/gris_guay">
+        android:background="@color/gris_guay_medio_trans">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivFotoPerfilMensajes"
             android:layout_width="30dp"
@@ -69,7 +68,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="@dimen/padding"
         android:layout_marginBottom="@dimen/padding"
-        android:background="@drawable/outline_edit_text_morao"
         android:orientation="horizontal">
 
         <EditText
@@ -92,7 +90,7 @@
             android:layout_height="28dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
-            android:src="@drawable/sendtrans_morao" />
+            />
     </LinearLayout>
 
     <pl.droidsonroids.gif.GifImageView
@@ -101,8 +99,9 @@
         android:layout_height="10dp"
         android:layout_above="@id/llMandarMensaje"
         android:layout_marginLeft="20dp"
-        android:src="@drawable/escribiendo"
+        android:src="@drawable/escribiendo_gris"
         android:visibility="gone"
+
         android:layout_marginBottom="3dp"/>
 
     <TextView

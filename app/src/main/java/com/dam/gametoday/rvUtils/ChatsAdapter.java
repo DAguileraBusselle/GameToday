@@ -12,8 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dam.gametoday.Game2dayApplication;
 import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
@@ -113,6 +115,13 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
             mAuth = FirebaseAuth.getInstance();
             bdd = FirebaseDatabase.getInstance().getReference();
 
+            tvNombreUser.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorChilling()));
+            tvCorreoUser.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorTransMenos()));
+            tvFechaHora.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorTransMenos()));
+
+            llNumMensajes.setBackground(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/num_mensajes_no_leidos_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
+
+
             bdd.child("Users").child(mensaje.getParticipante()).child("displayName").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                 @Override
                 public void onSuccess(DataSnapshot dataSnapshot) {
@@ -135,7 +144,8 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
             tvFechaHora.setText(sdf.format(resultDate));
 
             if (mensaje.getMsjEntrante()) {
-                tvUltimoMsj.setTextColor(context.getResources().getColor(R.color.morao_chilling));
+                tvUltimoMsj.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorChilling()));
+
                 ivCheck.setVisibility(View.GONE);
             } else {
                 ivCheck.setVisibility(View.VISIBLE);
@@ -144,7 +154,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                 } else {
                     ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.visto));
                 }
-                tvUltimoMsj.setTextColor(context.getResources().getColor(R.color.morrao_chilling));
+                tvUltimoMsj.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorrChilling()));
             }
 
             mStorRef.child(mensaje.getParticipante() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -175,7 +185,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                 if (cont > 0) {
                     llNumMensajes.setVisibility(View.VISIBLE);
                     tvNumMensajes.setText(String.valueOf(cont));
-                    itemView.setBackground(context.getDrawable(R.color.morao_trans_menos));
+                    itemView.setBackground(context.getDrawable(((Game2dayApplication) context.getApplicationContext()).getTema().getColorTransMenos()));
                 } else {
                     llNumMensajes.setVisibility(View.GONE);
                     itemView.setBackground(context.getDrawable(R.color.gris_guay_medio_trans_menos));
@@ -206,7 +216,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                             tvFechaHora.setText(sdf.format(resultDate));
 
                             if (mensaje.getMsjEntrante()) {
-                                tvUltimoMsj.setTextColor(context.getResources().getColor(R.color.morao_chilling));
+                                tvUltimoMsj.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorChilling()));
                                 ivCheck.setVisibility(View.GONE);
                             } else {
                                 ivCheck.setVisibility(View.VISIBLE);
@@ -215,7 +225,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                                 } else {
                                     ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.visto));
                                 }
-                                tvUltimoMsj.setTextColor(context.getResources().getColor(R.color.morrao_chilling));
+                                tvUltimoMsj.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorrChilling()));
                             }
                         }
                     }

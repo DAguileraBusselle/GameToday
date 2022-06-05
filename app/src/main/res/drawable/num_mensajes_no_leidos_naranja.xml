@@ -3,8 +3,8 @@
 
     <item><shape>
 
-        <stroke android:width="3dp" android:color="@color/naranja_chilling" />
-        <solid android:color="@color/naranja_trans_menos"/>
+        <stroke android:width="3dp" android:color="@color/narranja_chilling" />
+        <solid android:color="@color/narranja_chilling_trans"/>
 
         <corners
             android:radius="360dp" />

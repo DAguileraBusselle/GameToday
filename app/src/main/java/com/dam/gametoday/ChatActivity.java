@@ -2,6 +2,7 @@ package com.dam.gametoday;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dam.gametoday.model.Mensaje;
@@ -45,6 +47,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     ImageView btnEnviar, ivFoto, ivEscribiendo;
     EditText etMensaje;
     TextView tvNombre, tvFecha;
+    LinearLayout llMandar;
 
     StorageReference mStorRef;
     private FirebaseAuth mAuth;
@@ -67,7 +70,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        getWindow().setBackgroundDrawableResource(R.drawable.fondo_orange);
+        getWindow().setBackgroundDrawableResource(R.drawable.fondo_doom2);
 
         mStorRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -80,6 +83,12 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         tvNombre = findViewById(R.id.tvNombreUserMensajes);
         tvFecha = findViewById(R.id.tvFechaMensajes);
         ivEscribiendo = findViewById(R.id.ivEscribiendo);
+        llMandar = findViewById(R.id.llMandarMensaje);
+
+        llMandar.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/outline_edit_text_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+        tvNombre.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        btnEnviar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/sendtrans_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+        //ivEscribiendo.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/escribiendo_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
 
         btnEnviar.setOnClickListener(this);
         btnEnviar.setEnabled(false);
@@ -162,17 +171,17 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (etMensaje.getText().toString().trim().isEmpty()) {
                     btnEnviar.setEnabled(false);
-                    btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.sendtrans_morao));
+                    btnEnviar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/sendtrans_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+
                 } else {
                     btnEnviar.setEnabled(true);
-                    btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.send_morao));
+                    btnEnviar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/send_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
                 }
 
                 if (!etMensaje.getText().toString().trim().isEmpty()) {
                     bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(true);
 
                 }
-
 
             }
 

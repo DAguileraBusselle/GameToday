@@ -36,7 +36,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginTop="5dp"
-            android:background="@drawable/mensaje_entrante_morao"
             android:orientation="vertical"
             android:padding="5dp"
             android:visibility="visible">
@@ -72,7 +71,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="5dp"
-            android:background="@drawable/mensaje_saliente_morao"
             android:orientation="vertical"
             android:padding="5dp"
             android:layout_marginLeft="30dp"

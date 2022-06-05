@@ -56,7 +56,7 @@ public class PublicarDialog extends DialogFragment {
         btnQuitarImg.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/cross_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
         btnGaleria.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/galeria_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
 
-
+        etTexto.setTextColor(getResources().getColor(((Game2dayApplication) getContext().getApplicationContext()).getTema().getColorChilling()));
         ivFotoPreview = v.findViewById(R.id.ivPreviewImagenPubli);
 
         builder.setView(v);

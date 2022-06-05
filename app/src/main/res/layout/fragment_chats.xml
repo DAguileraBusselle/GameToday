@@ -18,7 +18,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/padding"
         android:layout_marginBottom="@dimen/padding"
-        android:backgroundTint="@color/morao_chilling"
         android:scaleType="centerInside"
         android:src="@drawable/send_morao"
         app:borderWidth="0dp"

@@ -9,7 +9,7 @@
 
 
     <LinearLayout
-        android:id="@+id/llSearchUserChat"
+        android:id="@+id/llTopSearchChat"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,6 +28,7 @@
             />
 
         <LinearLayout
+            android:id="@+id/llSearchUserChat"
             android:layout_gravity=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +59,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/llSearchUserChat"
+        android:layout_below="@id/llTopSearchChat"
         android:id="@+id/rvUsersChats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#673DFF</color>
-    <color name="purple_700">#9067FF</color>
+    <color name="purple_200">#00BB86FC</color>
+    <color name="purple_500">#00673DFF</color>
+    <color name="purple_700">#E6191919</color>
     <color name="teal_200">#4421E4</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
@@ -17,7 +17,7 @@
     <color name="azul_trans">#33001450</color>
     <color name="rojo_trans">#33570000</color>
     <color name="verde_trans">#330B3A00</color>
-    <color name="naranja_trans">#33432000</color>
+    <color name="naranja_trans">#655E2D00</color>
     <color name="trans">#00000000</color>
     <color name="trans_menos">#99000000</color>
 
@@ -36,32 +36,32 @@
     <color name="verde_trans_menos">#8895F392</color>
     <color name="verde_trans_menos_mas_menos_mas_mas_menos">#ED98F392</color>
     <color name="verde_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E698F392</color>
-    <color name="verrde_chilling">#4EFF8F</color>
-    <color name="verrde_chilling_trans">#EE6DEB9B</color>
+    <color name="verrde_chilling">#09FF94</color>
+    <color name="verrde_chilling_trans">#EE2BFF92</color>
     <color name="verde_chilling">#62CF43</color>
 
 
 <!--    COLORES ROJO-->
     <color name="rojo_trans_oscuro">#33430303</color>
     <color name="rojo_trans_menos">#88F39292</color>
-    <color name="rojo_trans_menos_mas_menos_mas_mas_menos">#EDFB6C6C</color>
+    <color name="rojo_trans_menos_mas_menos_mas_mas_menos">#EDFB3737</color>
     <color name="rojo_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E6E67B7B</color>
-    <color name="rrojo_chilling">#C34040</color>
-    <color name="rrojo_chilling_trans">#C1E94646</color>
+    <color name="rrojo_chilling">#F64600</color>
+    <color name="rrojo_chilling_trans">#C1FD5614</color>
     <color name="rojo_chilling">#EC2020</color>
 
 <!--    COLORES AZUL-->
     <color name="azul_trans_oscuro">#33031143</color>
     <color name="azul_trans_menos">#8892A7F3</color>
     <color name="azul_trans_menos_mas_menos_mas_mas_menos">#ED6C8BFB</color>
-    <color name="azul_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E6829EF4</color>
+    <color name="azul_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E64D79FF</color>
     <color name="azzul_chilling">#40BFC3</color>
     <color name="azzul_chilling_trans">#C146DBE9</color>
     <color name="azul_chilling">#204CEC</color>
 
 <!--    COLORES NARANJA-->
     <color name="naranja_trans_oscuro">#33431D03</color>
-    <color name="naranja_trans_menos">#9EFF8C00</color>
+    <color name="naranja_trans_menos">#80FF8C00</color>
     <color name="naranja_trans_menos_mas_menos_mas_mas_menos">#EDFF7D27</color>
     <color name="naranja_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E6FF872B</color>
     <color name="narranja_chilling">#F3B008</color>

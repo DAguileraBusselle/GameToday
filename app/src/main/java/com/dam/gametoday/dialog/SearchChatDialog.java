@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dam.gametoday.ChatActivity;
+import com.dam.gametoday.Game2dayApplication;
 import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.R;
 import com.dam.gametoday.model.Mensaje;
@@ -46,6 +48,7 @@ public class SearchChatDialog extends DialogFragment {
     EditText etTexto;
     ImageView btnCancel, btnBorrarTexto;
     RecyclerView rvUsersChat;
+    LinearLayout llEtSearch;
 
 
     LinearLayoutManager llm;
@@ -66,6 +69,7 @@ public class SearchChatDialog extends DialogFragment {
         btnCancel = v.findViewById(R.id.btnCancelarBuscarChat);
         btnBorrarTexto = v.findViewById(R.id.btnBorrarSearchChat);
         rvUsersChat = v.findViewById(R.id.rvUsersChats);
+        llEtSearch = v.findViewById(R.id.llSearchUserChat);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -74,6 +78,13 @@ public class SearchChatDialog extends DialogFragment {
 
         rvUsersChat.setLayoutManager(llm);
         rvUsersChat.setAdapter(adapter);
+
+        btnCancel.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/atras_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+        btnBorrarTexto.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/cross_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+
+        v.setBackground(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/outline_dialog_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+        etTexto.setTextColor(getResources().getColor(((Game2dayApplication) getContext().getApplicationContext()).getTema().getColorChilling()));
+        llEtSearch.setBackground(ContextCompat.getDrawable(getActivity().getApplicationContext(), getResources().getIdentifier("@drawable/outline_edit_text_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getActivity().getPackageName())));
 
 
         builder.setView(v);

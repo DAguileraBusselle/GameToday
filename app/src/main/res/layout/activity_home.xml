@@ -17,32 +17,31 @@
 
     <LinearLayout
         android:id="@+id/llHeaderHome"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/btnPersonalProfile"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.1"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
+            android:layout_weight="0.1"
             android:src="@drawable/default_pic" />
 
         <ImageView
-            android:layout_weight="1"
             android:id="@+id/icono"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:src="@drawable/logo_sin_borde"
-            />
+            android:layout_weight="1"
+            android:src="@drawable/logo_sin_borde" />
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="0.1" />
 
 
     </LinearLayout>

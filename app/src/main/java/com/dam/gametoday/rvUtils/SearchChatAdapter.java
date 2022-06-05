@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dam.gametoday.Game2dayApplication;
 import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
@@ -102,6 +103,10 @@ public class SearchChatAdapter extends RecyclerView.Adapter<SearchChatAdapter.Ch
             mStorRef = FirebaseStorage.getInstance().getReference();
             mAuth = FirebaseAuth.getInstance();
             bdd = FirebaseDatabase.getInstance().getReference();
+
+            tvNombreUser.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorChilling()));
+            tvCorreoUser.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorTransMenos()));
+
 
             tvNombreUser.setText(user.getDisplayName());
             tvCorreoUser.setText(user.getCorreo());

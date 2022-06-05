@@ -1,6 +1,7 @@
 package com.dam.gametoday.fragments;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.dam.gametoday.R;
 import com.dam.gametoday.dialog.SearchChatDialog;
 import com.dam.gametoday.model.Mensaje;
 import com.dam.gametoday.rvUtils.ChatsAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -49,13 +51,45 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_chats, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        bdd = FirebaseDatabase.getInstance().getReference();
+
         btnAbrirChat = v.findViewById(R.id.btnAbrirChat);
         btnAbrirChat.setOnClickListener(this);
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    switch (dataSnapshot.getValue().toString()) {
+                        case "morao":
+                            btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.morao_chilling)));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.morao_chilling));
+                            break;
+                        case "azul":
+                            btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.azul_chilling)));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.azul_chilling));
+                            break;
+                        case "verde":
+                            btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.verde_chilling)));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.verde_chilling));
+                            break;
+                        case "rojo":
+                            btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.rojo_chilling)));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.rojo_chilling));
+                            break;
+                        case "naranja":
+                            btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.naranja_chilling)));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.naranja_chilling));
+                            break;
+
+                    }
+
+                }
+            }
+        });
 
         rvChats = v.findViewById(R.id.rvChats);
 
-        mAuth = FirebaseAuth.getInstance();
-        bdd = FirebaseDatabase.getInstance().getReference();
 
         llm = new LinearLayoutManager(getContext());
         rvChats.setLayoutManager(llm);

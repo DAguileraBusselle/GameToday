@@ -79,7 +79,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         bdd = FirebaseDatabase.getInstance().getReference();
 
 
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").setValue("naranja");
 
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
@@ -104,7 +103,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
-        getWindow().setBackgroundDrawableResource(R.drawable.fondo_orange);
+        getWindow().setBackgroundDrawableResource(R.drawable.fondo_doom2);
 
         tvNumMsjNoLeidos = findViewById(R.id.tvNumMsjNoLeidosHome);
         llTvNumMsj = findViewById(R.id.llNumMensajes);

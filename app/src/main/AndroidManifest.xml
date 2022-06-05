@@ -19,7 +19,7 @@
         <activity
             android:name=".ChatActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name=".PerfilPersonalActivity"
             android:exported="true" />

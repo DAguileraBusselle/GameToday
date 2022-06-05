@@ -47,6 +47,7 @@
     <string name="btn_cambiar_foto">CAMBIAR FOTO</string>
     <string name="toast_foto_subida">Foto subida con éxito</string>
     <string name="btn_seguir">SEGUIR</string>
+    <string name="btn_siguiendo">SIGUIENDO</string>
     <string name="introduce_search">Introduce un nombre de usuario para buscarlo</string>
     <string name="no_result_search">No encontramos lo que buscas :(</string>
     <string name="borrar_publi_confirm">¿BORRAR PUBLICACIÓN?</string>
@@ -56,7 +57,7 @@
     <string name="publiciones">Publicaciones</string>
     <string name="likes">Likes</string>
     <string name="multimedia">Multimedia</string>
-    <string name="editar_perfil">Editar perfil</string>
+    <string name="editar_perfil"> Editar perfil </string>
     <string name="msj_saliente">"Tú: "</string>
     <string name="escribiendo">Escribiendo...</string>
     <string name="ayer">Ayer</string>
@@ -67,4 +68,13 @@
     <string name="hoy">Hoy</string>
     <string name="nombre">Nombre de usuario</string>
     <string name="bio">Bio</string>
+    <string name="cambiar_tema">CAMBIAR TEMA</string>
+    <string name="morao">MORADO \nELECTRICO</string>
+    <string name="rojo">ROJO \nARDENT</string>
+    <string name="verde">VERDE \nGAMEBOY</string>
+    <string name="azul">AZUL \nVELOZ</string>
+    <string name="naranja">NARANJA \nNARANJA</string>
+    <string name="btn_aplicar">APLICAR</string>
+    <string name="cambiar_fondo">CAMBIAR FONDO</string>
+    <string name="tema_aplicado">Tema aplicado correctamente</string>
 </resources>

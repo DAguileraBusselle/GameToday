@@ -13,11 +13,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignLeft="@id/llPerfil"
-        android:layout_alignTop="@id/llPerfil"
+        android:layout_alignParentTop="true"
         android:layout_alignRight="@id/llPerfil"
         android:layout_alignBottom="@id/llPerfil"
         android:scaleType="fitXY"
-        android:src="@drawable/header_orange" />
+        android:src="@drawable/header_sw" />
 
 
     <LinearLayout
@@ -58,7 +58,7 @@
                 android:layout_weight="2.3" />
 
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSeguirPerfil"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
@@ -66,7 +66,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
                 android:layout_weight="0"
-                android:background="@drawable/outline_button_morao"
                 android:enabled="false"
                 android:fontFamily="@font/conthrax_sb"
                 android:text="@string/btn_seguir"
@@ -79,7 +78,7 @@
                 android:src="@drawable/send_morao"
                 android:visibility="gone" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnEditarPrefil"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
@@ -87,7 +86,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
                 android:layout_weight="0"
-                android:background="@drawable/outline_button_morao"
                 android:enabled="false"
                 android:fontFamily="@font/conthrax_sb"
                 android:text="@string/editar_perfil"
@@ -164,6 +162,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tvTextoSeguidores"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
@@ -193,6 +192,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tvTextoSiguiendo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
@@ -245,12 +245,13 @@
         android:background="@color/black" />
 
     <HorizontalScrollView
-        android:layout_marginBottom="5dp"
         android:id="@+id/svOpcionesPublisPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:fillViewport="true">
+        android:layout_marginBottom="5dp"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -269,8 +270,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/conthrax_sb"
                     android:text="@string/publiciones"
-                    android:textSize="18sp"
-                    android:textColor="@color/morao_chilling" />
+                    android:textColor="@color/morao_chilling"
+                    android:textSize="18sp" />
 
                 <View
                     android:id="@+id/underlinePublisPersonal"
@@ -292,9 +293,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/conthrax_sb"
-                    android:textSize="18sp"
                     android:text="@string/likes"
-                    android:textColor="@color/morao_chilling" />
+                    android:textColor="@color/morao_chilling"
+                    android:textSize="18sp" />
 
                 <View
                     android:id="@+id/underlineLikesPersonal"
@@ -309,6 +310,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -316,9 +318,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/conthrax_sb"
-                    android:textSize="18sp"
                     android:text="@string/multimedia"
-                    android:textColor="@color/morao_chilling" />
+                    android:textColor="@color/morao_chilling"
+                    android:textSize="18sp" />
 
                 <View
                     android:id="@+id/underlineMediaPersonal"

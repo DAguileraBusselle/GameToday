@@ -3,6 +3,7 @@ package com.dam.gametoday;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +55,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
     public static final int CLAVE_CAMBIAR_FOTO = 1;
 
 
-    TextView tvNombre, tvCorreo, tvBio, tvSeguidores, tvSiguiendo, btnPublis, btnLikes, btnMedia;
+    TextView tvNombre, tvCorreo, tvBio, tvSeguidores, tvSiguiendo, tvTextSiguiendo, tvTextSeguidores, btnPublis, btnLikes, btnMedia;
     View underlinePubli, underlineLike, underlineMedia;
     ImageView ivFotoPerfil, btnCancel, btnMsj, btnMenu;
     RecyclerView rvPublis;
@@ -79,6 +80,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
         bdd = FirebaseDatabase.getInstance().getReference();
         mStorRef = FirebaseStorage.getInstance().getReference();
 
+        getWindow().setBackgroundDrawableResource(R.color.gris_guay);
 
         ivFotoPerfil = findViewById(R.id.ivFotoPerfilPerfil);
         btnEditar = findViewById(R.id.btnEditarPrefil);
@@ -99,6 +101,8 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
             btnMsj = findViewById(R.id.btnMandarMsj);
             btnMsj.setVisibility(View.VISIBLE);
             btnMsj.setOnClickListener(this);
+            btnMsj.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/send_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+
 
             btnSeguir = findViewById(R.id.btnSeguirPerfil);
             btnSeguir.setVisibility(View.VISIBLE);
@@ -112,15 +116,15 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
                             siguiendo = true;
-                            btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_pressed_morao));
+                            btnSeguir.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/outline_button_pressed_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
                             btnSeguir.setTextColor(getResources().getColor(R.color.gris_guay));
-                            btnSeguir.setText(getString(R.string.siguiendo));
+                            btnSeguir.setText(getString(R.string.btn_siguiendo));
                         }
                     }
 
                     if (!siguiendo) {
-                        btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_morao));
-                        btnSeguir.setTextColor(getResources().getColor(R.color.morao_chilling));
+                        btnSeguir.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/outline_button_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+                        btnSeguir.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
                         btnSeguir.setText(getString(R.string.btn_seguir));
                     }
                 }
@@ -156,6 +160,8 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
 
         tvSiguiendo = findViewById(R.id.tvSiguiendoPersonal);
         tvSeguidores = findViewById(R.id.tvSeguidoresPersonal);
+        tvTextSiguiendo = findViewById(R.id.tvTextoSiguiendo);
+        tvTextSeguidores = findViewById(R.id.tvTextoSeguidores);
 
         btnCancel = findViewById(R.id.btnCancelarPerfil);
         btnCancel.setOnClickListener(this);
@@ -243,6 +249,27 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                 }
             }
         });
+
+        btnCancel.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/atras_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+        btnMenu.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/tresrayas_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+        btnEditar.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/outline_button_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+        btnEditar.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        btnLikes.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        btnMedia.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        btnPublis.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        tvNombre.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        tvSiguiendo.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        tvSeguidores.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        tvTextSeguidores.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenos()));
+        tvTextSiguiendo.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenos()));
+        tvBio.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        tvCorreo.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenos()));
+        underlineLike.setBackground(getResources().getDrawable(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        underlineMedia.setBackground(getResources().getDrawable(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        underlinePubli.setBackground(getResources().getDrawable(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+
+
+
     }
 
     @Override
@@ -432,18 +459,23 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
                                 }
                             });
                             bdd.child("Users").child(user).child("seguidores").child(dataSnapshot.getKey()).removeValue();
-                            btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_morao));
-                            btnSeguir.setTextColor(getResources().getColor(R.color.morao_chilling));
+                            btnSeguir.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/outline_button_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+                            btnSeguir.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+
                             btnSeguir.setText(getString(R.string.btn_seguir));
+                            tvSeguidores.setText(String.valueOf(Integer.parseInt(tvSeguidores.getText().toString()) - 1));
+
+
                         }
                     }
 
                     if (!siguiendo) {
                         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").push().setValue(user);
                         bdd.child("Users").child(user).child("seguidores").push().setValue(mAuth.getCurrentUser().getUid());
-                        btnSeguir.setBackground(getResources().getDrawable(R.drawable.outline_button_pressed_morao));
+                        btnSeguir.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/outline_button_pressed_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
                         btnSeguir.setTextColor(getResources().getColor(R.color.gris_guay));
-                        btnSeguir.setText(getString(R.string.siguiendo));
+                        btnSeguir.setText(getString(R.string.btn_siguiendo));
+                        tvSeguidores.setText(String.valueOf(Integer.parseInt(tvSeguidores.getText().toString()) + 1));
 
                     }
                 }

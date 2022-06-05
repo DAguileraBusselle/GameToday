@@ -13,9 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dam.gametoday.ChatActivity;
+import com.dam.gametoday.Game2dayApplication;
 import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
@@ -137,12 +139,16 @@ public class MensajesAdapter extends RecyclerView.Adapter<MensajesAdapter.Mensaj
             if (mensaje.getMsjEntrante()) {
                 llMensajeEnt.setVisibility(View.VISIBLE);
                 llMensajeSal.setVisibility(View.GONE);
+                llMensajeEnt.setBackground(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/mensaje_entrante_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
+
                 tvTextoEnt.setText(mensaje.getTexto());
                 tvFechaHoraEnt.setText(sdf.format(resultDate));
 
             } else {
                 llMensajeSal.setVisibility(View.VISIBLE);
                 llMensajeEnt.setVisibility(View.GONE);
+                llMensajeSal.setBackground(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/mensaje_saliente_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
+
                 tvTextoSal.setText(mensaje.getTexto());
                 tvFechaHoraSal.setText(sdf.format(resultDate));
 
