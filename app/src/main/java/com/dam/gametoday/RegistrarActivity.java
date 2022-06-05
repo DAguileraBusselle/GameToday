@@ -213,6 +213,7 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
                 map.put("displayName", displayName);
                 map.put("correo", correo);
                 map.put("id", auth.getCurrentUser().getUid());
+                map.put("colorTema", "morao");
 
                 rootRef.child("Users").child(auth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
