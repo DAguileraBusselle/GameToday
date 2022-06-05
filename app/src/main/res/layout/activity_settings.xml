@@ -31,6 +31,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="ROJO"
+        />
+
+    <TextView
+        android:layout_below="@id/btnTemaRojo"
+        android:id="@+id/btnTemaNaranja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="MORAO"
+        />
+
+    <TextView
+        android:layout_below="@id/btnTemaNaranja"
+        android:id="@+id/btnTemaAzul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="ROJO"
         />
 

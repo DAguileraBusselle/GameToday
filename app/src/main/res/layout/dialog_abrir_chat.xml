@@ -24,7 +24,7 @@
             android:layout_height="50dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:src="@drawable/atras"
+            android:src="@drawable/atras_morao"
             />
 
         <LinearLayout
@@ -53,7 +53,7 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/cross" />
+                android:src="@drawable/cross_morao" />
         </LinearLayout>
     </LinearLayout>
 

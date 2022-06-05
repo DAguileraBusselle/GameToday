@@ -5,7 +5,6 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_sw"
     >
 
     <View
@@ -131,7 +130,7 @@
                     android:layout_marginRight="8dp"
                     android:fontFamily="@font/conthrax_sb"
                     android:text="0"
-                    android:textColor="@color/gris_chilling"
+                    android:textColor="@color/gris_guay"
                     android:visibility="visible" />
             </LinearLayout>
 

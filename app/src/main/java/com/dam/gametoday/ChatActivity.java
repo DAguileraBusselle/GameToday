@@ -25,8 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -69,7 +67,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        getWindow().setBackgroundDrawableResource(R.drawable.fondo_sw);
+        getWindow().setBackgroundDrawableResource(R.drawable.fondo_orange);
 
         mStorRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -164,10 +162,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (etMensaje.getText().toString().trim().isEmpty()) {
                     btnEnviar.setEnabled(false);
-                    btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.sendtrans));
+                    btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.sendtrans_morao));
                 } else {
                     btnEnviar.setEnabled(true);
-                    btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.send));
+                    btnEnviar.setImageDrawable(getResources().getDrawable(R.drawable.send_morao));
                 }
 
                 if (!etMensaje.getText().toString().trim().isEmpty()) {

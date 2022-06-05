@@ -17,8 +17,7 @@
         android:layout_alignRight="@id/llPerfil"
         android:layout_alignBottom="@id/llPerfil"
         android:scaleType="fitXY"
-        android:src="@drawable/header_sw" />
-
+        android:src="@drawable/header_orange" />
 
 
     <LinearLayout
@@ -35,7 +34,7 @@
             android:layout_height="25dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:src="@drawable/atras"
+            android:src="@drawable/atras_morao"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,7 +76,7 @@
                 android:id="@+id/btnMandarMsj"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/send"
+                android:src="@drawable/send_morao"
                 android:visibility="gone" />
 
             <Button
@@ -212,14 +211,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
+            android:ellipsize="end"
             android:fontFamily="@font/conthrax_sb"
+            android:maxLength="250"
+            android:maxLines="5"
+            android:text=""
             android:textColor="@color/morao_chilling"
             android:textSize="8sp"
-            android:ellipsize="end"
-            android:maxLines="5"
-            android:visibility="visible"
-            android:maxLength="250"
-            android:text=""/>
+            android:visibility="visible" />
 
     </LinearLayout>
 
@@ -346,7 +345,7 @@
         android:id="@+id/imgMenu"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/tres_rayas"
+        android:src="@drawable/tresrayas_morao"
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"

@@ -37,12 +37,12 @@
                 android:layout_marginLeft="5dp"
                 android:maxLines="1"
                 android:textScaleX="1"
+                android:fontFamily="@font/conthrax_sb"
                 android:layout_weight="2"
                 android:id="@+id/tvNombreUserSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/morao_chilling"
-                android:fontFamily="@font/conthrax_sb"
                 android:textSize="17sp"
                 />
 
@@ -52,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:layout_marginLeft="5dp"
-                android:textColor="@color/morao_trans_menos"
                 android:fontFamily="@font/conthrax_sb"
+                android:textColor="@color/morao_trans_menos"
                 android:textSize="10sp"
                 />
         </LinearLayout>
@@ -63,16 +63,13 @@
 
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSeguir"
         android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
-        android:background="@drawable/outline_button_morao"
         android:fontFamily="@font/conthrax_sb"
-        android:text="@string/siguiendo"
-
         />
 
 

@@ -1,5 +1,6 @@
 package com.dam.gametoday.fragments;
 
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dam.gametoday.Game2dayApplication;
+import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.R;
 import com.dam.gametoday.dialog.OnAceptarPubliListener;
 import com.dam.gametoday.dialog.PublicarDialog;
@@ -53,17 +57,50 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
 
     private ArrayList<Publicacion> listaPublicaciones;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_feed, container, false);
+        mAuth = FirebaseAuth.getInstance();
+        bdd = FirebaseDatabase.getInstance().getReference();
 
         btnPubli = v.findViewById(R.id.btnPublicar);
         btnPubli.setOnClickListener(this);
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    switch (dataSnapshot.getValue().toString()) {
+                        case "morao":
+                            btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.morao_chilling)));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.morao_chilling));
+                            break;
+                        case "azul":
+                            btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.azul_chilling)));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.azul_chilling));
+                            break;
+                        case "verde":
+                            btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.verde_chilling)));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.verde_chilling));
+                            break;
+                        case "rojo":
+                            btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.rojo_chilling)));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.rojo_chilling));
+                            break;
+                        case "naranja":
+                            btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.naranja_chilling)));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.naranja_chilling));
+                            break;
+
+                    }
+
+                }
+            }
+        });
 
         rvFeed = v.findViewById(R.id.rvFeed);
 
-        mAuth = FirebaseAuth.getInstance();
-        bdd = FirebaseDatabase.getInstance().getReference();
 
         listaPublicaciones = new ArrayList<Publicacion>();
 

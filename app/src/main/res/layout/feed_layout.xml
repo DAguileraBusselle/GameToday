@@ -15,7 +15,8 @@
         android:layout_height="25dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/trespuntos"/>
+
+        />
 
     <LinearLayout
         app:layout_constraintTop_toBottomOf="@id/btnMenuPubli"
@@ -59,73 +60,73 @@
                 android:fontFamily="@font/conthrax_sb"
                 android:textSize="10sp"
                 />
-            </LinearLayout>
-
-
-            </LinearLayout>
-
-        <TextView
-            android:padding="10dp"
-            android:id="@+id/tvTextoPubli"
-            app:layout_constraintTop_toBottomOf="@id/llUserFeed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/morao_chilling"
-            android:fontFamily="@font/conthrax_sb"
-            />
-
-        <ImageView
-            android:id="@+id/ivImagenPubli"
-            app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="fill_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:id="@+id/llBorrarFecha"
-            app:layout_constraintTop_toBottomOf="@id/ivImagenPubli"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_gravity="center"
-                android:id="@+id/btnLikePubli"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/heart_outline"/>
-            <TextView
-                android:id="@+id/tvNumLikes"
-                android:layout_marginLeft="2dp"
-                android:textColor="@color/morao_chilling"
-                android:fontFamily="@font/conthrax_sb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text=""/>
-
-            <TextView
-                android:padding="10dp"
-                android:id="@+id/tvFechaHoraPubli"
-                app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="01/23/2009 - 14:08"
-                android:textAlignment="textEnd"
-                android:textSize="8sp"
-                android:textColor="@color/morao_trans_menos"
-                android:fontFamily="@font/conthrax_sb"
-                />
         </LinearLayout>
 
 
-        <View
-            app:layout_constraintTop_toBottomOf="@id/llBorrarFecha"
-            android:layout_marginTop="@dimen/padding"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gris_chilling"/>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:padding="10dp"
+        android:id="@+id/tvTextoPubli"
+        app:layout_constraintTop_toBottomOf="@id/llUserFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/morao_chilling"
+        android:fontFamily="@font/conthrax_sb"
+        />
+
+    <ImageView
+        android:id="@+id/ivImagenPubli"
+        app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="fill_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/llBorrarFecha"
+        app:layout_constraintTop_toBottomOf="@id/ivImagenPubli"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/btnLikePubli"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            />
+        <TextView
+            android:id="@+id/tvNumLikes"
+            android:layout_marginLeft="2dp"
+            android:textColor="@color/morao_chilling"
+            android:fontFamily="@font/conthrax_sb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:padding="10dp"
+            android:id="@+id/tvFechaHoraPubli"
+            app:layout_constraintTop_toBottomOf="@id/tvTextoPubli"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="01/23/2009 - 14:08"
+            android:textAlignment="textEnd"
+            android:textSize="8sp"
+            android:textColor="@color/morao_trans_menos"
+            android:fontFamily="@font/conthrax_sb"
+            />
+    </LinearLayout>
+
+
+    <View
+        app:layout_constraintTop_toBottomOf="@id/llBorrarFecha"
+        android:layout_marginTop="@dimen/padding"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gris_chilling"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,9 +19,9 @@
         android:layout_marginRight="@dimen/padding"
         android:layout_marginBottom="@dimen/padding"
         android:backgroundTint="@color/morao_chilling"
-        android:src="@drawable/send"
         android:scaleType="centerInside"
-        app:borderWidth="2dp"
+        android:src="@drawable/send_morao"
+        app:borderWidth="0dp"
         app:rippleColor="@color/morao_chilling" />
 
 </RelativeLayout>

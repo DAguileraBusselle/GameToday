@@ -15,13 +15,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dam.gametoday.Game2dayApplication;
 import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
 import com.dam.gametoday.dialog.AceptarBorrarPubliDialog;
-import com.dam.gametoday.dialog.AceptarCerrarSesionDialog;
 import com.dam.gametoday.dialog.EditarPubliDialog;
 import com.dam.gametoday.model.Publicacion;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -109,6 +110,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
 
             ivFoto.setImageResource(defaulPic);
 
+            tvTexto.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorChilling()));
+            tvUser.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorrChilling()));
+            tvCorreo.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorTransMenos()));
+            tvHora.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorTransMenos()));
+            tvNumLikes.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorChilling()));
+
+            btnMenu.setImageDrawable(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/trespuntos_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
+
             mStorRef.child(publi.getUserId() + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
@@ -172,7 +181,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 }
             });
             tvTexto.setText(publi.getTexto());
-
             tvNumLikes.setText(String.valueOf(publi.getLikes()));
 
             bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -183,12 +191,13 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
                             likeDado = true;
-                            btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_full));
+                            btnLike.setImageDrawable(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/heart_full_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
+
                         }
                     }
 
                     if (!likeDado) {
-                        btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_outline));
+                        btnLike.setImageDrawable(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/heart_outline_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
 
                     }
                 }
@@ -226,7 +235,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                                         }
                                     });
                                     bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").child(dataSnapshot.getKey()).removeValue();
-                                    btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_outline));
+                                    btnLike.setImageDrawable(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/heart_outline_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
                                     tvNumLikes.setText(String.valueOf(Integer.parseInt(tvNumLikes.getText().toString()) - 1));
                                 }
                             }
@@ -234,7 +243,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                             if (!likeDado) {
                                 bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("likes").push().setValue(publi.getPubliId());
                                 bdd.child("Publicaciones").child(publi.getPubliId()).child("likes").push().setValue(mAuth.getCurrentUser().getUid());
-                                btnLike.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_full));
+                                btnLike.setImageDrawable(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/heart_full_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
                                 tvNumLikes.setText(String.valueOf(Integer.parseInt(tvNumLikes.getText().toString()) + 1));
 
                             }
@@ -267,15 +276,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 btnMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        /*
-                        mStorRef.child(publi.getImagenPubli()).delete();
-                        bdd.child("Publicaciones").child(publi.getPubliId()).removeValue();
 
-                        FeedFragment feed = new FeedFragment();
-                        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
-
-
-                         */
                         Context wrapper = new ContextThemeWrapper(context, R.style.AppTheme_PopupMenu);
                         PopupMenu menu = new PopupMenu(wrapper, btnMenu);
                         menu.inflate(R.menu.menu_publi);

@@ -1,22 +1,20 @@
 package com.dam.gametoday.model;
 
+import android.graphics.drawable.Drawable;
+
 public class Tema {
 
-    private int colorTransOscuro = 0;
-    private int colorTransMenos = 0;
-    private int colorTransMenosMasMenosMasMasMenos = 0;
-    private int colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = 0;
-    private int colorrChilling = 0;
-    private int colorrChillingTrans = 0;
-    private int colorChilling = 0;
+    private int colorTransOscuro;
+    private int colorTransMenos;
+    private int colorTransMenosMasMenosMasMasMenos;
+    private int colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos;
+    private int colorrChilling;
+    private int colorrChillingTrans;
+    private int colorChilling;
 
-    public Tema(int colorTransOscuro,
-                int colorTransMenos,
-                int colorTransMenosMasMenosMasMasMenos,
+    public Tema(int colorTransOscuro, int colorTransMenos, int colorTransMenosMasMenosMasMasMenos,
                 int colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos,
-                int colorrChilling,
-                int colorrChillingTrans,
-                int colorChilling) {
+                int colorrChilling, int colorrChillingTrans, int colorChilling) {
         this.colorTransOscuro = colorTransOscuro;
         this.colorTransMenos = colorTransMenos;
         this.colorTransMenosMasMenosMasMasMenos = colorTransMenosMasMenosMasMasMenos;
@@ -81,4 +79,7 @@ public class Tema {
     public void setColorChilling(int colorChilling) {
         this.colorChilling = colorChilling;
     }
+
+
+
 }

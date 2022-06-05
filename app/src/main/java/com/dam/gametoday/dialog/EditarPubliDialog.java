@@ -11,19 +11,14 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
-import com.dam.gametoday.HomeActivity;
 import com.dam.gametoday.R;
 import com.dam.gametoday.rvUtils.FeedAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -80,7 +75,7 @@ public class EditarPubliDialog extends DialogFragment {
             @Override
             public void onShow(DialogInterface dialog) {
 
-                btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_trans));
+                btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.ticktrans_morao));
 
                 btnAceptar.setEnabled(false);
 
@@ -88,7 +83,7 @@ public class EditarPubliDialog extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         if (etTexto.getText().toString().trim().isEmpty()) {
-                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_trans));
+                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.ticktrans_morao));
 
                             btnAceptar.setEnabled(false);
                         }
@@ -123,10 +118,10 @@ public class EditarPubliDialog extends DialogFragment {
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         if (etTexto.getText().toString().trim().isEmpty() && ivFotoPreview.getDrawable() == null) {
                             btnAceptar.setEnabled(false);
-                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_trans));
+                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.ticktrans_morao));
                         } else {
                             btnAceptar.setEnabled(true);
-                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick));
+                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_morao));
                         }
                     }
 
@@ -212,7 +207,7 @@ public class EditarPubliDialog extends DialogFragment {
             if (resultCode == Activity.RESULT_OK) {
                 if (data.getData() != null) {
                     btnAceptar.setEnabled(true);
-                    btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick));
+                    btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_morao));
                     imagenUri = data.getData();
                     ivFotoPreview.setVisibility(View.VISIBLE);
                     ivFotoPreview.setImageURI(imagenUri);

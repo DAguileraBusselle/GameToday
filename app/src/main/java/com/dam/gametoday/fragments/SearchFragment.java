@@ -1,8 +1,10 @@
 package com.dam.gametoday.fragments;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,16 +16,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dam.gametoday.Game2dayApplication;
 import com.dam.gametoday.R;
 import com.dam.gametoday.model.Publicacion;
 import com.dam.gametoday.model.Usuario;
 import com.dam.gametoday.rvUtils.FeedAdapter;
 import com.dam.gametoday.rvUtils.SearchAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -37,8 +43,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     RecyclerView rvSearch;
     TextView tvAviso;
     ImageView btnBorrarTexto;
+    LinearLayout llEtSearch;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference bdd;
     LinearLayoutManager llm;
     SearchAdapter adapter;
 
@@ -51,11 +59,51 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         etSearch = v.findViewById(R.id.etSearchUsuario);
         rvSearch = v.findViewById(R.id.rvSearch);
         tvAviso = v.findViewById(R.id.tvAviso);
+        llEtSearch = v.findViewById(R.id.llSearchUsuario);
 
         mAuth = FirebaseAuth.getInstance();
+        bdd = FirebaseDatabase.getInstance().getReference();
 
+
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    btnBorrarTexto.setImageDrawable(ContextCompat.getDrawable(getActivity().getApplicationContext(), getResources().getIdentifier("@drawable/cross_" + dataSnapshot.getValue().toString(), null, getActivity().getPackageName())));
+                    //btnBorrarTexto.setImageDrawable(getResources().getDrawable(R.drawable.cross_naranja));
+                    llEtSearch.setBackground(ContextCompat.getDrawable(getActivity().getApplicationContext(), getResources().getIdentifier("@drawable/outline_edit_text_" + dataSnapshot.getValue().toString(), null, getActivity().getPackageName())));
+
+                    switch (dataSnapshot.getValue().toString()) {
+                        case "morao":
+                            tvAviso.setTextColor(getResources().getColor(R.color.morrao_chilling));
+                            etSearch.setTextColor(getResources().getColor(R.color.morao_trans_menos));
+                            break;
+                        case "azul":
+                            tvAviso.setTextColor(getResources().getColor(R.color.azzul_chilling));
+                            etSearch.setTextColor(getResources().getColor(R.color.azul_trans_menos));
+                            break;
+                        case "verde":
+                            tvAviso.setTextColor(getResources().getColor(R.color.verrde_chilling));
+                            etSearch.setTextColor(getResources().getColor(R.color.verde_trans_menos));
+                            break;
+                        case "rojo":
+                            tvAviso.setTextColor(getResources().getColor(R.color.rrojo_chilling));
+                            etSearch.setTextColor(getResources().getColor(R.color.rojo_trans_menos));
+                            break;
+                        case "naranja":
+                            tvAviso.setTextColor(getResources().getColor(R.color.narranja_chilling));
+                            etSearch.setTextColor(getResources().getColor(R.color.naranja_trans_menos));
+                            break;
+
+                    }
+
+                }
+
+            }
+        });
         btnBorrarTexto = v.findViewById(R.id.btnBorrarSearch);
         btnBorrarTexto.setOnClickListener(this);
+
 
         llm = new LinearLayoutManager(getContext());
         rvSearch.setLayoutManager(llm);
@@ -83,7 +131,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
                 } else {
                     tvAviso.setText("");
-                    buscarUsuario(etSearch.getText().toString().trim());
+                    buscarUsuario(etSearch.getText().toString().trim().toLowerCase());
                     tvAviso.setVisibility(View.GONE);
 
                 }

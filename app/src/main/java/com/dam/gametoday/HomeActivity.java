@@ -50,6 +50,7 @@ import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnAceptarPubliListener, LifecycleObserver, OnAceptarBorrarPubli, OnEditarPubliListener {
 
+    public static final String CLAVE_COLOR_FAB = "FLOATING_ACTION_BUTTON";
     ImageView btnHome, btnSearch, btnChats, btnPerfil;
     TextView tvNumMsjNoLeidos;
     LinearLayout llTvNumMsj;
@@ -62,34 +63,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public static Boolean fueraDeCasa = false;
     public static Boolean fotoEditada = false;
 
-    Drawable imagenHomeLinea;
-    Drawable imagenHome;
-    Drawable imagenSearchLinea;
-    Drawable imagenSearch;
-    Drawable imagenChatsLinea;
-    Drawable imagenChats;
+    public static Drawable imagenHomeLinea;
+    public static Drawable imagenHome;
+    public static Drawable imagenSearchLinea;
+    public static Drawable imagenSearch;
+    public static Drawable imagenChatsLinea;
+    public static Drawable imagenChats;
 
     DatabaseReference bddRef;
     ValueEventListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
-        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
-
-        tvNumMsjNoLeidos = findViewById(R.id.tvNumMsjNoLeidosHome);
-        llTvNumMsj = findViewById(R.id.llNumMensajes);
-        btnChats = findViewById(R.id.btnChats);
-        btnHome = findViewById(R.id.btnHome);
-        btnSearch = findViewById(R.id.btnSearch);
-        btnPerfil = findViewById(R.id.btnPersonalProfile);
-
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
 
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").setValue("verde");
+
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").setValue("naranja");
 
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
@@ -107,6 +97,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+
+        getWindow().setBackgroundDrawableResource(R.drawable.fondo_orange);
+
+        tvNumMsjNoLeidos = findViewById(R.id.tvNumMsjNoLeidosHome);
+        llTvNumMsj = findViewById(R.id.llNumMensajes);
+        btnChats = findViewById(R.id.btnChats);
+        btnHome = findViewById(R.id.btnHome);
+        btnSearch = findViewById(R.id.btnSearch);
+        btnPerfil = findViewById(R.id.btnPersonalProfile);
+
 
 
 
@@ -174,6 +180,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void establecerTema(String color) {
+
         int colorTransOscuro = R.color.morao_trans_oscuro;
         int colorTransMenos = R.color.morao_trans_menos;
         int colorTransMenosMasMenosMasMasMenos = R.color.morao_trans_menos_mas_menos_mas_mas_menos;
@@ -219,7 +226,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 colorrChillingTrans = R.color.narranja_chilling_trans;
                 colorChilling = R.color.naranja_chilling;
                 break;
-
+            default:
+                colorTransOscuro = R.color.morao_trans_oscuro;
+                colorTransMenos = R.color.morao_trans_menos;
+                colorTransMenosMasMenosMasMasMenos = R.color.morao_trans_menos_mas_menos_mas_mas_menos;
+                colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = R.color.morao_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos;
+                colorrChilling = R.color.morrao_chilling;
+                colorrChillingTrans = R.color.morrao_chilling_trans;
+                colorChilling = R.color.morao_chilling;
         }
 
         Tema tema = new Tema(colorTransOscuro, colorTransMenos, colorTransMenosMasMenosMasMasMenos,
