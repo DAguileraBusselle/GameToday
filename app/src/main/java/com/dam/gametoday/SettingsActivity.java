@@ -18,10 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     View underlineTemaMorao, underlineTemaRojo, underlineTemaVerde, underlineTemaAzul, underlineTemaNaranja;
-    View underlineFondoHex, underlineFondoPkm,underlineFondoSunset,underlineFondoDoom,underlineFondoOrange, underlineFondoSw, underlineFondoCircuito;
+    View underlineFondoHex, underlineFondoPkm,underlineFondoSunset,underlineFondoDoom,
+            underlineFondoOrange, underlineFondoSw, underlineFondoCircuito, underlineFondoGameboy;
     LinearLayout llTemas, btnTemas, llFondo, btnFondos;
     LinearLayout btnTemaAzul, btnTemaMorao, btnTemaRojo, btnTemaVerde, btnTemaNaranja;
-    LinearLayout btnFondoHex, btnFondoPkm,btnFondoSunset,btnFondoDoom,btnFondoOrange, btnFondoSw, btnFondoCircuito;
+    LinearLayout btnFondoHex, btnFondoPkm,btnFondoSunset,btnFondoDoom,
+            btnFondoOrange, btnFondoSw, btnFondoCircuito,btnFondoGameboy;
     ImageView itemTemas;
     ImageView itemFondos;
     TextView btnCancelarTemas, btnAplicarTemas;
@@ -67,6 +69,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         underlineFondoOrange = findViewById(R.id.underlineFondoOrange);
         underlineFondoSunset = findViewById(R.id.underlineFondoSunset);
         underlineFondoSw = findViewById(R.id.underlineFondoSw);
+        underlineFondoGameboy = findViewById(R.id.underlineFondoGameboy);
 
         btnTemaAzul = findViewById(R.id.btnTemaAzul);
         btnTemaMorao = findViewById(R.id.btnTemaMorao);
@@ -84,6 +87,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         btnFondoOrange = findViewById(R.id.btnFondoOrange);
         btnFondoSunset = findViewById(R.id.btnFondoSunset);
         btnFondoSw = findViewById(R.id.btnFondoSw);
+        btnFondoGameboy = findViewById(R.id.btnFondoGameboy);
 
         btnAplicarFondos =  findViewById(R.id.btnAplicarFondoAjustes);
         btnCancelarFondos = findViewById(R.id.btnCancelarFondoAjustes);
@@ -111,6 +115,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         btnFondoOrange.setOnClickListener(this);
         btnFondoSunset.setOnClickListener(this);
         btnFondoSw.setOnClickListener(this);
+        btnFondoGameboy.setOnClickListener(this);
         btnAplicarFondos.setOnClickListener(this);
         btnCancelarFondos.setOnClickListener(this);
 
@@ -294,6 +299,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoHex.setVisibility(View.GONE);
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.VISIBLE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
                         break;
                     case "doom":
                         underlineFondoSw.setVisibility(View.GONE);
@@ -303,6 +309,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoHex.setVisibility(View.GONE);
                         underlineFondoDoom.setVisibility(View.VISIBLE);
                         underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
                         break;
                     case "orange":
                         underlineFondoSw.setVisibility(View.GONE);
@@ -312,6 +319,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoHex.setVisibility(View.GONE);
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
                         break;
                     case "pkm":
                         underlineFondoSw.setVisibility(View.GONE);
@@ -321,6 +329,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoHex.setVisibility(View.GONE);
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
                         break;
                     case "sunset":
                         underlineFondoSw.setVisibility(View.GONE);
@@ -330,6 +339,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoHex.setVisibility(View.GONE);
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
                         break;
                     case "sw":
                         underlineFondoSw.setVisibility(View.VISIBLE);
@@ -339,6 +349,17 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoHex.setVisibility(View.GONE);
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
+                        break;
+                    case "gameboy":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.VISIBLE);
                         break;
                     default:
                         underlineFondoSw.setVisibility(View.GONE);
@@ -348,6 +369,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoHex.setVisibility(View.VISIBLE);
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
                         break;
 
 
@@ -404,7 +426,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoHex.setVisibility(View.GONE);
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.VISIBLE);
-
+            underlineFondoGameboy.setVisibility(View.GONE);
         }else if (view.equals(btnFondoDoom)) {
             fondoElegido = "doom";
             underlineFondoSw.setVisibility(View.GONE);
@@ -414,7 +436,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoHex.setVisibility(View.GONE);
             underlineFondoDoom.setVisibility(View.VISIBLE);
             underlineFondoCircuito.setVisibility(View.GONE);
-
+            underlineFondoGameboy.setVisibility(View.GONE);
         }else if (view.equals(btnFondoHex)) {
             fondoElegido = "hex";
             underlineFondoSw.setVisibility(View.GONE);
@@ -424,7 +446,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoHex.setVisibility(View.VISIBLE);
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
-
+            underlineFondoGameboy.setVisibility(View.GONE);
         }else if (view.equals(btnFondoOrange)) {
             fondoElegido = "orange";
             underlineFondoSw.setVisibility(View.GONE);
@@ -434,7 +456,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoHex.setVisibility(View.GONE);
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
-
+            underlineFondoGameboy.setVisibility(View.GONE);
         }else if (view.equals(btnFondoPkm)) {
             fondoElegido = "pkm";
             underlineFondoSw.setVisibility(View.GONE);
@@ -444,7 +466,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoHex.setVisibility(View.GONE);
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
-
+            underlineFondoGameboy.setVisibility(View.GONE);
         }else if (view.equals(btnFondoSunset)) {
             fondoElegido = "sunset";
             underlineFondoSw.setVisibility(View.GONE);
@@ -454,7 +476,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoHex.setVisibility(View.GONE);
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
-
+            underlineFondoGameboy.setVisibility(View.GONE);
         }else if (view.equals(btnFondoSw)) {
             fondoElegido = "sw";
             underlineFondoSw.setVisibility(View.VISIBLE);
@@ -464,8 +486,19 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoHex.setVisibility(View.GONE);
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
+            underlineFondoGameboy.setVisibility(View.GONE);
+        }else if (view.equals(btnFondoGameboy)) {
+            fondoElegido = "gameboy";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+            underlineFondoGameboy.setVisibility(View.VISIBLE);
 
-        } else if (view.equals(btnSalir)) {
+        }else if (view.equals(btnSalir)) {
             Intent i = new Intent (SettingsActivity.this, PerfilPersonalActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.putExtra(HomeActivity.CLAVE_USUARIO, mAuth.getCurrentUser().getUid());
