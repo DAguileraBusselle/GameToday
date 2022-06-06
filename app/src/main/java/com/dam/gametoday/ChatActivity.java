@@ -70,7 +70,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        getWindow().setBackgroundDrawableResource(R.drawable.fondo_doom2);
+        getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/fondo_" + ((Game2dayApplication) getApplicationContext()).getFondo(), null, getPackageName())));
 
         mStorRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -87,6 +87,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
         llMandar.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/outline_edit_text_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
         tvNombre.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        etMensaje.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenos()));
         btnEnviar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/sendtrans_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
         //ivEscribiendo.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/escribiendo_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
 
@@ -196,7 +197,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                                 bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child(user).child("escribiendo").setValue(false);
 
                             }
-                        }, 1000
+                        }, 850
                 );
 
 

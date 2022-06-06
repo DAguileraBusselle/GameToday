@@ -11,8 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
+import com.dam.gametoday.Game2dayApplication;
 import com.dam.gametoday.PerfilPersonalActivity;
 import com.dam.gametoday.R;
 
@@ -34,6 +36,13 @@ public class AceptarCerrarSesionDialog extends DialogFragment {
         btnCancel = v.findViewById(R.id.btnCancelarConfirm);
         btnAceptar = v.findViewById(R.id.btnAceptarConfirm);
         tvMensaje = v.findViewById(R.id.tvTextoConfirmacion);
+
+        v.setBackground(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/outline_dialog_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+
+        btnAceptar.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/tick_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+        btnCancel.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/cross_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+        tvMensaje.setTextColor(getResources().getColor(((Game2dayApplication) getContext().getApplicationContext()).getTema().getColorChilling()));
+
 
         builder.setView(v);
 

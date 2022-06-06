@@ -26,19 +26,16 @@ import com.dam.gametoday.fragments.ChatsFragment;
 import com.dam.gametoday.fragments.FeedFragment;
 import com.dam.gametoday.fragments.SearchFragment;
 import com.dam.gametoday.model.Tema;
-import com.dam.gametoday.model.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
 //import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -78,8 +75,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
 
-
-
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -97,13 +92,36 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("fondo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.getValue() != null) {
+                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                    System.out.println(dataSnapshot.getValue().toString());
+                    ((Game2dayApplication) getApplicationContext()).setFondo(dataSnapshot.getValue().toString());
+                    System.out.println(((Game2dayApplication) getApplicationContext()).getFondo());
+
+                    getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/fondo_" + dataSnapshot.getValue().toString(), null, getPackageName())));
+
+
+                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
+                } else {
+                    //((Game2dayApplication) getApplicationContext()).setFondo("hex");
+                }
+
+            }
+        });
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
-
-        getWindow().setBackgroundDrawableResource(R.drawable.fondo_doom2);
 
         tvNumMsjNoLeidos = findViewById(R.id.tvNumMsjNoLeidosHome);
         llTvNumMsj = findViewById(R.id.llNumMensajes);
@@ -123,9 +141,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+        System.out.println("@drawable/fondo_" + ((Game2dayApplication) getApplicationContext()).getFondo());
+        System.out.println("@drawable/fondo_" + ((Game2dayApplication) getApplicationContext()).getFondo());
+
         FeedFragment feed = new FeedFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.flHome, feed).addToBackStack(null).commit();
-
 
         mStorRef = FirebaseStorage.getInstance().getReference();
 
@@ -136,7 +156,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        updateToken();
 
         if (fueraDeCasa) {
             ChatsFragment chats = new ChatsFragment();
@@ -150,7 +169,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").onDisconnect().setValue(false);
 
 
+
     }
+
 
     private void establecerIconosYColores() {
         imagenHomeLinea = ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/homeline_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName()));
@@ -244,12 +265,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void updateToken() {
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-        String refreshToken = FirebaseInstanceId.getInstance().getToken();
-        Token token = new Token(refreshToken);
-        FirebaseDatabase.getInstance().getReference().child("Tokens").child(firebaseUser.getUid()).setValue(token);
-    }
+
 
 
     @Override

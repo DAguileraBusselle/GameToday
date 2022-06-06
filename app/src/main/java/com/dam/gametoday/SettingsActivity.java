@@ -18,16 +18,22 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     View underlineTemaMorao, underlineTemaRojo, underlineTemaVerde, underlineTemaAzul, underlineTemaNaranja;
-    LinearLayout llTemas, btnTemas;
+    View underlineFondoHex, underlineFondoPkm,underlineFondoSunset,underlineFondoDoom,underlineFondoOrange, underlineFondoSw, underlineFondoCircuito;
+    LinearLayout llTemas, btnTemas, llFondo, btnFondos;
     LinearLayout btnTemaAzul, btnTemaMorao, btnTemaRojo, btnTemaVerde, btnTemaNaranja;
+    LinearLayout btnFondoHex, btnFondoPkm,btnFondoSunset,btnFondoDoom,btnFondoOrange, btnFondoSw, btnFondoCircuito;
     ImageView itemTemas;
+    ImageView itemFondos;
     TextView btnCancelarTemas, btnAplicarTemas;
+    TextView btnCancelarFondos, btnAplicarFondos;
 
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
 
     boolean temasVisibles = false;
+    boolean fondosVisibles = false;
     String temaElegido;
+    String fondoElegido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +46,46 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
 
         itemTemas = findViewById(R.id.itemTemasAjustes);
+        itemFondos = findViewById(R.id.itemFondosAjustes);
         underlineTemaAzul = findViewById(R.id.underlineTemaAzul);
         underlineTemaRojo = findViewById(R.id.underlineTemaRojo);
         underlineTemaVerde = findViewById(R.id.underlineTemaVerde);
         underlineTemaMorao = findViewById(R.id.underlineTemaMorao);
         underlineTemaNaranja = findViewById(R.id.underlineTemaNaranja);
 
+        underlineFondoCircuito = findViewById(R.id.underlineFondoCircuito);
+        underlineFondoDoom = findViewById(R.id.underlineFondoDoom);
+        underlineFondoHex = findViewById(R.id.underlineFondoHex);
+        underlineFondoPkm = findViewById(R.id.underlineFondoPkm);
+        underlineFondoOrange = findViewById(R.id.underlineFondoOrange);
+        underlineFondoSunset = findViewById(R.id.underlineFondoSunset);
+        underlineFondoSw = findViewById(R.id.underlineFondoSw);
+
         btnTemaAzul = findViewById(R.id.btnTemaAzul);
         btnTemaMorao = findViewById(R.id.btnTemaMorao);
         btnTemaNaranja = findViewById(R.id.btnTemaNaranja);
         btnTemaRojo = findViewById(R.id.btnTemaRojo);
         btnTemaVerde = findViewById(R.id.btnTemaVerde);
+
         btnAplicarTemas = findViewById(R.id.btnAplicarTemaAjustes);
         btnCancelarTemas = findViewById(R.id.btnCancelarTemaAjustes);
 
+        btnFondoCircuito = findViewById(R.id.btnFondoCircuito);
+        btnFondoDoom = findViewById(R.id.btnFondoDoom);
+        btnFondoHex = findViewById(R.id.btnFondoHex);
+        btnFondoPkm = findViewById(R.id.btnFondoPkm);
+        btnFondoOrange = findViewById(R.id.btnFondoOrange);
+        btnFondoSunset = findViewById(R.id.btnFondoSunset);
+        btnFondoSw = findViewById(R.id.btnFondoSw);
+
+        btnAplicarFondos =  findViewById(R.id.btnAplicarFondoAjustes);
+        btnCancelarFondos = findViewById(R.id.btnCancelarFondoAjustes);
 
         llTemas = findViewById(R.id.llTemasAjustes);
         btnTemas = findViewById(R.id.btnCambiarTema);
+
+        llFondo = findViewById(R.id.llFondosAjustes);
+        btnFondos = findViewById(R.id.btnCambiarFondo);
 
         btnTemas.setOnClickListener(this);
         btnTemaVerde.setOnClickListener(this);
@@ -66,6 +95,17 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         btnTemaMorao.setOnClickListener(this);
         btnCancelarTemas.setOnClickListener(this);
         btnAplicarTemas.setOnClickListener(this);
+
+        btnFondos.setOnClickListener(this);
+        btnFondoCircuito.setOnClickListener(this);
+        btnFondoDoom.setOnClickListener(this);
+        btnFondoHex.setOnClickListener(this);
+        btnFondoPkm.setOnClickListener(this);
+        btnFondoOrange.setOnClickListener(this);
+        btnFondoSunset.setOnClickListener(this);
+        btnFondoSw.setOnClickListener(this);
+        btnAplicarFondos.setOnClickListener(this);
+        btnCancelarFondos.setOnClickListener(this);
 
     }
 
@@ -138,17 +178,31 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
             Toast.makeText(this, R.string.tema_aplicado, Toast.LENGTH_SHORT);
 
-            temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
             temasVisibles = false;
             itemTemas.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
             llTemas.setVisibility(View.GONE);
             temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
+        } else if (view.equals(btnAplicarFondos)) {
+            bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("fondo").setValue(fondoElegido);
+
+            ((Game2dayApplication) getApplicationContext()).setFondo(fondoElegido);
+
+            Toast.makeText(this, R.string.tema_aplicado, Toast.LENGTH_SHORT);
+
+            fondosVisibles = false;
+            itemFondos.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
+            llFondo.setVisibility(View.GONE);
+            fondoElegido = ((Game2dayApplication) getApplicationContext()).getColor();
         } else if (view.equals(btnCancelarTemas)) {
-            temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
             temasVisibles = false;
             itemTemas.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
             llTemas.setVisibility(View.GONE);
             temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
+        }else if (view.equals(btnCancelarFondos)) {
+            fondosVisibles = false;
+            itemFondos.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
+            llFondo.setVisibility(View.GONE);
+            fondoElegido = ((Game2dayApplication) getApplicationContext()).getFondo();
         } else if (view.equals(btnTemas)) {
 
             if (temasVisibles) {
@@ -202,6 +256,88 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             }
             temasVisibles = !temasVisibles;
 
+        }else if (view.equals(btnFondos)) {
+
+            if (fondosVisibles) {
+                itemFondos.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
+                llFondo.setVisibility(View.GONE);
+                fondoElegido = ((Game2dayApplication) getApplicationContext()).getFondo();
+
+            } else {
+                itemFondos.setImageDrawable(getResources().getDrawable(R.drawable.itemshown));
+
+                llFondo.setVisibility(View.VISIBLE);
+
+                switch (((Game2dayApplication) getApplicationContext()).getFondo()) {
+                    case "circuito":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.VISIBLE);
+                        break;
+                    case "doom":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.VISIBLE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        break;
+                    case "orange":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.VISIBLE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        break;
+                    case "pkm":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.VISIBLE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        break;
+                    case "sunset":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.VISIBLE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        break;
+                    case "sw":
+                        underlineFondoSw.setVisibility(View.VISIBLE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        break;
+                    default:
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.VISIBLE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        break;
+
+
+                }
+            }
+            fondosVisibles = !fondosVisibles;
+
         } else if (view.equals(btnTemaMorao)) {
             temaElegido = "morao";
             underlineTemaMorao.setVisibility(View.VISIBLE);
@@ -241,6 +377,76 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineTemaRojo.setVisibility(View.VISIBLE);
             underlineTemaVerde.setVisibility(View.GONE);
             underlineTemaNaranja.setVisibility(View.GONE);
+
+        }else if (view.equals(btnFondoCircuito)) {
+            fondoElegido = "circuito";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.VISIBLE);
+
+        }else if (view.equals(btnFondoDoom)) {
+            fondoElegido = "doom";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.VISIBLE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+
+        }else if (view.equals(btnFondoHex)) {
+            fondoElegido = "hex";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.VISIBLE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+
+        }else if (view.equals(btnFondoOrange)) {
+            fondoElegido = "orange";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.VISIBLE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+
+        }else if (view.equals(btnFondoPkm)) {
+            fondoElegido = "pkm";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.VISIBLE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+
+        }else if (view.equals(btnFondoSunset)) {
+            fondoElegido = "sunset";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.VISIBLE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+
+        }else if (view.equals(btnFondoSw)) {
+            fondoElegido = "sw";
+            underlineFondoSw.setVisibility(View.VISIBLE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
 
         }
     }

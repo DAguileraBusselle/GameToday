@@ -38,6 +38,7 @@
             android:layout_marginTop="5dp"
             android:orientation="vertical"
             android:padding="5dp"
+            android:layout_marginLeft="5dp"
             android:visibility="visible">
 
             <TextView
@@ -73,6 +74,7 @@
             android:layout_marginTop="5dp"
             android:orientation="vertical"
             android:padding="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginLeft="30dp"
             android:visibility="visible">
 

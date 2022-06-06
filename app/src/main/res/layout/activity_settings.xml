@@ -9,12 +9,11 @@
     android:padding="@dimen/padding">
 
 
-
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/fecha_outline">
+        android:background="@drawable/fecha_outline"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/btnCambiarTema"
@@ -22,32 +21,35 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/conthrax_sb"
                 android:text="@string/cambiar_tema"
                 android:textColor="@color/gris_guay"
-                android:fontFamily="@font/conthrax_sb"
-                android:layout_weight="1"/>
+                android:textSize="22sp" />
 
             <ImageView
                 android:id="@+id/itemTemasAjustes"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/itemhidden"
-                android:layout_weight="0.4"
                 android:layout_marginRight="15dp"
-                />
+                android:layout_weight="0.4"
+                android:scaleType="centerCrop"
+                android:src="@drawable/itemhidden" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llTemasAjustes"
-            android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/ajuste_outline"
             android:orientation="vertical"
+            android:padding="5dp"
             android:visibility="gone">
 
             <HorizontalScrollView
@@ -75,37 +77,39 @@
                             android:layout_width="90dp"
                             android:layout_height="60dp"
                             android:orientation="horizontal">
+
                             <View
-                                android:background="@color/morao_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/morao_chilling" />
+
                             <View
-                                android:background="@color/morrao_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/morrao_chilling" />
+
                             <View
-                                android:background="@color/morao_trans_menos"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/morao_trans_menos" />
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/conthrax_sb"
                             android:text="@string/morao"
                             android:textAlignment="center"
-                            android:textSize="10dp"
                             android:textColor="@color/morao_chilling"
-                            android:fontFamily="@font/conthrax_sb"
-                            />
+                            android:textSize="10dp" />
 
                         <View
                             android:id="@+id/underlineTemaMorao"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="3dp"
                             android:layout_height="3dp"
                             android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
                             android:background="@color/gris_guay"
                             android:visibility="gone" />
                     </LinearLayout>
@@ -121,37 +125,39 @@
                             android:layout_width="90dp"
                             android:layout_height="60dp"
                             android:orientation="horizontal">
+
                             <View
-                                android:background="@color/rojo_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/rojo_chilling" />
+
                             <View
-                                android:background="@color/rrojo_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/rrojo_chilling" />
+
                             <View
-                                android:background="@color/rojo_trans_menos"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/rojo_trans_menos" />
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/conthrax_sb"
                             android:text="@string/rojo"
                             android:textAlignment="center"
-                            android:textSize="10dp"
                             android:textColor="@color/rojo_chilling"
-                            android:fontFamily="@font/conthrax_sb"
-                            />
+                            android:textSize="10dp" />
 
                         <View
                             android:id="@+id/underlineTemaRojo"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="3dp"
                             android:layout_height="3dp"
                             android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
                             android:background="@color/gris_guay"
                             android:visibility="gone" />
                     </LinearLayout>
@@ -167,37 +173,39 @@
                             android:layout_width="90dp"
                             android:layout_height="60dp"
                             android:orientation="horizontal">
+
                             <View
-                                android:background="@color/verde_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/verde_chilling" />
+
                             <View
-                                android:background="@color/verrde_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/verrde_chilling" />
+
                             <View
-                                android:background="@color/verde_trans_menos"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/verde_trans_menos" />
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/conthrax_sb"
                             android:text="@string/verde"
                             android:textAlignment="center"
-                            android:textSize="10dp"
                             android:textColor="@color/verde_chilling"
-                            android:fontFamily="@font/conthrax_sb"
-                            />
+                            android:textSize="10dp" />
 
                         <View
                             android:id="@+id/underlineTemaVerde"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="3dp"
                             android:layout_height="3dp"
                             android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
                             android:background="@color/gris_guay"
                             android:visibility="gone" />
                     </LinearLayout>
@@ -214,37 +222,39 @@
                             android:layout_width="90dp"
                             android:layout_height="60dp"
                             android:orientation="horizontal">
+
                             <View
-                                android:background="@color/azul_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/azul_chilling" />
+
                             <View
-                                android:background="@color/azzul_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/azzul_chilling" />
+
                             <View
-                                android:background="@color/azul_trans_menos"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/azul_trans_menos" />
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/conthrax_sb"
                             android:text="@string/azul"
                             android:textAlignment="center"
-                            android:textSize="10dp"
                             android:textColor="@color/azul_chilling"
-                            android:fontFamily="@font/conthrax_sb"
-                            />
+                            android:textSize="10dp" />
 
                         <View
                             android:id="@+id/underlineTemaAzul"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="3dp"
                             android:layout_height="3dp"
                             android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
                             android:background="@color/gris_guay"
                             android:visibility="gone" />
                     </LinearLayout>
@@ -261,44 +271,45 @@
                             android:layout_width="90dp"
                             android:layout_height="60dp"
                             android:orientation="horizontal">
+
                             <View
-                                android:background="@color/naranja_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/naranja_chilling" />
+
                             <View
-                                android:background="@color/narranja_chilling"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/narranja_chilling" />
+
                             <View
-                                android:background="@color/naranja_trans_menos"
                                 android:layout_width="30dp"
-                                android:layout_height="60dp"/>
+                                android:layout_height="60dp"
+                                android:background="@color/naranja_trans_menos" />
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/conthrax_sb"
                             android:text="@string/naranja"
                             android:textAlignment="center"
-                            android:textSize="10dp"
                             android:textColor="@color/naranja_chilling"
-                            android:fontFamily="@font/conthrax_sb"
-                            />
+                            android:textSize="10dp" />
 
                         <View
                             android:id="@+id/underlineTemaNaranja"
                             android:layout_width="match_parent"
-                            android:layout_marginTop="3dp"
                             android:layout_height="3dp"
                             android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
                             android:background="@color/gris_guay"
                             android:visibility="gone" />
                     </LinearLayout>
 
 
                 </LinearLayout>
-
 
 
             </HorizontalScrollView>
@@ -311,20 +322,24 @@
                     android:id="@+id/btnCancelarTemaAjustes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:layout_weight="1"
-                    android:textColor="@color/gris_guay"
                     android:fontFamily="@font/conthrax_sb"
-                    android:text="@string/btn_cancelar"/>
+                    android:text="@string/btn_cancelar"
+                    android:textAlignment="center"
+                    android:textColor="@color/gris_guay"
+                    android:textSize="18sp" />
+
                 <TextView
                     android:id="@+id/btnAplicarTemaAjustes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:layout_weight="1"
-                    android:textColor="@color/gris_guay"
                     android:fontFamily="@font/conthrax_sb"
-                    android:text="@string/btn_aplicar"/>
+                    android:text="@string/btn_aplicar"
+
+                    android:textAlignment="center"
+                    android:textColor="@color/gris_guay"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -337,23 +352,304 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/conthrax_sb"
                 android:text="@string/cambiar_fondo"
                 android:textColor="@color/gris_guay"
-                android:fontFamily="@font/conthrax_sb"
-                android:layout_weight="1"/>
+                android:textSize="22sp" />
 
             <ImageView
+                android:id="@+id/itemFondosAjustes"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/itemhidden"
-                android:layout_weight="0.4"
                 android:layout_marginRight="15dp"
-                />
+                android:layout_weight="0.4"
+                android:scaleType="centerCrop"
+                android:src="@drawable/itemhidden" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llFondosAjustes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/ajuste_outline"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <HorizontalScrollView
+                android:id="@+id/svFondosAjustes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/btnFondoHex"
+                            android:layout_width="135dp"
+                            android:layout_height="240dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/fondo_hex" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/underlineFondoHex"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
+                            android:background="@color/gris_guay"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/btnFondoPkm"
+                            android:layout_width="135dp"
+                            android:layout_height="240dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/fondo_pkm" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/underlineFondoPkm"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
+                            android:background="@color/gris_guay"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/btnFondoSunset"
+                            android:layout_width="135dp"
+                            android:layout_height="240dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/fondo_sunset" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/underlineFondoSunset"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
+                            android:background="@color/gris_guay"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/btnFondoDoom"
+                            android:layout_width="135dp"
+                            android:layout_height="240dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/fondo_doom" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/underlineFondoDoom"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
+                            android:background="@color/gris_guay"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/btnFondoOrange"
+                            android:layout_width="135dp"
+                            android:layout_height="240dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/fondo_orange" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/underlineFondoOrange"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
+                            android:background="@color/gris_guay"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/btnFondoSw"
+                            android:layout_width="135dp"
+                            android:layout_height="240dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/fondo_sw" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/underlineFondoSw"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
+                            android:background="@color/gris_guay"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/btnFondoCircuito"
+                            android:layout_width="135dp"
+                            android:layout_height="240dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/fondo_circuito" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/underlineFondoCircuito"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_below="@id/llPerfil"
+                            android:layout_marginTop="3dp"
+                            android:background="@color/gris_guay"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/btnCancelarFondoAjustes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/conthrax_sb"
+                    android:text="@string/btn_cancelar"
+                    android:textAlignment="center"
+                    android:textColor="@color/gris_guay"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/btnAplicarFondoAjustes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/conthrax_sb"
+                    android:text="@string/btn_aplicar"
+
+                    android:textAlignment="center"
+                    android:textColor="@color/gris_guay"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

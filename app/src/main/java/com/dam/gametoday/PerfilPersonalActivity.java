@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
     ImageView ivFotoPerfil, btnCancel, btnMsj, btnMenu;
     RecyclerView rvPublis;
     Button btnSeguir, btnEditar;
+    ImageView llFondo;
 
     LinearLayoutManager llm;
     FeedAdapter adapter;
@@ -81,6 +83,8 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
         mStorRef = FirebaseStorage.getInstance().getReference();
 
         getWindow().setBackgroundDrawableResource(R.color.gris_guay);
+
+
 
         ivFotoPerfil = findViewById(R.id.ivFotoPerfilPerfil);
         btnEditar = findViewById(R.id.btnEditarPrefil);
@@ -147,6 +151,9 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
         underlinePubli = findViewById(R.id.underlinePublisPersonal);
         underlineLike = findViewById(R.id.underlineLikesPersonal);
         underlineMedia = findViewById(R.id.underlineMediaPersonal);
+
+        llFondo = findViewById(R.id.fondo);
+        llFondo.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/header_" + ((Game2dayApplication) getApplicationContext()).getFondo(), null, getPackageName())));
 
         listaPublicaciones = new ArrayList<Publicacion>();
 
@@ -262,7 +269,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
         tvSeguidores.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
         tvTextSeguidores.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenos()));
         tvTextSiguiendo.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenos()));
-        tvBio.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        tvBio.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos()));
         tvCorreo.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenos()));
         underlineLike.setBackground(getResources().getDrawable(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
         underlineMedia.setBackground(getResources().getDrawable(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
@@ -550,6 +557,7 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
 
     @Override
     public void aceptarCerrarSesion() {
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").setValue(false);
         mAuth.signOut();
         Intent i = new Intent(PerfilPersonalActivity.this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

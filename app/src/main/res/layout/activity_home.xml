@@ -90,14 +90,12 @@
             android:id="@+id/btnHome"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:src="@drawable/home_morao"
             android:layout_weight="1"/>
 
         <ImageView
             android:id="@+id/btnSearch"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:src="@drawable/search_morao"
             android:layout_weight="1"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +109,7 @@
                 android:id="@+id/btnChats"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/chats_morao"/>
+                />
             <LinearLayout
                 app:layout_constraintTop_toTopOf="@id/btnChats"
                 app:layout_constraintLeft_toRightOf="@id/btnChats"
@@ -119,7 +117,7 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/num_mensajes_no_leidos_morao">
+                >
 
                 <TextView
                     android:id="@+id/tvNumMsjNoLeidosHome"

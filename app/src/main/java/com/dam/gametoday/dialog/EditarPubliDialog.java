@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,8 +18,11 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.DialogFragment;
 
+import com.dam.gametoday.Game2dayApplication;
 import com.dam.gametoday.R;
 import com.dam.gametoday.rvUtils.FeedAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -61,6 +65,18 @@ public class EditarPubliDialog extends DialogFragment {
 
         ivFotoPreview = v.findViewById(R.id.ivPreviewImagenPubli);
 
+        ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(((Game2dayApplication) getContext().getApplicationContext()).getTema().getColorChilling()));
+        ViewCompat.setBackgroundTintList(etTexto, colorStateList);
+
+        v.setBackground(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/outline_dialog_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+        btnCancel.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/atras_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+        btnQuitarImg.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/cross_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+        btnGaleria.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/galeria_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
+
+        etTexto.setTextColor(getResources().getColor(((Game2dayApplication) getContext().getApplicationContext()).getTema().getColorChilling()));
+        ivFotoPreview = v.findViewById(R.id.ivPreviewImagenPubli);
+
+
         mStorRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
@@ -75,7 +91,7 @@ public class EditarPubliDialog extends DialogFragment {
             @Override
             public void onShow(DialogInterface dialog) {
 
-                btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.ticktrans_morao));
+                btnAceptar.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/ticktrans_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
 
                 btnAceptar.setEnabled(false);
 
@@ -83,7 +99,7 @@ public class EditarPubliDialog extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         if (etTexto.getText().toString().trim().isEmpty()) {
-                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.ticktrans_morao));
+                            btnAceptar.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/ticktrans_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
 
                             btnAceptar.setEnabled(false);
                         }
@@ -118,10 +134,10 @@ public class EditarPubliDialog extends DialogFragment {
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         if (etTexto.getText().toString().trim().isEmpty() && ivFotoPreview.getDrawable() == null) {
                             btnAceptar.setEnabled(false);
-                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.ticktrans_morao));
+                            btnAceptar.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/ticktrans_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
                         } else {
                             btnAceptar.setEnabled(true);
-                            btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_morao));
+                            btnAceptar.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/tick_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
                         }
                     }
 
@@ -207,7 +223,7 @@ public class EditarPubliDialog extends DialogFragment {
             if (resultCode == Activity.RESULT_OK) {
                 if (data.getData() != null) {
                     btnAceptar.setEnabled(true);
-                    btnAceptar.setImageDrawable(getResources().getDrawable(R.drawable.tick_morao));
+                    btnAceptar.setImageDrawable(ContextCompat.getDrawable(getContext().getApplicationContext(), getContext().getResources().getIdentifier("@drawable/ticktrans_" + ((Game2dayApplication) getContext().getApplicationContext()).getColor(), null, getContext().getPackageName())));
                     imagenUri = data.getData();
                     ivFotoPreview.setVisibility(View.VISIBLE);
                     ivFotoPreview.setImageURI(imagenUri);
