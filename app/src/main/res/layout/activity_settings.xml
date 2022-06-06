@@ -106,7 +106,7 @@
                 android:background="@drawable/ajuste_outline"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <HorizontalScrollView
                     android:id="@+id/svTemasAjustes"
@@ -389,7 +389,7 @@
                 android:background="@drawable/ajuste_outline"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <HorizontalScrollView
                     android:id="@+id/svFondosAjustes"
