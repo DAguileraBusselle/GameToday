@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gris_guay"
-    tools:context=".PerfilPersonalActivity">
+    tools:context=".PerfilPersonalActivity"
+    android:background="@color/gris_guay">
 
 
     <ImageView
@@ -13,18 +13,17 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignLeft="@id/llPerfil"
-        android:layout_alignParentTop="true"
         android:layout_alignRight="@id/llPerfil"
         android:layout_alignBottom="@id/llPerfil"
-        android:scaleType="fitXY"
-        />
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY" />
 
 
     <LinearLayout
         android:id="@+id/llPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gris_guay_medio_trans"
+        android:background="@color/trans_menos_mas"
         android:orientation="vertical"
         android:padding="10dp">
 

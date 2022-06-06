@@ -70,7 +70,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+
         getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/fondo_" + ((Game2dayApplication) getApplicationContext()).getFondo(), null, getPackageName())));
+
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.trans_menos));
 
         mStorRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();

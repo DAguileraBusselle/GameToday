@@ -48,6 +48,7 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_naranja.xml" value="0.126" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_pressed_naranja.xml" value="0.126" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_dialog_verde.xml" value="0.136" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_edit_text.xml" value="0.1615" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/redondo_morao_chilling.xml" value="0.24814814814814815" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_chat.xml" value="0.1" />
@@ -58,7 +59,7 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_perfil.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_perfil_personal.xml" value="0.215625" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_registrar.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_settings.xml" value="0.22" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_settings.xml" value="0.18" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/borrar.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/chats_layout.xml" value="0.3591905564924115" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/dialog_abrir_chat.xml" value="0.18" />

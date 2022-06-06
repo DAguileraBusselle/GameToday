@@ -20,6 +20,7 @@
     <color name="naranja_trans">#655E2D00</color>
     <color name="trans">#00000000</color>
     <color name="trans_menos">#99000000</color>
+    <color name="trans_menos_mas">#BE000000</color>
 
 
 <!--    COLORES MORADO-->

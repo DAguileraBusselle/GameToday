@@ -26,6 +26,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     ImageView itemFondos;
     TextView btnCancelarTemas, btnAplicarTemas;
     TextView btnCancelarFondos, btnAplicarFondos;
+    ImageView btnSalir;
 
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
@@ -40,10 +41,16 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
+
+
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
 
         temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
+
+        btnSalir = findViewById(R.id.btnCancelarAjustes);
+        btnSalir.setOnClickListener(this);
 
         itemTemas = findViewById(R.id.itemTemasAjustes);
         itemFondos = findViewById(R.id.itemFondosAjustes);
@@ -211,6 +218,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
 
             } else {
+                itemFondos.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
+                llFondo.setVisibility(View.GONE);
+                fondoElegido = ((Game2dayApplication) getApplicationContext()).getFondo();
+                fondosVisibles = false;
+
                 itemTemas.setImageDrawable(getResources().getDrawable(R.drawable.itemshown));
 
                 llTemas.setVisibility(View.VISIBLE);
@@ -264,6 +276,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 fondoElegido = ((Game2dayApplication) getApplicationContext()).getFondo();
 
             } else {
+                itemTemas.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
+                llTemas.setVisibility(View.GONE);
+                temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
+                temasVisibles = false;
+
                 itemFondos.setImageDrawable(getResources().getDrawable(R.drawable.itemshown));
 
                 llFondo.setVisibility(View.VISIBLE);
@@ -448,6 +465,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
 
+        } else if (view.equals(btnSalir)) {
+            Intent i = new Intent (SettingsActivity.this, PerfilPersonalActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i.putExtra(HomeActivity.CLAVE_USUARIO, mAuth.getCurrentUser().getUid());
+            startActivity(i);
+            finish();
         }
     }
 

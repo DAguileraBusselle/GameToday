@@ -69,12 +69,13 @@
     <string name="nombre">Nombre de usuario</string>
     <string name="bio">Bio</string>
     <string name="cambiar_tema">CAMBIAR TEMA</string>
-    <string name="morao">MORADO \nVACIO</string>
+    <string name="morao">MORADO \nFANTASMA</string>
     <string name="rojo">ROJO \nARDENT</string>
     <string name="verde">VERDE \nGAMEBOY</string>
-    <string name="azul">AZUL \nVELOZ</string>
+    <string name="azul">AZUL \nSÓNICO</string>
     <string name="naranja">NARANJA \nMISTERIO</string>
     <string name="btn_aplicar">APLICAR</string>
     <string name="cambiar_fondo">CAMBIAR FONDO</string>
     <string name="tema_aplicado">Tema aplicado correctamente</string>
+    <string name="ajustes">AJUSTES</string>
 </resources>

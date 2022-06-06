@@ -105,7 +105,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/fondo_" + dataSnapshot.getValue().toString(), null, getPackageName())));
 
-
+                    establecerClicks();
                     System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                     System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
@@ -133,10 +133,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        btnChats.setOnClickListener(this);
-        btnHome.setOnClickListener(this);
-        btnSearch.setOnClickListener(this);
-        btnPerfil.setOnClickListener(this);
+
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").setValue(true);
 
 
@@ -169,6 +166,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").onDisconnect().setValue(false);
 
 
+
+    }
+
+    private void establecerClicks() {
+        btnChats.setOnClickListener(this);
+        btnHome.setOnClickListener(this);
+        btnSearch.setOnClickListener(this);
+        btnPerfil.setOnClickListener(this);
 
     }
 

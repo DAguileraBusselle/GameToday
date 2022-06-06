@@ -82,8 +82,9 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
         bdd = FirebaseDatabase.getInstance().getReference();
         mStorRef = FirebaseStorage.getInstance().getReference();
 
-        getWindow().setBackgroundDrawableResource(R.color.gris_guay);
+        //getWindow().setBackgroundDrawableResource(((Game2dayApplication) getApplicationContext()).getTema().getColorTransOscuro());
 
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.gris_guay));
 
 
         ivFotoPerfil = findViewById(R.id.ivFotoPerfilPerfil);

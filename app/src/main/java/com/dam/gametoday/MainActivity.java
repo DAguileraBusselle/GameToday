@@ -45,43 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
 
-        //Ejecutar al menos una vez el sign out para crear un usuario nuevo
-        //mAuth.signOut();
 
-        //bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child("p2jaA3REYERK73xz88iy2ZqDngm2");
-        //bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child("fem22GVFPFUV2bxgcsiYiYbGDRz2");
-/*
-
-        HashMap<String, Object> msj1 = new HashMap<>();
-        msj1.put("entrante", true);
-        msj1.put("texto", "hola marta que tal");
-        msj1.put("fechaMsjMilis", System.currentTimeMillis());
-
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child("p2jaA3REYERK73xz88iy2ZqDngm2").push().setValue(msj1);
-
-        HashMap<String, Object> msj2 = new HashMap<>();
-        msj2.put("entrante", false);
-        msj2.put("texto", "the fitness grand pacer test is a multicapacity aerobics capacity test");
-        msj2.put("fechaMsjMilis", System.currentTimeMillis() + 1000);
-
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child("p2jaA3REYERK73xz88iy2ZqDngm2").push().setValue(msj2);
-
-        HashMap<String, Object> msj3 = new HashMap<>();
-        msj3.put("entrante", true);
-        msj3.put("texto", "fuite a la verga malparido");
-        msj3.put("fechaMsjMilis", System.currentTimeMillis() + 2000);
-
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child("p2jaA3REYERK73xz88iy2ZqDngm2").push().setValue(msj3);
-
-
- */ /*
-        HashMap<String, Object> msj4 = new HashMap<>();
-        msj4.put("entrante", true);
-        msj4.put("texto", "UWU");
-        msj4.put("fechaMsjMilis", System.currentTimeMillis() - 1000);
-
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("chats").child("fem22GVFPFUV2bxgcsiYiYbGDRz2").push().setValue(msj4);
-        */
 
 
         if (mAuth.getCurrentUser() != null) {
