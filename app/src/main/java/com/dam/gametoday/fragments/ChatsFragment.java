@@ -148,7 +148,6 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
-
     private void sortList(List<Mensaje> list) {
         Collections.sort(list, new Comparator<Mensaje>() {
             public int compare(Mensaje msj1, Mensaje msj2) {

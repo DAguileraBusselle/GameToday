@@ -33,8 +33,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private FirebaseAuth mAuth;
     private DatabaseReference bdd;
 
-    boolean temasVisibles = false;
-    boolean fondosVisibles = false;
+    boolean temasVisibles = true;
+    boolean fondosVisibles = true;
     String temaElegido;
     String fondoElegido;
 
@@ -45,6 +45,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
 
+        temasVisibles = false;
+        fondosVisibles = false;
 
         mAuth = FirebaseAuth.getInstance();
         bdd = FirebaseDatabase.getInstance().getReference();
@@ -509,12 +511,25 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent i = new Intent (SettingsActivity.this, PerfilPersonalActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        i.putExtra(HomeActivity.CLAVE_USUARIO, mAuth.getCurrentUser().getUid());
-        startActivity(i);
-        finish();
+        if (llTemas.getVisibility() == View.VISIBLE) {
+            itemTemas.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
+            llTemas.setVisibility(View.GONE);
+            temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
+            temasVisibles = false;
+        } else if (llFondo.getVisibility() == View.VISIBLE) {
+            itemFondos.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
+            llFondo.setVisibility(View.GONE);
+            fondoElegido = ((Game2dayApplication) getApplicationContext()).getFondo();
+            fondosVisibles = false;
+        } else if (llTemas.getVisibility() == View.GONE && llFondo.getVisibility() == View.GONE) {
+            Intent i = new Intent (SettingsActivity.this, PerfilPersonalActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i.putExtra(HomeActivity.CLAVE_USUARIO, mAuth.getCurrentUser().getUid());
+            startActivity(i);
+            finish();
+        }
+
+
 
     }
 }

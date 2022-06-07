@@ -210,7 +210,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                         } else {
                             tvUltimoMsj.setText(mensaje.getTexto());
 
-                            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy - HH:mm");
                             Date resultDate = new Date(mensaje.getFechaHoraMsj());
 
                             tvFechaHora.setText(sdf.format(resultDate));
@@ -237,7 +237,6 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
 
                 }
             });
-
 
             bdd.child("Users").child(mensaje.getParticipante()).child("conectado").addValueEventListener(new ValueEventListener() {
                 @Override
