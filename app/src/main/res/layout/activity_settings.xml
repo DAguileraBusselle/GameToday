@@ -654,6 +654,223 @@
                                 android:visibility="gone" />
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/btnFondoCalle"
+                                android:layout_width="135dp"
+                                android:layout_height="240dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/fondo_calle" />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/underlineFondoCalle"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_below="@id/llPerfil"
+                                android:layout_marginTop="3dp"
+                                android:background="@color/gris_guay"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/btnFondoMandos"
+                                android:layout_width="135dp"
+                                android:layout_height="240dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/fondo_mandos" />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/underlineFondoMandos"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_below="@id/llPerfil"
+                                android:layout_marginTop="3dp"
+                                android:background="@color/gris_guay"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/btnFondoMetal"
+                                android:layout_width="135dp"
+                                android:layout_height="240dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/fondo_metal" />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/underlineFondoMetal"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_below="@id/llPerfil"
+                                android:layout_marginTop="3dp"
+                                android:background="@color/gris_guay"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/btnFondoMarioAmarillo"
+                                android:layout_width="135dp"
+                                android:layout_height="240dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/fondo_marioamarillo" />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/underlineFondoMarioAmarillo"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_below="@id/llPerfil"
+                                android:layout_marginTop="3dp"
+                                android:background="@color/gris_guay"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/btnFondoMarioAzul"
+                                android:layout_width="135dp"
+                                android:layout_height="240dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/fondo_marioazul" />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/underlineFondoMarioAzul"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_below="@id/llPerfil"
+                                android:layout_marginTop="3dp"
+                                android:background="@color/gris_guay"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/btnFondoMarioNaranja"
+                                android:layout_width="135dp"
+                                android:layout_height="240dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/fondo_marionaranja" />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/underlineFondoMarioNaranja"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_below="@id/llPerfil"
+                                android:layout_marginTop="3dp"
+                                android:background="@color/gris_guay"
+                                android:visibility="gone" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/btnFondoMarioBlanco"
+                                android:layout_width="135dp"
+                                android:layout_height="240dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/fondo_marioblanco" />
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/underlineFondoMarioBlanco"
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:layout_below="@id/llPerfil"
+                                android:layout_marginTop="3dp"
+                                android:background="@color/gris_guay"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
 
@@ -687,6 +904,8 @@
                         android:textSize="18sp" />
 
                 </LinearLayout>
+
+
 
             </LinearLayout>
 

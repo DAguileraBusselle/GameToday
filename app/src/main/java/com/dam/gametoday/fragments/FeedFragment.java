@@ -74,23 +74,23 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
                     switch (dataSnapshot.getValue().toString()) {
                         case "morao":
                             btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.morao_chilling)));
-                            btnPubli.setRippleColor(getResources().getColor(R.color.morao_chilling));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.morrao_chilling));
                             break;
                         case "azul":
                             btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.azul_chilling)));
-                            btnPubli.setRippleColor(getResources().getColor(R.color.azul_chilling));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.azzul_chilling));
                             break;
                         case "verde":
                             btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.verde_chilling)));
-                            btnPubli.setRippleColor(getResources().getColor(R.color.verde_chilling));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.verrde_chilling));
                             break;
                         case "rojo":
                             btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.rojo_chilling)));
-                            btnPubli.setRippleColor(getResources().getColor(R.color.rojo_chilling));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.rrojo_chilling));
                             break;
                         case "naranja":
                             btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.naranja_chilling)));
-                            btnPubli.setRippleColor(getResources().getColor(R.color.naranja_chilling));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.narranja_chilling));
                             break;
 
                     }

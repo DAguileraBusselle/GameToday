@@ -18,16 +18,27 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     View underlineTemaMorao, underlineTemaRojo, underlineTemaVerde, underlineTemaAzul, underlineTemaNaranja;
-    View underlineFondoHex, underlineFondoPkm,underlineFondoSunset,underlineFondoDoom,
-            underlineFondoOrange, underlineFondoSw, underlineFondoCircuito, underlineFondoGameboy;
+
+    View underlineFondoHex, underlineFondoPkm, underlineFondoSunset, underlineFondoDoom,
+            underlineFondoOrange, underlineFondoSw, underlineFondoCircuito, underlineFondoGameboy,
+            underlineFondoCalle, underlineFondoMandos, underlineFondoMetal, underlineFondoMarioAmarillo,
+            underlineFondoMarioAzul, underlineFondoMarioNaranja, underlineFondoMarioBlanco;
+
     LinearLayout llTemas, btnTemas, llFondo, btnFondos;
+
     LinearLayout btnTemaAzul, btnTemaMorao, btnTemaRojo, btnTemaVerde, btnTemaNaranja;
-    LinearLayout btnFondoHex, btnFondoPkm,btnFondoSunset,btnFondoDoom,
-            btnFondoOrange, btnFondoSw, btnFondoCircuito,btnFondoGameboy;
+
+    LinearLayout btnFondoHex, btnFondoPkm, btnFondoSunset, btnFondoDoom,
+            btnFondoOrange, btnFondoSw, btnFondoCircuito, btnFondoGameboy,
+            btnFondoCalle, btnFondoMandos, btnFondoMetal, btnFondoMarioAmarillo,
+            btnFondoMarioAzul, btnFondoMarioNaranja, btnFondoMarioBlanco;
+
     ImageView itemTemas;
     ImageView itemFondos;
+
     TextView btnCancelarTemas, btnAplicarTemas;
     TextView btnCancelarFondos, btnAplicarFondos;
+
     ImageView btnSalir;
 
     private FirebaseAuth mAuth;
@@ -72,6 +83,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         underlineFondoSunset = findViewById(R.id.underlineFondoSunset);
         underlineFondoSw = findViewById(R.id.underlineFondoSw);
         underlineFondoGameboy = findViewById(R.id.underlineFondoGameboy);
+        underlineFondoCalle = findViewById(R.id.underlineFondoCalle);
+        underlineFondoMandos = findViewById(R.id.underlineFondoMandos);
+        underlineFondoMetal = findViewById(R.id.underlineFondoMetal);
+        underlineFondoMarioAmarillo = findViewById(R.id.underlineFondoMarioAmarillo);
+        underlineFondoMarioAzul = findViewById(R.id.underlineFondoMarioAzul);
+        underlineFondoMarioNaranja = findViewById(R.id.underlineFondoMarioNaranja);
+        underlineFondoMarioBlanco = findViewById(R.id.underlineFondoMarioBlanco);
 
         btnTemaAzul = findViewById(R.id.btnTemaAzul);
         btnTemaMorao = findViewById(R.id.btnTemaMorao);
@@ -90,8 +108,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         btnFondoSunset = findViewById(R.id.btnFondoSunset);
         btnFondoSw = findViewById(R.id.btnFondoSw);
         btnFondoGameboy = findViewById(R.id.btnFondoGameboy);
+        btnFondoCalle = findViewById(R.id.btnFondoCalle);
+        btnFondoMandos = findViewById(R.id.btnFondoMandos);
+        btnFondoMetal = findViewById(R.id.btnFondoMetal);
+        btnFondoMarioAmarillo = findViewById(R.id.btnFondoMarioAmarillo);
+        btnFondoMarioAzul = findViewById(R.id.btnFondoMarioAzul);
+        btnFondoMarioNaranja = findViewById(R.id.btnFondoMarioNaranja);
+        btnFondoMarioBlanco = findViewById(R.id.btnFondoMarioBlanco);
 
-        btnAplicarFondos =  findViewById(R.id.btnAplicarFondoAjustes);
+        btnAplicarFondos = findViewById(R.id.btnAplicarFondoAjustes);
         btnCancelarFondos = findViewById(R.id.btnCancelarFondoAjustes);
 
         llTemas = findViewById(R.id.llTemasAjustes);
@@ -118,6 +143,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         btnFondoSunset.setOnClickListener(this);
         btnFondoSw.setOnClickListener(this);
         btnFondoGameboy.setOnClickListener(this);
+        btnFondoCalle.setOnClickListener(this);
+        btnFondoMandos.setOnClickListener(this);
+        btnFondoMetal.setOnClickListener(this);
+        btnFondoMarioAmarillo.setOnClickListener(this);
+        btnFondoMarioAzul.setOnClickListener(this);
+        btnFondoMarioNaranja.setOnClickListener(this);
+        btnFondoMarioBlanco.setOnClickListener(this);
         btnAplicarFondos.setOnClickListener(this);
         btnCancelarFondos.setOnClickListener(this);
 
@@ -129,13 +161,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("colorTema").setValue(temaElegido);
 
             ((Game2dayApplication) getApplicationContext()).setColor(temaElegido);
-            int colorTransOscuro = R.color.morao_trans_oscuro;
-            int colorTransMenos = R.color.morao_trans_menos;
-            int colorTransMenosMasMenosMasMasMenos = R.color.morao_trans_menos_mas_menos_mas_mas_menos;
-            int colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = R.color.morao_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos;
-            int colorrChilling = R.color.morrao_chilling;
-            int colorrChillingTrans = R.color.morrao_chilling_trans;
-            int colorChilling = R.color.morao_chilling;
+            int colorTransOscuro;
+            int colorTransMenos;
+            int colorTransMenosMasMenosMasMasMenos;
+            int colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos;
+            int colorrChilling;
+            int colorrChillingTrans;
+            int colorChilling;
 
             switch (temaElegido) {
                 case "verde":
@@ -212,7 +244,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             itemTemas.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
             llTemas.setVisibility(View.GONE);
             temaElegido = ((Game2dayApplication) getApplicationContext()).getColor();
-        }else if (view.equals(btnCancelarFondos)) {
+        } else if (view.equals(btnCancelarFondos)) {
             fondosVisibles = false;
             itemFondos.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
             llFondo.setVisibility(View.GONE);
@@ -235,28 +267,28 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 llTemas.setVisibility(View.VISIBLE);
 
                 switch (((Game2dayApplication) getApplicationContext()).getColor()) {
-                    case "azul" :
+                    case "azul":
                         underlineTemaMorao.setVisibility(View.GONE);
                         underlineTemaAzul.setVisibility(View.VISIBLE);
                         underlineTemaRojo.setVisibility(View.GONE);
                         underlineTemaVerde.setVisibility(View.GONE);
                         underlineTemaNaranja.setVisibility(View.GONE);
                         break;
-                    case "naranja" :
+                    case "naranja":
                         underlineTemaMorao.setVisibility(View.GONE);
                         underlineTemaAzul.setVisibility(View.GONE);
                         underlineTemaRojo.setVisibility(View.GONE);
                         underlineTemaVerde.setVisibility(View.GONE);
                         underlineTemaNaranja.setVisibility(View.VISIBLE);
                         break;
-                    case "rojo" :
+                    case "rojo":
                         underlineTemaMorao.setVisibility(View.GONE);
                         underlineTemaAzul.setVisibility(View.GONE);
                         underlineTemaRojo.setVisibility(View.VISIBLE);
                         underlineTemaVerde.setVisibility(View.GONE);
                         underlineTemaNaranja.setVisibility(View.GONE);
                         break;
-                    case "verde" :
+                    case "verde":
                         underlineTemaMorao.setVisibility(View.GONE);
                         underlineTemaAzul.setVisibility(View.GONE);
                         underlineTemaRojo.setVisibility(View.GONE);
@@ -275,7 +307,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             }
             temasVisibles = !temasVisibles;
 
-        }else if (view.equals(btnFondos)) {
+        } else if (view.equals(btnFondos)) {
 
             if (fondosVisibles) {
                 itemFondos.setImageDrawable(getResources().getDrawable(R.drawable.itemhidden));
@@ -302,6 +334,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.VISIBLE);
                         underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
                         break;
                     case "doom":
                         underlineFondoSw.setVisibility(View.GONE);
@@ -312,6 +351,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoDoom.setVisibility(View.VISIBLE);
                         underlineFondoCircuito.setVisibility(View.GONE);
                         underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
                         break;
                     case "orange":
                         underlineFondoSw.setVisibility(View.GONE);
@@ -322,6 +368,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
                         underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
                         break;
                     case "pkm":
                         underlineFondoSw.setVisibility(View.GONE);
@@ -332,6 +385,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
                         underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
                         break;
                     case "sunset":
                         underlineFondoSw.setVisibility(View.GONE);
@@ -342,6 +402,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
                         underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
                         break;
                     case "sw":
                         underlineFondoSw.setVisibility(View.VISIBLE);
@@ -352,6 +419,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
                         underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
                         break;
                     case "gameboy":
                         underlineFondoSw.setVisibility(View.GONE);
@@ -362,6 +436,132 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
                         underlineFondoGameboy.setVisibility(View.VISIBLE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
+                        break;
+                    case "calle":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.VISIBLE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
+                        break;
+                    case "mandos":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.VISIBLE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
+                        break;
+                    case "metal":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.VISIBLE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
+                        break;
+                    case "marioamarillo":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.VISIBLE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
+                        break;
+                    case "marioazul":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.VISIBLE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
+                        break;
+                    case "marionaranja":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.VISIBLE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
+                        break;
+                    case "marioblanco":
+                        underlineFondoSw.setVisibility(View.GONE);
+                        underlineFondoSunset.setVisibility(View.GONE);
+                        underlineFondoOrange.setVisibility(View.GONE);
+                        underlineFondoPkm.setVisibility(View.GONE);
+                        underlineFondoHex.setVisibility(View.GONE);
+                        underlineFondoDoom.setVisibility(View.GONE);
+                        underlineFondoCircuito.setVisibility(View.GONE);
+                        underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.VISIBLE);
                         break;
                     default:
                         underlineFondoSw.setVisibility(View.GONE);
@@ -372,6 +572,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         underlineFondoDoom.setVisibility(View.GONE);
                         underlineFondoCircuito.setVisibility(View.GONE);
                         underlineFondoGameboy.setVisibility(View.GONE);
+                        underlineFondoCalle.setVisibility(View.GONE);
+                        underlineFondoMandos.setVisibility(View.GONE);
+                        underlineFondoMetal.setVisibility(View.GONE);
+                        underlineFondoMarioAmarillo.setVisibility(View.GONE);
+                        underlineFondoMarioAzul.setVisibility(View.GONE);
+                        underlineFondoMarioNaranja.setVisibility(View.GONE);
+                        underlineFondoMarioBlanco.setVisibility(View.GONE);
                         break;
 
 
@@ -387,7 +594,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineTemaVerde.setVisibility(View.GONE);
             underlineTemaNaranja.setVisibility(View.GONE);
 
-        }else if (view.equals(btnTemaAzul)) {
+        } else if (view.equals(btnTemaAzul)) {
             temaElegido = "azul";
             underlineTemaMorao.setVisibility(View.GONE);
             underlineTemaAzul.setVisibility(View.VISIBLE);
@@ -395,7 +602,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineTemaVerde.setVisibility(View.GONE);
             underlineTemaNaranja.setVisibility(View.GONE);
 
-        }else if (view.equals(btnTemaNaranja)) {
+        } else if (view.equals(btnTemaNaranja)) {
             temaElegido = "naranja";
             underlineTemaMorao.setVisibility(View.GONE);
             underlineTemaAzul.setVisibility(View.GONE);
@@ -403,7 +610,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineTemaVerde.setVisibility(View.GONE);
             underlineTemaNaranja.setVisibility(View.VISIBLE);
 
-        }else if (view.equals(btnTemaVerde)) {
+        } else if (view.equals(btnTemaVerde)) {
             temaElegido = "verde";
             underlineTemaMorao.setVisibility(View.GONE);
             underlineTemaAzul.setVisibility(View.GONE);
@@ -411,7 +618,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineTemaVerde.setVisibility(View.VISIBLE);
             underlineTemaNaranja.setVisibility(View.GONE);
 
-        }else if (view.equals(btnTemaRojo)) {
+        } else if (view.equals(btnTemaRojo)) {
             temaElegido = "rojo";
             underlineTemaMorao.setVisibility(View.GONE);
             underlineTemaAzul.setVisibility(View.GONE);
@@ -419,7 +626,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineTemaVerde.setVisibility(View.GONE);
             underlineTemaNaranja.setVisibility(View.GONE);
 
-        }else if (view.equals(btnFondoCircuito)) {
+        } else if (view.equals(btnFondoCircuito)) {
             fondoElegido = "circuito";
             underlineFondoSw.setVisibility(View.GONE);
             underlineFondoSunset.setVisibility(View.GONE);
@@ -429,7 +636,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.VISIBLE);
             underlineFondoGameboy.setVisibility(View.GONE);
-        }else if (view.equals(btnFondoDoom)) {
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoDoom)) {
             fondoElegido = "doom";
             underlineFondoSw.setVisibility(View.GONE);
             underlineFondoSunset.setVisibility(View.GONE);
@@ -439,7 +653,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoDoom.setVisibility(View.VISIBLE);
             underlineFondoCircuito.setVisibility(View.GONE);
             underlineFondoGameboy.setVisibility(View.GONE);
-        }else if (view.equals(btnFondoHex)) {
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoHex)) {
             fondoElegido = "hex";
             underlineFondoSw.setVisibility(View.GONE);
             underlineFondoSunset.setVisibility(View.GONE);
@@ -449,7 +670,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
             underlineFondoGameboy.setVisibility(View.GONE);
-        }else if (view.equals(btnFondoOrange)) {
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoOrange)) {
             fondoElegido = "orange";
             underlineFondoSw.setVisibility(View.GONE);
             underlineFondoSunset.setVisibility(View.GONE);
@@ -459,7 +687,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
             underlineFondoGameboy.setVisibility(View.GONE);
-        }else if (view.equals(btnFondoPkm)) {
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoPkm)) {
             fondoElegido = "pkm";
             underlineFondoSw.setVisibility(View.GONE);
             underlineFondoSunset.setVisibility(View.GONE);
@@ -469,7 +704,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
             underlineFondoGameboy.setVisibility(View.GONE);
-        }else if (view.equals(btnFondoSunset)) {
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoSunset)) {
             fondoElegido = "sunset";
             underlineFondoSw.setVisibility(View.GONE);
             underlineFondoSunset.setVisibility(View.VISIBLE);
@@ -479,7 +721,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
             underlineFondoGameboy.setVisibility(View.GONE);
-        }else if (view.equals(btnFondoSw)) {
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoSw)) {
             fondoElegido = "sw";
             underlineFondoSw.setVisibility(View.VISIBLE);
             underlineFondoSunset.setVisibility(View.GONE);
@@ -489,7 +738,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
             underlineFondoGameboy.setVisibility(View.GONE);
-        }else if (view.equals(btnFondoGameboy)) {
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoGameboy)) {
             fondoElegido = "gameboy";
             underlineFondoSw.setVisibility(View.GONE);
             underlineFondoSunset.setVisibility(View.GONE);
@@ -499,9 +755,137 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             underlineFondoDoom.setVisibility(View.GONE);
             underlineFondoCircuito.setVisibility(View.GONE);
             underlineFondoGameboy.setVisibility(View.VISIBLE);
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoCalle)) {
+            fondoElegido = "calle";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+            underlineFondoGameboy.setVisibility(View.GONE);
+            underlineFondoCalle.setVisibility(View.VISIBLE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
 
-        }else if (view.equals(btnSalir)) {
-            Intent i = new Intent (SettingsActivity.this, PerfilPersonalActivity.class);
+        } else if (view.equals(btnFondoMandos)) {
+            fondoElegido = "mandos";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+            underlineFondoGameboy.setVisibility(View.GONE);
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.VISIBLE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+
+        } else if (view.equals(btnFondoMetal)) {
+            fondoElegido = "metal";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+            underlineFondoGameboy.setVisibility(View.GONE);
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.VISIBLE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoMarioAmarillo)) {
+            fondoElegido = "marioamarillo";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+            underlineFondoGameboy.setVisibility(View.GONE);
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.VISIBLE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoMarioAzul)) {
+            fondoElegido = "marioazul";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+            underlineFondoGameboy.setVisibility(View.GONE);
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.VISIBLE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoMarioNaranja)) {
+            fondoElegido = "marionaranja";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+            underlineFondoGameboy.setVisibility(View.GONE);
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.VISIBLE);
+            underlineFondoMarioBlanco.setVisibility(View.GONE);
+        } else if (view.equals(btnFondoMarioBlanco)) {
+            fondoElegido = "marioblanco";
+            underlineFondoSw.setVisibility(View.GONE);
+            underlineFondoSunset.setVisibility(View.GONE);
+            underlineFondoOrange.setVisibility(View.GONE);
+            underlineFondoPkm.setVisibility(View.GONE);
+            underlineFondoHex.setVisibility(View.GONE);
+            underlineFondoDoom.setVisibility(View.GONE);
+            underlineFondoCircuito.setVisibility(View.GONE);
+            underlineFondoGameboy.setVisibility(View.GONE);
+            underlineFondoCalle.setVisibility(View.GONE);
+            underlineFondoMandos.setVisibility(View.GONE);
+            underlineFondoMetal.setVisibility(View.GONE);
+            underlineFondoMarioAmarillo.setVisibility(View.GONE);
+            underlineFondoMarioAzul.setVisibility(View.GONE);
+            underlineFondoMarioNaranja.setVisibility(View.GONE);
+            underlineFondoMarioBlanco.setVisibility(View.VISIBLE);
+
+        } else if (view.equals(btnSalir)) {
+            Intent i = new Intent(SettingsActivity.this, PerfilPersonalActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.putExtra(HomeActivity.CLAVE_USUARIO, mAuth.getCurrentUser().getUid());
             startActivity(i);
@@ -522,13 +906,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             fondoElegido = ((Game2dayApplication) getApplicationContext()).getFondo();
             fondosVisibles = false;
         } else if (llTemas.getVisibility() == View.GONE && llFondo.getVisibility() == View.GONE) {
-            Intent i = new Intent (SettingsActivity.this, PerfilPersonalActivity.class);
+            Intent i = new Intent(SettingsActivity.this, PerfilPersonalActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.putExtra(HomeActivity.CLAVE_USUARIO, mAuth.getCurrentUser().getUid());
             startActivity(i);
             finish();
         }
-
 
 
     }

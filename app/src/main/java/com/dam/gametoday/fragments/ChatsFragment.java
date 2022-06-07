@@ -63,23 +63,23 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
                     switch (dataSnapshot.getValue().toString()) {
                         case "morao":
                             btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.morao_chilling)));
-                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.morao_chilling));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.morrao_chilling));
                             break;
                         case "azul":
                             btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.azul_chilling)));
-                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.azul_chilling));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.azzul_chilling));
                             break;
                         case "verde":
                             btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.verde_chilling)));
-                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.verde_chilling));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.verrde_chilling));
                             break;
                         case "rojo":
                             btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.rojo_chilling)));
-                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.rojo_chilling));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.rrojo_chilling));
                             break;
                         case "naranja":
                             btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.naranja_chilling)));
-                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.naranja_chilling));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.narranja_chilling));
                             break;
 
                     }
