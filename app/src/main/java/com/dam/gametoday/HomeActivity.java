@@ -206,13 +206,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void establecerTema(String color) {
 
-        int colorTransOscuro = R.color.morao_trans_oscuro;
-        int colorTransMenos = R.color.morao_trans_menos;
-        int colorTransMenosMasMenosMasMasMenos = R.color.morao_trans_menos_mas_menos_mas_mas_menos;
-        int colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = R.color.morao_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos;
-        int colorrChilling = R.color.morrao_chilling;
-        int colorrChillingTrans = R.color.morrao_chilling_trans;
-        int colorChilling = R.color.morao_chilling;
+        int colorTransOscuro;
+        int colorTransMenos;
+        int colorTransMenosMasMenosMasMasMenos;
+        int colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos;
+        int colorrChilling;
+        int colorrChillingTrans;
+        int colorChilling;
 
         switch (color) {
             case "verde":
@@ -250,6 +250,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 colorrChilling = R.color.narranja_chilling;
                 colorrChillingTrans = R.color.narranja_chilling_trans;
                 colorChilling = R.color.naranja_chilling;
+                break;
+            case "blanco":
+                colorTransOscuro = R.color.blanco_trans_oscuro;
+                colorTransMenos = R.color.blanco_trans_menos;
+                colorTransMenosMasMenosMasMasMenos = R.color.blanco_trans_menos_mas_menos_mas_mas_menos;
+                colorTransMenosMasMenosMasMasMenosMenosMasMenosMasMasMenos = R.color.blanco_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos;
+                colorrChilling = R.color.blannco_chilling;
+                colorrChillingTrans = R.color.blannco_chilling_trans;
+                colorChilling = R.color.blanco_chilling;
                 break;
             default:
                 colorTransOscuro = R.color.morao_trans_oscuro;

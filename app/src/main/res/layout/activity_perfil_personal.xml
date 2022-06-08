@@ -216,7 +216,7 @@
             android:maxLines="5"
             android:text=""
             android:textColor="@color/morao_chilling"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:visibility="visible" />
 
     </LinearLayout>

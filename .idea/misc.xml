@@ -39,17 +39,24 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/fecha_outline.xml" value="0.3665" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/mensaje_entrante.xml" value="0.283" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/mensaje_entrante_azul.xml" value="0.12" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/mensaje_entrante_blanco.xml" value="0.1" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/mensaje_entrante_rojo.xml" value="0.1" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/mensaje_saliente.xml" value="0.283" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/mensaje_saliente_azul.xml" value="0.12" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/mensaje_saliente_blanco.xml" value="0.142" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/num_mensajes_no_leidos.xml" value="0.2745" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/num_mensajes_no_leidos_blanco.xml" value="0.142" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/num_mensajes_no_leidos_morao.xml" value="0.1255" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/num_mensajes_no_leidos_naranja.xml" value="0.1" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_blanco.xml" value="0.142" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_naranja.xml" value="0.126" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_pressed_blanco.xml" value="0.142" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_pressed_naranja.xml" value="0.126" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_dialog_blanco.xml" value="0.142" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_dialog_verde.xml" value="0.136" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_edit_text.xml" value="0.1615" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_edit_text_blanco.xml" value="0.142" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/redondo_morao_chilling.xml" value="0.24814814814814815" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_chat.xml" value="0.1" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_editar_perfil.xml" value="0.33" />
@@ -59,7 +66,7 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_perfil.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_perfil_personal.xml" value="0.215625" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_registrar.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/activity_settings.xml" value="0.6686819830713422" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/borrar.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/chats_layout.xml" value="0.3591905564924115" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/dialog_abrir_chat.xml" value="0.18" />

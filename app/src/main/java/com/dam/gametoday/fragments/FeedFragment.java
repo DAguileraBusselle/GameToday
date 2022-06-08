@@ -92,6 +92,10 @@ public class FeedFragment extends Fragment implements View.OnClickListener {
                             btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.naranja_chilling)));
                             btnPubli.setRippleColor(getResources().getColor(R.color.narranja_chilling));
                             break;
+                        case "blanco":
+                            btnPubli.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.blanco_chilling)));
+                            btnPubli.setRippleColor(getResources().getColor(R.color.blannco_chilling));
+                            break;
 
                     }
 

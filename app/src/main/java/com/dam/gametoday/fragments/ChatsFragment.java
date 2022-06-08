@@ -81,6 +81,10 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
                             btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.naranja_chilling)));
                             btnAbrirChat.setRippleColor(getResources().getColor(R.color.narranja_chilling));
                             break;
+                        case "blanco":
+                            btnAbrirChat.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.blanco_chilling)));
+                            btnAbrirChat.setRippleColor(getResources().getColor(R.color.blannco_chilling));
+                            break;
 
                     }
 

@@ -94,6 +94,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                             tvAviso.setTextColor(getResources().getColor(R.color.narranja_chilling));
                             etSearch.setTextColor(getResources().getColor(R.color.naranja_trans_menos));
                             break;
+                        case "blanco":
+                            tvAviso.setTextColor(getResources().getColor(R.color.blanco_chilling));
+                            etSearch.setTextColor(getResources().getColor(R.color.blanco_chilling));
+                            break;
 
                     }
 

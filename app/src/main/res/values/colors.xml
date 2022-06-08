@@ -18,6 +18,7 @@
     <color name="rojo_trans">#33570000</color>
     <color name="verde_trans">#330B3A00</color>
     <color name="naranja_trans">#655E2D00</color>
+    <color name="blanco_trans">#456E6E6E</color>
     <color name="trans">#00000000</color>
     <color name="trans_menos">#99000000</color>
     <color name="trans_menos_mas">#BE000000</color>
@@ -68,6 +69,15 @@
     <color name="narranja_chilling">#F3B008</color>
     <color name="narranja_chilling_trans">#C1EFBC02</color>
     <color name="naranja_chilling">#EC7F20</color>
+
+<!--    COLORES BLANCO-->
+    <color name="blanco_trans_oscuro">#335E5E5E</color>
+    <color name="blanco_trans_menos">#80A8A8A8</color>
+    <color name="blanco_trans_menos_mas_menos_mas_mas_menos">#EDC6C6C6</color>
+    <color name="blanco_trans_menos_mas_menos_mas_mas_menos_menos_mas_menos_mas_mas_menos">#E6919191</color>
+    <color name="blannco_chilling">#818181</color>
+    <color name="blannco_chilling_trans">#E6838383</color>
+    <color name="blanco_chilling">#C6C6C6</color>
 
 
     <color name="blue_chiller">#ABBDF4</color>
