@@ -44,7 +44,7 @@ import java.util.TimerTask;
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvMensajes;
-    ImageView btnEnviar, ivFoto, ivEscribiendo;
+    ImageView btnEnviar, ivFoto, ivEscribiendo, btnSalir;
     EditText etMensaje;
     TextView tvNombre, tvFecha;
     LinearLayout llMandar;
@@ -87,13 +87,16 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         tvFecha = findViewById(R.id.tvFechaMensajes);
         ivEscribiendo = findViewById(R.id.ivEscribiendo);
         llMandar = findViewById(R.id.llMandarMensaje);
+        btnSalir = findViewById(R.id.btnCancelarChat);
+
 
         llMandar.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/outline_edit_text_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
         tvNombre.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
-        etMensaje.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
+        etMensaje.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenos()));
         btnEnviar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/sendtrans_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
-        //ivEscribiendo.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/escribiendo_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
+        btnSalir.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/atras_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
 
+        btnSalir.setOnClickListener(this);
         btnEnviar.setOnClickListener(this);
         btnEnviar.setEnabled(false);
 
@@ -289,6 +292,16 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
             etMensaje.setText("");
 
+        }else if (view.equals((btnSalir))){
+            Intent i = new Intent(ChatActivity.this, HomeActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            if (bddRef != null && listener != null && listener2 != null) {
+                bddRef.removeEventListener(listener);
+                bddRef2.removeEventListener(listener2);
+            }
+            startActivity(i);
+            HomeActivity.fueraDeCasa = true;
+            finish();
         }
     }
 

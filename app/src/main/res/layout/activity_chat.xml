@@ -26,6 +26,18 @@
         android:orientation="horizontal"
         android:padding="5dp"
         android:background="@color/gris_guay_medio_trans">
+
+        <ImageView
+            android:id="@+id/btnCancelarChat"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="center"
+            />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivFotoPerfilMensajes"
             android:layout_width="30dp"
