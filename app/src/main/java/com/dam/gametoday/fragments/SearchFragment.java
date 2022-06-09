@@ -155,9 +155,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private void buscarUsuario(String busqueda) {
         Query query = FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("displayName").startAt(busqueda).endAt(busqueda + "\uf8ff");
 
-        query.addValueEventListener(new ValueEventListener() {
+        query.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onSuccess(DataSnapshot dataSnapshot) {
                 listaUsuarios.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (!snapshot.child("id").getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
@@ -176,12 +176,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
                 }
                 adapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
