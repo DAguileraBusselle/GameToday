@@ -181,18 +181,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                                         }
                                     });
                                     bdd.child("Users").child(user.getUserId()).child("seguidores").child(dataSnapshot.getKey()).removeValue();
-                                    btnSeguir.setBackground(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/outline_button_pressed_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
-                                    btnSeguir.setTextColor(context.getResources().getColor(R.color.gris_guay));
-                                    btnSeguir.setText(context.getString(R.string.siguiendo));
+                                    btnSeguir.setBackground(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/outline_button_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
+                                    btnSeguir.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorChilling()));
+                                    btnSeguir.setText(context.getString(R.string.btn_seguir));
                                 }
                             }
 
                             if (!siguiendo) {
                                 bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").push().setValue(user.getUserId());
                                 bdd.child("Users").child(user.getUserId()).child("seguidores").push().setValue(mAuth.getCurrentUser().getUid());
-                                btnSeguir.setBackground(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/outline_button_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
-                                btnSeguir.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorChilling()));
-                                btnSeguir.setText(context.getString(R.string.btn_seguir));
+                                btnSeguir.setBackground(ContextCompat.getDrawable(context.getApplicationContext(), context.getResources().getIdentifier("@drawable/outline_button_pressed_" + ((Game2dayApplication) context.getApplicationContext()).getColor(), null, context.getPackageName())));
+                                btnSeguir.setTextColor(context.getResources().getColor(R.color.gris_guay));
+                                btnSeguir.setText(context.getString(R.string.siguiendo));
 
                             }
                         }
