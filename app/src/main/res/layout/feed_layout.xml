@@ -7,19 +7,10 @@
     android:padding="@dimen/padding">
 
 
-    <ImageView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/btnMenuPubli"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
 
-        />
 
     <LinearLayout
-        app:layout_constraintTop_toBottomOf="@id/btnMenuPubli"
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/llUserFeed"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -37,27 +28,28 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_gravity="top"
             android:orientation="vertical"
             android:layout_weight="1"
             >
             <TextView
-                android:layout_marginTop="5dp"
+                android:padding="5dp"
                 android:id="@+id/tvNombreUserPubli"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:layout_weight="0.9"
+                android:layout_weight="1"
                 android:textColor="@color/morrao_chilling"
                 android:fontFamily="@font/conthrax_sb"
-                android:textSize="23sp"
+                android:textSize="20sp"
                 />
 
             <TextView
                 android:id="@+id/tvCorreoUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:lines="1"
                 android:textColor="@color/morao_trans_menos"
@@ -66,6 +58,16 @@
                 />
         </LinearLayout>
 
+
+        <ImageView
+            android:id="@+id/btnMenuPubli"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+
+            android:layout_weight="0.2"
+            />
 
     </LinearLayout>
 

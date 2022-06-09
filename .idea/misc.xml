@@ -50,6 +50,7 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/num_mensajes_no_leidos_naranja.xml" value="0.1" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_blanco.xml" value="0.142" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_naranja.xml" value="0.126" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_pressed_azul.xml" value="0.1" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_pressed_blanco.xml" value="0.142" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_button_pressed_naranja.xml" value="0.126" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/drawable/outline_dialog.xml" value="0.1" />
@@ -72,7 +73,7 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/dialog_abrir_chat.xml" value="0.18" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/dialog_aceptar.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/dialog_publicar.xml" value="0.33" />
-        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/feed_layout.xml" value="0.1670886075949367" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/feed_layout.xml" value="0.5" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/fragment_chats.xml" value="0.33" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/fragment_feed.xml" value="0.7651515151515151" />
         <entry key="..\:/Users/david/AndroidStudioProjects/GameToday/app/src/main/res/layout/fragment_search.xml" value="0.25" />

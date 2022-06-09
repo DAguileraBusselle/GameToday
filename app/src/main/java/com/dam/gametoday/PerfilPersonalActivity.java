@@ -558,12 +558,17 @@ public class PerfilPersonalActivity extends AppCompatActivity implements View.On
 
     @Override
     public void aceptarCerrarSesion() {
-        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").setValue(false);
-        mAuth.signOut();
-        Intent i = new Intent(PerfilPersonalActivity.this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
-        finish();
+        bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("conectado").setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                mAuth.signOut();
+                Intent i = new Intent(PerfilPersonalActivity.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finishAffinity();
+            }
+        });
+
     }
 
     @Override

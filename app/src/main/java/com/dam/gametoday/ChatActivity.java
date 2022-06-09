@@ -92,7 +92,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
         llMandar.setBackground(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/outline_edit_text_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
         tvNombre.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
-        etMensaje.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorTransMenos()));
+        etMensaje.setTextColor(getResources().getColor(((Game2dayApplication) getApplicationContext()).getTema().getColorChilling()));
         btnEnviar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/sendtrans_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
         btnSalir.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), getResources().getIdentifier("@drawable/atras_" + ((Game2dayApplication) getApplicationContext()).getColor(), null, getPackageName())));
 
