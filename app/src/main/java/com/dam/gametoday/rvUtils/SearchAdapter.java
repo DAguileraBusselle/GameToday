@@ -110,9 +110,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                 }
             });
 
-            bdd.child("Users").child(user.getUserId()).child("seguidores").addListenerForSingleValueEvent(new ValueEventListener() {
+            bdd.child("Users").child(user.getUserId()).child("seguidores").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                public void onSuccess(DataSnapshot snapshot) {
                     Boolean likeDado = false;
 
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -129,11 +129,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                         btnSeguir.setTextColor(context.getResources().getColor(((Game2dayApplication) context.getApplicationContext()).getTema().getColorChilling()));
                         btnSeguir.setText(context.getString(R.string.btn_seguir));
                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
                 }
             });
 
@@ -167,27 +162,22 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
             btnSeguir.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    bdd.child("Users").child(user.getUserId()).child("seguidores").addListenerForSingleValueEvent(new ValueEventListener() {
+                    bdd.child("Users").child(user.getUserId()).child("seguidores").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        public void onSuccess(DataSnapshot snapshot) {
                             Boolean siguiendo = false;
 
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                 if (dataSnapshot.getValue().toString().equals(mAuth.getCurrentUser().getUid())) {
                                     siguiendo = true;
-                                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                                         @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        public void onSuccess(DataSnapshot snapshot) {
                                             for (DataSnapshot dataSnapshot2 : snapshot.getChildren()) {
                                                 if (dataSnapshot2.getValue().toString().equals(user.getUserId())) {
                                                     bdd.child("Users").child(mAuth.getCurrentUser().getUid()).child("siguiendo").child(dataSnapshot2.getKey()).removeValue();
                                                 }
                                             }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
                                         }
                                     });
                                     bdd.child("Users").child(user.getUserId()).child("seguidores").child(dataSnapshot.getKey()).removeValue();
@@ -205,11 +195,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchVH> 
                                 btnSeguir.setText(context.getString(R.string.btn_seguir));
 
                             }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
                         }
                     });
                     view.setEnabled(false);
