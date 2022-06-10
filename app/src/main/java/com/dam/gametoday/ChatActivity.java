@@ -217,22 +217,36 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 super.onScrolled(recyclerView, dx, dy);
                 int primeraPosicionVisible = llm.findFirstVisibleItemPosition();
                 int ultimaPosicionVisible = llm.findLastVisibleItemPosition();
+                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+                System.out.println(listaMensajes.get(ultimaPosicionVisible).getTexto());
+                System.out.println(listaMensajes.get(primeraPosicionVisible).getTexto());
+                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
 
                 if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() <= System.currentTimeMillis() - 86400000) {
-                       tvFecha.setVisibility(View.VISIBLE);
+                    tvFecha.setVisibility(View.VISIBLE);
 
-                        if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() >= System.currentTimeMillis() - (86400000 * 2)) {
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-                            Date resultDate = new Date(listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj());
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yy");
+                    Date resultDate2 = new Date(listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj());
 
-                            tvFecha.setText(sdf.format(resultDate));
-                        }
+                    String fechaMensaje = sdf2.format(resultDate2);
 
-                    } else  {
-                        tvFecha.setVisibility(View.GONE);
+                    SimpleDateFormat sdfAyer = new SimpleDateFormat("dd/MM/yy");
+                    Date resultDateAyer = new Date(System.currentTimeMillis() - 86400000);
+
+                    String fechaAyer = sdfAyer.format(resultDateAyer);
+
+                    if (fechaMensaje.equals(fechaAyer)) {
+                        tvFecha.setText(getString(R.string.ayer));
+                    } else {
+                        tvFecha.setText(fechaMensaje);
 
                     }
 
+                    } else  {
+                   tvFecha.setVisibility(View.GONE);
+                }
 
             }
         });
