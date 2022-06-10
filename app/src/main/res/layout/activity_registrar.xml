@@ -118,25 +118,27 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="@dimen/padding">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCancelarRegistar"
             android:fontFamily="@font/conthrax_sb"
             android:background="@drawable/outline_button_morao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/morao_chilling"
             android:text="@string/btn_cancelar" />
         <View
             android:layout_width="15dp"
             android:layout_height="match_parent"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegistrarRegistrar"
             android:fontFamily="@font/conthrax_sb"
             android:background="@drawable/outline_button_morao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/morao_chilling"
             android:text="@string/btn_registar" />
     </LinearLayout>
 

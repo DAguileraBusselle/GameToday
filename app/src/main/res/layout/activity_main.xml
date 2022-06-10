@@ -17,7 +17,7 @@
         />
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnIniciarSesion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,11 +25,12 @@
         android:background="@drawable/outline_button_morao"
         android:fontFamily="@font/conthrax_sb"
         android:text="@string/btn_iniciar"
+        android:textColor="@color/morao_chilling"
         android:textSize="18sp"
 
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegistrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,6 +40,7 @@
         android:background="@drawable/outline_button_morao"
         android:fontFamily="@font/conthrax_sb"
         android:text="@string/btn_registar"
+        android:textColor="@color/morao_chilling"
         android:textSize="18sp"
 
         />

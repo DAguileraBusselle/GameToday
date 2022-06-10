@@ -215,15 +215,13 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int primeraPosicionVisible = llm.findFirstCompletelyVisibleItemPosition();
-                int ultimaPosicionVisible = llm.findLastCompletelyVisibleItemPosition();
-                if (listaMensajes.get(ultimaPosicionVisible).getFechaHoraMsj() <= System.currentTimeMillis() - 86400000) {
-                    if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() <= System.currentTimeMillis() - 86400000) {
-                        tvFecha.setVisibility(View.VISIBLE);
+                int primeraPosicionVisible = llm.findFirstVisibleItemPosition();
+                int ultimaPosicionVisible = llm.findLastVisibleItemPosition();
 
-                        if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() >= System.currentTimeMillis() - (86400000*2)) {
-                            tvFecha.setText(getString(R.string.ayer));
-                        } else {
+                if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() <= System.currentTimeMillis() - 86400000) {
+                       tvFecha.setVisibility(View.VISIBLE);
+
+                        if (listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj() >= System.currentTimeMillis() - (86400000 * 2)) {
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
                             Date resultDate = new Date(listaMensajes.get(primeraPosicionVisible).getFechaHoraMsj());
 
@@ -234,10 +232,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                         tvFecha.setVisibility(View.GONE);
 
                     }
-                } else  {
-                    tvFecha.setVisibility(View.GONE);
-                }
-
 
 
             }
@@ -272,7 +266,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view.equals(btnEnviar)) {
-            String texto = etMensaje.getText().toString();
+            String texto = etMensaje.getText().toString().trim();
 
             HashMap<String, Object> msj = new HashMap<>();
             msj.put("entrante", false);

@@ -63,8 +63,8 @@
     <string name="ayer">Ayer</string>
     <string name="menu_settings">Ajustes</string>
     <string name="menu_sign_out">Cerrar sesión</string>
-    <string name="menu_borrar">borrar</string>
-    <string name="menu_editar">editar</string>
+    <string name="menu_borrar">Borrar</string>
+    <string name="menu_editar">Editar</string>
     <string name="hoy">Hoy</string>
     <string name="nombre">Nombre de usuario</string>
     <string name="bio">Bio</string>

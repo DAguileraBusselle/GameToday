@@ -158,7 +158,7 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
                     ViewCompat.setBackgroundTintList(etContraCheck, colorStateList);
                 } else {
                     btnRegistrar.setEnabled(false);
-                    ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.rojo_suave));
+                    ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.red));
                     ViewCompat.setBackgroundTintList(etContraCheck, colorStateList);
                 }
             }
