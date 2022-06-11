@@ -151,6 +151,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
         mStorRef.child(user + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
