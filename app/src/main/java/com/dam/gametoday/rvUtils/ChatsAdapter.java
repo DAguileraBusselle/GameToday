@@ -150,7 +150,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
             } else {
                 ivCheck.setVisibility(View.VISIBLE);
                 if (mensaje.getLeido().equals("no")) {
-                    ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.enviado));
+                    ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.enviado_light));
                 } else {
                     ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.visto));
                 }
@@ -221,7 +221,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ChatsVH>
                             } else {
                                 ivCheck.setVisibility(View.VISIBLE);
                                 if (mensaje.getLeido().equals("no")) {
-                                    ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.enviado));
+                                    ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.enviado_light));
                                 } else {
                                     ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.visto));
                                 }

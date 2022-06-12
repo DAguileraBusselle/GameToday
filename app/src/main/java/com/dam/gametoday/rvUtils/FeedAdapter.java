@@ -265,7 +265,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedVH> {
                 }
             });
 
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy - HH:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy - HH:mm");
             Date resultDate = new Date(publi.getFechaPubli());
 
             tvHora.setText(sdf.format(resultDate));
